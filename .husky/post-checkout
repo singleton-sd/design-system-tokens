@@ -8,7 +8,7 @@ PREVIOUS_BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1})
 
 # Fallback if PREVIOUS_BRANCH is empty or invalid
 if [ -z "$PREVIOUS_BRANCH" ]; then
-    PREVIOUS_BRANCH="master" # Default fallback branch (change as needed)
+    PREVIOUS_BRANCH="main" # Default fallback branch (change as needed)
     echo "⚠️ Unable to determine the previous branch. Falling back to '$PREVIOUS_BRANCH'."
 fi
 

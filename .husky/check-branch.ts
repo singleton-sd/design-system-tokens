@@ -5,6 +5,8 @@ const branchName = getCurrentBranchName();
 
 const isValidBranchName =
   branchName === 'master' ||
+  branchName === 'main' ||
+  branchName === 'design' ||
   branchName === 'develop' ||
   /^release\/v\d+\.\d+\.\d+$/.test(branchName) ||
   /^(feature|hotfix)\/(\w+-\d{1,5})(-\w+)*$/.test(branchName);
