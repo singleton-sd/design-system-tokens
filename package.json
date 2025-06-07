@@ -1,0 +1,43 @@
+{
+  "name": "@singleton-sd/tokens",
+  "description": "Singleton SD's cross-platform design tokens for consistent UI spacing, typography, and theming. Distributed as an npm package and raw JSON for design tools and applications.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.esm.js"
+    },
+    "./tokens.json": "./dist/tokens.json"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@release-it/conventional-changelog": "^10.0.0",
+    "@types/node": "^20.19.0",
+    "husky": "^9.1.7",
+    "release-it": "^18.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "author": "Patricio Perpetua",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/singleton-sd/design-system/tokens.git"
+  },
+  "keywords": [
+    "singletonsd",
+    "singleton-sd",
+    "patricioperpetua",
+    "figma",
+    "figma-tokens",
+    "design-tokens"
+  ],
+  "engines": {
+    "node": "20.x"
+  }
+}

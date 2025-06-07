@@ -1,0 +1,3 @@
+if [ ! -f ".husky/tsconfig-node.json" ]; then echo '{"compilerOptions":{"esModuleInterop":true}}' > .husky/tsconfig-node.json; fi
+
+yarn ts-node --project .husky/tsconfig-node.json .husky/check-filenames.ts

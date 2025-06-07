@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "github.copilot",
+    "streetsidesoftware.code-spell-checker",
+    "davidanson.vscode-markdownlint", // Lint Markdown (README etc.)
+    "streetsidesoftware.code-spell-checker", // Catch typos
+    "yoavbls.pretty-ts-errors", // Helpful for .js config if needed
+    "figma.figma-vscode", // Figma integration
+    "scttcper.token-transformer" // Figma token transformation/inspection
+  ]
+}
