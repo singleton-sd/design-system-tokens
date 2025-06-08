@@ -1,0 +1,64 @@
+{
+  "fg": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.yellow-light.500}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{colors.yellow-dark.500}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{colors.yellow-dark.300}"
+    }
+  },
+  "bg": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.white}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{colors.gray.500}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{colors.gray.300}"
+    }
+  },
+  "accent": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.indigo.400}"
+    },
+    "onAccent": {
+      "$type": "color",
+      "$value": "{colors.white}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{colors.indigo.200}"
+    }
+  },
+  "shadows": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.gray.900}"
+    }
+  },
+  "fg-alternative": {
+    "default": {
+      "$type": "color",
+      "$value": "{colors.purple.500}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{colors.purple.600}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{colors.purple.300}"
+    }
+  }
+}

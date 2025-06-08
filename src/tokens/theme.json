@@ -1,0 +1,36 @@
+{
+  "button": {
+    "primary": {
+      "background": {
+        "$type": "color",
+        "$value": "{accent.default}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{accent.onAccent}"
+      }
+    },
+    "borderRadius": {
+      "$type": "number",
+      "$value": "{borderRadius.lg}"
+    },
+    "borderWidth": {
+      "$type": "number",
+      "$value": "{dimension.sm}"
+    }
+  },
+  "card": {
+    "background": {
+      "$type": "color",
+      "$value": "{bg.default}"
+    },
+    "borderRadius": {
+      "$type": "number",
+      "$value": "{borderRadius.lg}"
+    },
+    "padding": {
+      "$type": "number",
+      "$value": "{dimension.md}"
+    }
+  }
+}
