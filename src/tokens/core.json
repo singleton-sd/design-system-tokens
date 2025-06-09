@@ -539,7 +539,7 @@
   },
   "letterSpacing": {
     "default": {
-      "$type": "number",
+      "$type": "letterSpacing",
       "$value": 0
     },
     "heading": {
