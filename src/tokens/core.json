@@ -429,31 +429,31 @@
   },
   "fontSizes": {
     "base": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "16px"
     },
     "heading6": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 1.625"
     },
     "heading5": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 2.25"
     },
     "heading4": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 2.625"
     },
     "heading3": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 3.25"
     },
     "heading2": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 4"
     },
     "heading1": {
-      "$type": "number",
+      "$type": "fontSizes",
       "$value": "{fontSizes.base} * 4.5"
     }
   },
@@ -495,45 +495,45 @@
   },
   "fontWeights": {
     "light": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "300"
     },
     "regular": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "400"
     },
     "medium": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "500"
     },
     "semiBold": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "600"
     },
     "bold": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "700"
     },
     "extraBold": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "800"
     },
     "black": {
-      "$type": "number",
+      "$type": "fontWeights",
       "$value": "900"
     }
   },
   "borderRadius": {
     "sm": {
-      "$type": "number",
+      "$type": "borderRadius",
       "$value": 4
     },
     "lg": {
-      "$type": "number",
+      "$type": "borderRadius",
       "$value": 8
     },
     "xl": {
-      "$type": "number",
+      "$type": "borderRadius",
       "$value": 16
     }
   },
