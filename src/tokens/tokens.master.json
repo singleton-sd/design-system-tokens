@@ -492,6 +492,10 @@
       "body": {
         "$type": "fontFamilies",
         "$value": "Open Sauce Sans"
+      },
+      "logo": {
+        "$type": "fontFamilies",
+        "$value": "Open Sauce Sans"
       }
     },
     "fontWeights": {
@@ -532,6 +536,10 @@
       "heading": {
         "$type": "letterSpacing",
         "$value": "-3%"
+      },
+      "logo": {
+        "$type": "letterSpacing",
+        "$value": "3%"
       }
     },
     "lineHeights": {
@@ -631,6 +639,19 @@
           "fontSize": "{fontSizes.base}",
           "lineHeight": "{lineHeights.body}",
           "letterSpacing": "{letterSpacing.heading}",
+          "paragraphSpacing": "0",
+          "textCase": "none",
+          "textDecoration": "none"
+        }
+      },
+      "logo": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{fontFamilies.logo}",
+          "fontWeight": "{fontWeights.regular}",
+          "fontSize": "{fontSizes.heading3}",
+          "lineHeight": "{lineHeights.body}",
+          "letterSpacing": "{letterSpacing.logo}",
           "paragraphSpacing": "0",
           "textCase": "none",
           "textDecoration": "none"
@@ -788,13 +809,38 @@
       }
     }
   },
+  "components": {
+    "logo": {
+      "layout": {
+        "padding": {
+          "horizontal": {
+            "$type": "spacing",
+            "$value": "{spacing.md}"
+          },
+          "vertical": {
+            "$type": "spacing",
+            "$value": "{spacing.md}"
+          }
+        },
+        "gap": {
+          "$type": "spacing",
+          "$value": "{spacing.xs}"
+        },
+        "gap-vertical": {
+          "$type": "spacing",
+          "$value": "-{spacing.md}"
+        }
+      }
+    }
+  },
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
       "core",
       "light",
       "dark",
-      "theme"
+      "theme",
+      "components"
     ]
   }
 }
