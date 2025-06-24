@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 
 // Define your allowed file name pattern
-const allowedPattern = /^[a-z0-9-]+(\.controller|\.service|\.module)?(\.spec|\.test)?\.ts$/;
+const allowedPattern = /^([a-z0-9-]+|[A-Z][a-zA-Z0-9]+)(\.spec|\.test)?(\.d)?(\.defs)?\.tsx?$/;
 
 // Get staged files
 const stagedFiles = execSync('git diff --cached --name-only --diff-filter=ACM', {
