@@ -635,6 +635,19 @@
           "textDecoration": "none"
         },
         "type": "typography"
+      },
+      "logo": {
+        "value": {
+          "fontFamily": "{fontFamilies.logo}",
+          "fontWeight": "{fontWeights.regular}",
+          "fontSize": "{fontSizes.heading3}",
+          "lineHeight": "{lineHeights.body}",
+          "letterSpacing": "{letterSpacing.logo}",
+          "paragraphSpacing": "0",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "type": "typography"
       }
     }
   },
