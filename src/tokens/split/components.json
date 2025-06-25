@@ -1,0 +1,20 @@
+{
+  "logo": {
+    "layout": {
+      "padding": {
+        "horizontal": {
+          "value": "{spacing.md}",
+          "type": "spacing"
+        },
+        "vertical": {
+          "value": "{spacing.md}",
+          "type": "spacing"
+        }
+      },
+      "gap": {
+        "value": "{spacing.xs}",
+        "type": "spacing"
+      }
+    }
+  }
+}
