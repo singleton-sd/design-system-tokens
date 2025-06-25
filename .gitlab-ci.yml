@@ -33,14 +33,16 @@ commit-generated-files:
     - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
       when: always
   before_script:
-    - apt-get update && apt-get install -y git openssh-client
+    - apk add --no-cache git openssh
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh key
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - chmod 700 ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - git checkout $CI_COMMIT_REF_NAME
+    - git remote set-url origin "git@gitlab.com:$CI_PROJECT_PATH.git"
     - git config --global user.name "$(echo "$CI_COMMIT_AUTHOR" | sed -n 's/^\(.*\) <.*>$/\1/p')"
     - git config --global user.email "$(echo "$CI_COMMIT_AUTHOR" | sed -n 's/^.* <\(.*\)>$/\1/p')"
-    - git remote set-url origin "git@gitlab.com:$CI_PROJECT_PATH.git"
   script:
     - yarn
     - yarn dev
