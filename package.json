@@ -18,7 +18,9 @@
     "build-tailwind": "style-dictionary build -c style-dictionary.config.tailwind.mjs --verbose",
     "flatten-typography": "node scripts/flattenTypography.mjs",
     "split-tokens": "node scripts/split-tokens.mjs && yarn flatten-typography",
-    "dev": "yarn split-tokens && yarn build"
+    "dev": "yarn split-tokens && yarn build",
+    "release": "env-cmd -x release-it -VV --dry-run",
+    "release:ci": "release-it --ci"
   },
   "files": [
     "dist"
