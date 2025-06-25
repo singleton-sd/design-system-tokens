@@ -1,0 +1,27 @@
+image: '${GLOBAL_IMAGE_NAME}:${GLOBAL_IMAGE_TAG}'
+
+# https://gitlab.com/singletonsd/pipelines/npm
+include:
+  - project: 'singletonsd/pipelines/npm'
+    file: '/src/.gitlab-ci-main.yml'
+
+variables:
+  GLOBAL_IMAGE_NAME: 'node'
+  GLOBAL_IMAGE_TAG: '22-alpine'
+  TEST_STATIC_ALL: 'false'
+  ORIGINAL_REPOSITORY: 'singleton-sd/design-system/tokens'
+  NODE_COMMON_DOCKER_PACKAGE: 'false'
+  ENABLE_RELEASE_JOB: 'true'
+  ENABLE_RELEASE_PUBLISH: 'true'
+  NODE_COMMON_BUILD_ARTIFACT_PATH: 'dist'
+  PAGES_SOURCE_FOLDER: 'dist'
+  PAGES_ENABLED: 'true'
+
+stages:
+  - install
+  - test_static
+  - test_dynamic
+  - build
+  - deploy
+  - release
+  - package
