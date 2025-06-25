@@ -685,10 +685,6 @@
         "value": "{colors.indigo.400}",
         "type": "color"
       },
-      "onAccent": {
-        "value": "{colors.white}",
-        "type": "color"
-      },
       "bg": {
         "value": "{colors.indigo.200}",
         "type": "color"
@@ -747,10 +743,6 @@
     "accent": {
       "default": {
         "value": "{colors.indigo.600}",
-        "type": "color"
-      },
-      "onAccent": {
-        "value": "{colors.white}",
         "type": "color"
       },
       "bg": {
