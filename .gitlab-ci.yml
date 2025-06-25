@@ -25,3 +25,30 @@ stages:
   - deploy
   - release
   - package
+
+commit-generated-files:
+  image: '${GLOBAL_IMAGE_NAME}:${GLOBAL_IMAGE_TAG}'
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
+      when: always
+  before_script:
+    - apt-get update && apt-get install -y git openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+    - git config --global user.name "$(echo "$CI_COMMIT_AUTHOR" | sed -n 's/^\(.*\) <.*>$/\1/p')"
+    - git config --global user.email "$(echo "$CI_COMMIT_AUTHOR" | sed -n 's/^.* <\(.*\)>$/\1/p')"
+    - git remote set-url origin "git@gitlab.com:$CI_PROJECT_PATH.git"
+  script:
+    - yarn
+    - yarn dev
+    - |
+      if ! git diff --quiet; then
+        git add .
+        git commit -m "feat: auto-commit generated files"
+        git push origin HEAD:main
+      else
+        echo "No changes to commit."
+      fi
