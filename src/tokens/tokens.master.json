@@ -757,12 +757,6 @@
         "value": "{colors.indigo.800}",
         "type": "color"
       }
-    },
-    "shadows": {
-      "default": {
-        "value": "#0000004d",
-        "type": "color"
-      }
     }
   },
   "theme": {},
