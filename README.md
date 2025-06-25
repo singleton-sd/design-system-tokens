@@ -48,6 +48,91 @@ npm install @singleton-sd/tokens
 yarn add @singleton-sd/tokens
 ```
 
+## 🧑‍💻 Usage
+
+### SCSS (recommended for design systems or apps using Sass)
+
+```bash
+// Light theme
+@use '@singleton-sd/tokens/scss/light' as tokens;
+
+// Dark theme
+@use '@singleton-sd/tokens/scss/dark' as tokens;
+```
+
+You can now use the variables as:
+
+```css
+body {
+  background-color: tokens.$background;
+  color: tokens.$text;
+}
+```
+
+⚠️ Note: The exact variable names depend on how your SCSS files are structured (e.g. $color-primary, $font-size-sm, etc).
+
+### CSS (for plain CSS or PostCSS setups)
+
+```css
+/* Light theme */
+@import '@singleton-sd/tokens/css/light';
+
+/* Dark theme */
+@import '@singleton-sd/tokens/css/dark';
+```
+
+Now you can use CSS custom properties:
+
+```css
+body {
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+```
+
+To activate a theme, apply the data-theme attribute to the <html> or <body>:
+
+```html
+<html data-theme="dark">
+  <!-- or "light" -->
+  <body>
+    ...
+  </body>
+</html>
+```
+
+Or toggle it dynamically:
+
+```js
+document.documentElement.setAttribute('data-theme', 'dark');
+```
+
+### Tailwind
+
+After installating, in the consumer's tailwind.config.js:
+
+```js
+// tailwind.config.js
+const singletonTokens = require('@singleton-sd/tokens/tailwind');
+
+module.exports = {
+  ...singletonTokens,
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    // Add your project's paths here
+  ],
+  theme: {
+    ...singletonTokens.theme,
+    extend: {
+      // Add custom extensions here
+    },
+  },
+};
+```
+
 ### **Local Development**
 
 Clone the repository and install dependencies:
