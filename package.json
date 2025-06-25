@@ -11,6 +11,7 @@
     "./tailwind": "./dist/tailwind/tailwind.config.js"
   },
   "scripts": {
+    "build-all": "yarn build",
     "build": "yarn build-dark && yarn build-light && yarn build-tailwind",
     "build-dark": "style-dictionary build -c style-dictionary.config.dark.mjs --verbose",
     "build-light": "style-dictionary build -c style-dictionary.config.light.mjs --verbose",
