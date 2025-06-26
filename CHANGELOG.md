@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (2025-06-26)
+
+* feat: SSDOP-25 add each theme root file gen ([bf91ce7](https://gitlab.com/singleton-sd/design-system/tokens/commit/bf91ce7))
+
 ## 1.1.0 (2025-06-25)
 
 * ci: SSDOP-25 add gitlab pipelines ([1b839f6](https://gitlab.com/singleton-sd/design-system/tokens/commit/1b839f6))
