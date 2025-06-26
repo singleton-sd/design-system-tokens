@@ -36,6 +36,13 @@ npm install @singletonsd/tokens
 
 ## 📦 Installation
 
+Make sure you configure your npm registry to use the GitLab registry for `@singleton-sd` packages. To do so, create or update your `.npmrc` file in the root of your project with the following line:
+
+```ini
+@singleton-sd:registry=https://gitlab.com/api/v4/packages/npm/
+This tells npm to fetch any @singleton-sd scoped packages from GitLab’s npm registry.
+```
+
 ### **Using NPM**
 
 ```sh
@@ -73,6 +80,8 @@ body {
 
 ### CSS (for plain CSS or PostCSS setups)
 
+#### Option 1: Dynamic Theming via data-theme
+
 ```css
 /* Light theme */
 @import '@singleton-sd/tokens/css/light';
@@ -108,6 +117,29 @@ Or toggle it dynamically:
 
 ```js
 document.documentElement.setAttribute('data-theme', 'dark');
+```
+
+#### Option 2: Static Theming via :root (no theme switcher)
+
+If you are not using data-theme, and just want to apply tokens globally via :root, import the corresponding root files:
+
+```css
+/* Light theme as default (applied globally to :root) */
+@import '@singleton-sd/tokens/css/root/light';
+
+/* Optional: override with dark tokens if system prefers dark mode */
+@import '@singleton-sd/tokens/css/root/dark';
+```
+
+This will expose the tokens directly to :root without requiring a data-theme attribute.
+
+Use as usual:
+
+```css
+body {
+  background-color: var(--bg-default);
+  color: var(--fg-default);
+}
 ```
 
 ### Tailwind

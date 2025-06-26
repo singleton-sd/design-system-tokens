@@ -33,5 +33,19 @@ export default {
         },
       ],
     },
+    'css-root': {
+      transformGroup: 'css',
+      buildPath: 'dist/css/root/light',
+      files: [
+        {
+          destination: '_variables.css',
+          format: 'css/variables',
+          options: {
+            outputReferences: true,
+            selector: ':root',
+          },
+        },
+      ],
+    },
   },
 };
