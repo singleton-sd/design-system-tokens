@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.2.1 (2025-06-26)</small>
+
+* fix: SSDOP-25 add missing exports ([08863d8](https://gitlab.com/singleton-sd/design-system/tokens/commit/08863d8))
+
 ## 1.2.0 (2025-06-26)
 
 * feat: SSDOP-25 add each theme root file gen ([bf91ce7](https://gitlab.com/singleton-sd/design-system/tokens/commit/bf91ce7))
