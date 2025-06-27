@@ -1,5 +1,7 @@
 # Changelog
 
+## <small>1.2.4 (2025-06-27)</small>
+
 ## <small>1.2.3 (2025-06-27)</small>
 
 * ci: :bookmark: SSDOP-30 enable release trigger ([13c18ad](https://gitlab.com/singleton-sd/design-system/tokens/commit/13c18ad))
