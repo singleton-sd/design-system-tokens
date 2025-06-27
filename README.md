@@ -142,6 +142,72 @@ body {
 }
 ```
 
+### 📦 Via CDN
+
+This project publishes versioned CSS design tokens via GitLab Pages, enabling stable, branch-specific, or tag-specific consumption.
+
+You can include the tokens directly in your application via GitLab Pages:
+
+#### CSS Import Examples
+
+📌 Latest (from main)
+
+```css
+@import url('https://tokens-94a440.gitlab.io/css/dark/_variables.css');
+```
+
+🏷 Specific Version (from Git Tag)
+
+```css
+@import url('https://tokens-94a440.gitlab.io/1.2.1/css/dark/_variables.css');
+```
+
+🌿 Feature or Branch
+GitLab sanitizes branch names by converting them to lowercase and replacing invalid characters with hyphens. For example, for a branch called feature/dark-mode, use:
+
+```css
+@import url('https://tokens-94a440.gitlab.io/feature-dark-mode/css/dark/_variables.css');
+```
+
+You can include your CSS design tokens directly into your HTML using GitLab Pages. This is the recommended method for browser-safe, versioned, and production-ready consumption.
+
+#### HTML <link> Examples
+
+📌 Latest version (from main branch)
+
+```html
+<link href="https://tokens-94a440.gitlab.io/css/dark/_variables.css" rel="stylesheet" />
+```
+
+Use this for live environments where staying up-to-date with the main branch is acceptable.
+
+🏷 Locked version (from Git tag)
+
+```html
+<link href="https://tokens-94a440.gitlab.io/1.2.1/css/dark/_variables.css" rel="stylesheet" />
+```
+
+Use this in production to lock your app to a specific version of the tokens.
+
+🌿 Feature or preview branch (e.g., feature/color-tokens)
+
+```html
+<link
+  href="https://tokens-94a440.gitlab.io/feature-color-tokens/css/dark/_variables.css"
+  rel="stylesheet"
+/>
+```
+
+GitLab automatically sanitizes branch names: lowercase, non-alphanumeric characters replaced with hyphens.
+
+📌 Recommendation
+
+| Use case        | URL path         | Description                          |
+| --------------- | ---------------- | ------------------------------------ |
+| Production      | `/1.2.1/`        | Locked to a released tag             |
+| Staging / Dev   | `/`              | Latest from `main` branch            |
+| Feature testing | `/feature-name/` | Preview from branch (auto-sanitized) |
+
 ### Tailwind
 
 After installating, in the consumer's tailwind.config.js:
