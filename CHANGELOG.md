@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.2.2 (2025-06-27)</small>
+
+* docs: :bookmark: SSDOP-30 add CDN consumer explanation ([a5a32f4](https://gitlab.com/singleton-sd/design-system/tokens/commit/a5a32f4))
+
 ## <small>1.2.1 (2025-06-26)</small>
 
 * fix: SSDOP-25 add missing exports ([08863d8](https://gitlab.com/singleton-sd/design-system/tokens/commit/08863d8))
