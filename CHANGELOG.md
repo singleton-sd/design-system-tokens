@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.2.3 (2025-06-27)</small>
+
+* ci: :bookmark: SSDOP-30 enable release trigger ([13c18ad](https://gitlab.com/singleton-sd/design-system/tokens/commit/13c18ad))
+
 ## <small>1.2.2 (2025-06-27)</small>
 
 * docs: :bookmark: SSDOP-30 add CDN consumer explanation ([a5a32f4](https://gitlab.com/singleton-sd/design-system/tokens/commit/a5a32f4))
