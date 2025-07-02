@@ -153,20 +153,20 @@ You can include the tokens directly in your application via GitLab Pages:
 📌 Latest (from main)
 
 ```css
-@import url('https://tokens-94a440.gitlab.io/css/dark/_variables.css');
+@import url('https://singleton-sd.gitlab.io/design-system/tokens/css/dark/_variables.css');
 ```
 
 🏷 Specific Version (from Git Tag)
 
 ```css
-@import url('https://tokens-94a440.gitlab.io/1.2.1/css/dark/_variables.css');
+@import url('https://singleton-sd.gitlab.io/design-system/tokens/1.2.1/css/dark/_variables.css');
 ```
 
 🌿 Feature or Branch
 GitLab sanitizes branch names by converting them to lowercase and replacing invalid characters with hyphens. For example, for a branch called feature/dark-mode, use:
 
 ```css
-@import url('https://tokens-94a440.gitlab.io/feature-dark-mode/css/dark/_variables.css');
+@import url('https://singleton-sd.gitlab.io/design-system/tokens/feature-dark-mode/css/dark/_variables.css');
 ```
 
 You can include your CSS design tokens directly into your HTML using GitLab Pages. This is the recommended method for browser-safe, versioned, and production-ready consumption.
@@ -176,7 +176,10 @@ You can include your CSS design tokens directly into your HTML using GitLab Page
 📌 Latest version (from main branch)
 
 ```html
-<link href="https://tokens-94a440.gitlab.io/css/dark/_variables.css" rel="stylesheet" />
+<link
+  href="https://singleton-sd.gitlab.io/design-system/tokens/css/dark/_variables.css"
+  rel="stylesheet"
+/>
 ```
 
 Use this for live environments where staying up-to-date with the main branch is acceptable.
@@ -184,7 +187,10 @@ Use this for live environments where staying up-to-date with the main branch is 
 🏷 Locked version (from Git tag)
 
 ```html
-<link href="https://tokens-94a440.gitlab.io/1.2.1/css/dark/_variables.css" rel="stylesheet" />
+<link
+  href="https://singleton-sd.gitlab.io/design-system/tokens/1.2.1/css/dark/_variables.css"
+  rel="stylesheet"
+/>
 ```
 
 Use this in production to lock your app to a specific version of the tokens.
@@ -193,7 +199,7 @@ Use this in production to lock your app to a specific version of the tokens.
 
 ```html
 <link
-  href="https://tokens-94a440.gitlab.io/feature-color-tokens/css/dark/_variables.css"
+  href="https://singleton-sd.gitlab.io/design-system/tokens/feature-color-tokens/css/dark/_variables.css"
   rel="stylesheet"
 />
 ```
