@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.2.5 (2025-07-02)</small>
+
+* docs: :bookmark: SSDOP-30 change CDN url ([d063073](https://gitlab.com/singleton-sd/design-system/tokens/commit/d063073))
+
 ## <small>1.2.4 (2025-06-27)</small>
 
 ## <small>1.2.3 (2025-06-27)</small>
