@@ -4,7 +4,7 @@
 [![pipeline status](https://gitlab.com/singleton-sd/design-system/tokens/badges/master/pipeline.svg)](https://gitlab.com/singleton-sd/design-system/tokens/-/commits/master)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-[Live Latest Resume Build](https://singleton-sd.gitlab.io/design-system/tokens/)
+[Live Token Gallery](https://tokens.design.singletonsd.com/) · [GitLab Pages URL](https://singleton-sd.gitlab.io/design-system/tokens/)
 
 📌 **Short description of the project.**
 
@@ -15,6 +15,21 @@ Tokens are distributed in platform-agnostic JSON format and built outputs, ready
 - Frontend frameworks (React, Tailwind, MUI, etc.)
 - Design tools (e.g. Figma Tokens Studio via raw URL)
 - Any product needing consistent, scalable UI design foundations
+
+## Public Token Gallery
+
+The GitLab Pages site publishes a public HTML reference for the generated tokens at both the Singleton SD design tokens domain and the GitLab Pages URL:
+
+- Primary domain: [https://tokens.design.singletonsd.com/](https://tokens.design.singletonsd.com/)
+- GitLab Pages fallback: [https://singleton-sd.gitlab.io/design-system/tokens/](https://singleton-sd.gitlab.io/design-system/tokens/)
+- Repository: [https://gitlab.com/singleton-sd/design-system/tokens](https://gitlab.com/singleton-sd/design-system/tokens)
+
+The page is built from the generated files in `dist` and demonstrates:
+
+- Light and dark mode with `data-theme="light"` and `data-theme="dark"`
+- Semantic theme colors such as `--fg-default`, `--bg-default`, and `--accent-default`
+- Main color palettes with their CSS variable names and color codes
+- Browser usage examples for the published CSS token files
 
 ## 📁 Structure Overview
 
@@ -102,7 +117,7 @@ body {
 }
 ```
 
-To activate a theme, apply the data-theme attribute to the <html> or <body>:
+To activate a theme, apply the `data-theme` attribute to the `html` or `body` element:
 
 ```html
 <html data-theme="dark">
@@ -146,19 +161,21 @@ body {
 
 This project publishes versioned CSS design tokens via GitLab Pages, enabling stable, branch-specific, or tag-specific consumption.
 
-You can include the tokens directly in your application via GitLab Pages:
+You can include the tokens directly in your application via the public tokens domain. The GitLab Pages URL is also available as a fallback.
 
 #### CSS Import Examples
 
 📌 Latest (from main)
 
 ```css
+@import url('https://tokens.design.singletonsd.com/css/dark/_variables.css');
 @import url('https://singleton-sd.gitlab.io/design-system/tokens/css/dark/_variables.css');
 ```
 
 🏷 Specific Version (from Git Tag)
 
 ```css
+@import url('https://tokens.design.singletonsd.com/1.2.1/css/dark/_variables.css');
 @import url('https://singleton-sd.gitlab.io/design-system/tokens/1.2.1/css/dark/_variables.css');
 ```
 
@@ -166,16 +183,21 @@ You can include the tokens directly in your application via GitLab Pages:
 GitLab sanitizes branch names by converting them to lowercase and replacing invalid characters with hyphens. For example, for a branch called feature/dark-mode, use:
 
 ```css
+@import url('https://tokens.design.singletonsd.com/feature-dark-mode/css/dark/_variables.css');
 @import url('https://singleton-sd.gitlab.io/design-system/tokens/feature-dark-mode/css/dark/_variables.css');
 ```
 
 You can include your CSS design tokens directly into your HTML using GitLab Pages. This is the recommended method for browser-safe, versioned, and production-ready consumption.
 
-#### HTML <link> Examples
+#### HTML Link Examples
 
 📌 Latest version (from main branch)
 
 ```html
+<link
+  href="https://tokens.design.singletonsd.com/css/dark/_variables.css"
+  rel="stylesheet"
+/>
 <link
   href="https://singleton-sd.gitlab.io/design-system/tokens/css/dark/_variables.css"
   rel="stylesheet"
@@ -188,6 +210,10 @@ Use this for live environments where staying up-to-date with the main branch is 
 
 ```html
 <link
+  href="https://tokens.design.singletonsd.com/1.2.1/css/dark/_variables.css"
+  rel="stylesheet"
+/>
+<link
   href="https://singleton-sd.gitlab.io/design-system/tokens/1.2.1/css/dark/_variables.css"
   rel="stylesheet"
 />
@@ -198,6 +224,10 @@ Use this in production to lock your app to a specific version of the tokens.
 🌿 Feature or preview branch (e.g., feature/color-tokens)
 
 ```html
+<link
+  href="https://tokens.design.singletonsd.com/feature-color-tokens/css/dark/_variables.css"
+  rel="stylesheet"
+/>
 <link
   href="https://singleton-sd.gitlab.io/design-system/tokens/feature-color-tokens/css/dark/_variables.css"
   rel="stylesheet"

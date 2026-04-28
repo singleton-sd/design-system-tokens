@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Singleton SD Design Tokens</title>
+    <meta
+      name="description"
+      content="Public reference for Singleton SD design tokens, light and dark themes, color palettes, and CSS variable usage."
+    />
+    <link rel="stylesheet" href="css/light/_variables.css" />
+    <link rel="stylesheet" href="css/dark/_variables.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --page-radius-sm: 12px;
+        --page-radius-md: 18px;
+        --page-radius-lg: 28px;
+        --page-border: color-mix(in srgb, var(--fg-default), transparent 78%);
+        --page-surface: color-mix(in srgb, var(--bg-default), var(--bg-subtle) 14%);
+        --page-surface-strong: color-mix(in srgb, var(--bg-default), var(--accent-bg) 18%);
+        --page-text: color-mix(in srgb, var(--fg-default), var(--colors-gray-900) 34%);
+        --page-text-muted: color-mix(in srgb, var(--fg-muted), var(--colors-gray-700) 38%);
+        --page-shadow: 0 28px 80px
+          color-mix(in srgb, var(--shadows-default, var(--colors-black)), transparent 84%);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top left, color-mix(in srgb, var(--accent-bg), transparent 18%), transparent 38rem),
+          linear-gradient(135deg, var(--bg-default), color-mix(in srgb, var(--bg-default), var(--bg-subtle) 18%));
+        color: var(--page-text);
+        font-family:
+          var(--font-families-body), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      code,
+      pre {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      }
+
+      .page {
+        margin: 0 auto;
+        max-width: 1180px;
+        padding: 32px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+        min-height: 520px;
+        padding: 72px 0 48px;
+      }
+
+      .eyebrow {
+        color: var(--fg-muted);
+        font-size: 0.78rem;
+        font-weight: var(--font-weights-bold);
+        letter-spacing: 0.16em;
+        margin: 0 0 16px;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--fg-default);
+        font-family:
+          var(--font-families-heading), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 9vw, 7.5rem);
+        max-width: 760px;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 4rem);
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .lead {
+        color: var(--page-text-muted);
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        margin-top: 24px;
+        max-width: 680px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .button {
+        align-items: center;
+        background: var(--accent-default);
+        border: 1px solid var(--page-border);
+        border-radius: 999px;
+        color: var(--accent-on-accent);
+        display: inline-flex;
+        font-weight: var(--font-weights-bold);
+        gap: 10px;
+        min-height: 44px;
+        padding: 0 18px;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        background: var(--page-surface);
+        color: var(--fg-default);
+      }
+
+      .panel {
+        background: color-mix(in srgb, var(--page-surface), transparent 4%);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-lg);
+        box-shadow: var(--page-shadow);
+        padding: 24px;
+      }
+
+      .theme-card {
+        align-self: start;
+        display: grid;
+        gap: 18px;
+      }
+
+      .theme-toggle {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .theme-toggle button {
+        background: transparent;
+        border: 1px solid var(--page-border);
+        border-radius: 999px;
+        color: var(--page-text);
+        cursor: pointer;
+        font: inherit;
+        font-weight: var(--font-weights-bold);
+        padding: 12px 16px;
+      }
+
+      .theme-toggle button[aria-pressed="true"] {
+        background: var(--accent-default);
+        border-color: var(--accent-default);
+        color: var(--accent-on-accent);
+      }
+
+      .theme-preview {
+        background: var(--bg-default);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-md);
+        color: var(--fg-default);
+        overflow: hidden;
+      }
+
+      .theme-preview-header {
+        background: var(--accent-bg);
+        color: var(--fg-default);
+        padding: 18px;
+      }
+
+      .theme-preview-body {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        background: color-mix(in srgb, var(--accent-bg), transparent 32%);
+        border: 1px solid var(--page-border);
+        border-radius: 999px;
+        color: var(--fg-muted);
+        font-size: 0.85rem;
+        font-weight: var(--font-weights-bold);
+        padding: 6px 10px;
+      }
+
+      .section {
+        display: grid;
+        gap: 24px;
+        padding: 56px 0;
+      }
+
+      .section-header {
+        display: grid;
+        gap: 12px;
+        max-width: 780px;
+      }
+
+      .section-header p {
+        color: var(--page-text-muted);
+        font-size: 1.05rem;
+      }
+
+      .theme-grid,
+      .usage-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .semantic-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .semantic-token {
+        align-items: center;
+        background: var(--page-surface-strong);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-md);
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 72px minmax(0, 1fr);
+        padding: 14px;
+      }
+
+      .semantic-swatch,
+      .swatch-preview {
+        background: var(--token-color);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-sm);
+        min-height: 54px;
+      }
+
+      .token-name {
+        color: var(--fg-default);
+        display: block;
+        font-weight: var(--font-weights-bold);
+      }
+
+      .token-value {
+        color: var(--page-text-muted);
+        display: block;
+        font-size: 0.86rem;
+        margin-top: 2px;
+      }
+
+      .palette-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .palette-card {
+        background: var(--page-surface);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-md);
+        overflow: hidden;
+      }
+
+      .palette-card h3 {
+        padding: 18px 18px 0;
+      }
+
+      .swatch-list {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+      }
+
+      .swatch-row {
+        align-items: center;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 54px minmax(0, 1fr);
+      }
+
+      .swatch-preview {
+        min-height: 44px;
+      }
+
+      .code-block {
+        background: color-mix(in srgb, var(--colors-black), var(--bg-default) 18%);
+        border: 1px solid var(--page-border);
+        border-radius: var(--page-radius-md);
+        color: var(--colors-gray-100);
+        overflow: auto;
+        padding: 20px;
+      }
+
+      .code-block code {
+        display: block;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        min-width: 360px;
+        white-space: pre;
+      }
+
+      .code-comment {
+        color: var(--colors-gray-500);
+      }
+
+      .code-token {
+        color: var(--colors-yellow-dark-400);
+      }
+
+      .code-string {
+        color: var(--colors-green-300);
+      }
+
+      .code-property {
+        color: var(--colors-blue-300);
+      }
+
+      .footer {
+        border-top: 1px solid var(--page-border);
+        color: var(--page-text-muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+        padding: 32px 0;
+      }
+
+      @media (max-width: 860px) {
+        .page {
+          padding: 24px;
+        }
+
+        .hero,
+        .theme-grid,
+        .usage-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: 0;
+          padding-top: 40px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page {
+          padding: 18px;
+        }
+
+        .semantic-token {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Singleton SD Design System</p>
+          <h1 id="page-title">Public design tokens</h1>
+          <p class="lead">
+            A browser-friendly reference for Singleton SD tokens. Switch between light and dark mode, inspect
+            semantic theme values, and copy the CSS variable names used by applications.
+          </p>
+          <p class="lead">
+            Primary domain: <a href="https://tokens.design.singletonsd.com/">tokens.design.singletonsd.com</a><br />
+            GitLab Pages: <a href="https://singleton-sd.gitlab.io/design-system/tokens/">singleton-sd.gitlab.io/design-system/tokens</a>
+          </p>
+          <div class="actions" aria-label="Quick links">
+            <a class="button" href="#colors">Explore colors</a>
+            <a class="button secondary" href="css/light/_variables.css">Light CSS</a>
+            <a class="button secondary" href="css/dark/_variables.css">Dark CSS</a>
+            <a class="button secondary" href="https://gitlab.com/singleton-sd/design-system/tokens">Git repository</a>
+          </div>
+        </div>
+
+        <aside class="panel theme-card" aria-labelledby="theme-switcher-title">
+          <div>
+            <p class="eyebrow">Theme preview</p>
+            <h2 id="theme-switcher-title">Light and dark</h2>
+          </div>
+          <div class="theme-toggle" role="group" aria-label="Select preview theme">
+            <button type="button" data-theme-option="light" aria-pressed="true">Light</button>
+            <button type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+          </div>
+          <div class="theme-preview">
+            <div class="theme-preview-header">
+              <strong>Theme tokens</strong>
+              <p>Semantic values adapt through <code>data-theme</code>.</p>
+            </div>
+            <div class="theme-preview-body">
+              <div class="chip-row" aria-label="Semantic theme tokens">
+                <span class="chip">fg-default</span>
+                <span class="chip">bg-default</span>
+                <span class="chip">accent-default</span>
+              </div>
+              <p>
+                This card is styled with the same CSS custom properties that product interfaces consume.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="themes" aria-labelledby="themes-title">
+        <div class="section-header">
+          <p class="eyebrow">Theme modes</p>
+          <h2 id="themes-title">Semantic color tokens</h2>
+          <p>
+            Light and dark modes share token names while swapping values. Apps can import both theme files and set
+            <code>data-theme="light"</code> or <code>data-theme="dark"</code> on the document.
+          </p>
+        </div>
+        <div class="theme-grid">
+          <article class="panel" data-theme="light">
+            <h3>Light mode</h3>
+            <div class="semantic-list" data-semantic-list="light"></div>
+          </article>
+          <article class="panel" data-theme="dark">
+            <h3>Dark mode</h3>
+            <div class="semantic-list" data-semantic-list="dark"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="colors" aria-labelledby="colors-title">
+        <div class="section-header">
+          <p class="eyebrow">Main colors</p>
+          <h2 id="colors-title">Core palette and color codes</h2>
+          <p>
+            These foundational color scales power the semantic theme tokens. Each swatch shows the CSS variable name
+            and the resolved color code from the published token CSS.
+          </p>
+        </div>
+        <div class="palette-grid" data-palette-grid></div>
+      </section>
+
+      <section class="section" id="usage" aria-labelledby="usage-title">
+        <div class="section-header">
+          <p class="eyebrow">Implementation</p>
+          <h2 id="usage-title">Use the tokens in code</h2>
+          <p>
+            Import the generated CSS files from GitLab Pages or the npm package, then style with the stable custom
+            property names.
+          </p>
+        </div>
+        <div class="usage-grid">
+          <pre class="code-block"><code><span class="code-comment">&lt;!-- HTML --&gt;</span>
+<span class="code-token">&lt;link</span>
+  <span class="code-property">rel</span>=<span class="code-string">"stylesheet"</span>
+  <span class="code-property">href</span>=<span class="code-string">"https://tokens.design.singletonsd.com/css/light/_variables.css"</span>
+<span class="code-token">/&gt;</span>
+<span class="code-token">&lt;link</span>
+  <span class="code-property">rel</span>=<span class="code-string">"stylesheet"</span>
+  <span class="code-property">href</span>=<span class="code-string">"https://tokens.design.singletonsd.com/css/dark/_variables.css"</span>
+<span class="code-token">/&gt;</span>
+<span class="code-comment">&lt;!-- GitLab Pages fallback --&gt;</span>
+<span class="code-token">&lt;link</span>
+  <span class="code-property">rel</span>=<span class="code-string">"stylesheet"</span>
+  <span class="code-property">href</span>=<span class="code-string">"https://singleton-sd.gitlab.io/design-system/tokens/css/dark/_variables.css"</span>
+<span class="code-token">/&gt;</span></code></pre>
+          <pre class="code-block"><code><span class="code-comment">/* CSS */</span>
+body {
+  background: <span class="code-token">var(--bg-default)</span>;
+  color: <span class="code-token">var(--fg-default)</span>;
+}
+
+.button {
+  background: <span class="code-token">var(--accent-default)</span>;
+  color: <span class="code-token">var(--accent-on-accent)</span>;
+}</code></pre>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>
+          Singleton SD design tokens ·
+          <a href="https://tokens.design.singletonsd.com/">Custom domain</a> ·
+          <a href="https://singleton-sd.gitlab.io/design-system/tokens/">GitLab Pages</a>
+        </span>
+        <span>
+          <a href="https://gitlab.com/singleton-sd/design-system/tokens">Git repository and README</a>
+        </span>
+      </footer>
+    </main>
+
+    <script>
+      const semanticTokens = [
+        "fg-default",
+        "fg-muted",
+        "fg-subtle",
+        "bg-default",
+        "bg-muted",
+        "bg-subtle",
+        "accent-default",
+        "accent-bg",
+        "accent-on-accent"
+      ];
+      const palettes = [
+        ["Yellow dark", "yellow-dark"],
+        ["Yellow light", "yellow-light"],
+        ["Indigo", "indigo"],
+        ["Purple", "purple"],
+        ["Gray", "gray"],
+        ["Blue", "blue"],
+        ["Green", "green"],
+        ["Red", "red"]
+      ];
+      const steps = ["100", "200", "300", "400", "500", "600", "700", "800", "900"];
+
+      const toHex = (color) => {
+        const channels = color.match(/\d+(\.\d+)?/g);
+        if (!channels || channels.length < 3) {
+          return color;
+        }
+
+        return `#${channels
+          .slice(0, 3)
+          .map((channel) => Number(channel).toString(16).padStart(2, "0"))
+          .join("")}`;
+      };
+
+      const getTokenValue = (tokenName, theme = document.documentElement.dataset.theme) => {
+        const probe = document.createElement("div");
+        probe.dataset.theme = theme;
+        probe.style.color = `var(--${tokenName})`;
+        probe.style.position = "absolute";
+        probe.style.pointerEvents = "none";
+        probe.style.visibility = "hidden";
+        document.body.appendChild(probe);
+        const value = getComputedStyle(probe).color;
+        probe.remove();
+        return toHex(value);
+      };
+
+      const toDisplayName = (name) => `--${name}`;
+
+      const renderSemanticTokens = () => {
+        document.querySelectorAll("[data-semantic-list]").forEach((list) => {
+          const theme = list.dataset.semanticList;
+          list.innerHTML = semanticTokens
+            .map((token) => {
+              const value = getTokenValue(token, theme);
+              return `
+                <div class="semantic-token">
+                  <div class="semantic-swatch" style="--token-color: var(--${token})"></div>
+                  <div>
+                    <code class="token-name">${toDisplayName(token)}</code>
+                    <span class="token-value">${value}</span>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        });
+      };
+
+      const renderPalettes = () => {
+        const grid = document.querySelector("[data-palette-grid]");
+        grid.innerHTML = palettes
+          .map(([title, name]) => {
+            const swatches = steps
+              .map((step) => {
+                const token = `colors-${name}-${step}`;
+                const value = getTokenValue(token);
+                return `
+                  <div class="swatch-row">
+                    <div class="swatch-preview" style="--token-color: var(--${token})"></div>
+                    <div>
+                      <code class="token-name">${toDisplayName(token)}</code>
+                      <span class="token-value">${value}</span>
+                    </div>
+                  </div>
+                `;
+              })
+              .join("");
+            return `
+              <article class="palette-card">
+                <h3>${title}</h3>
+                <div class="swatch-list">${swatches}</div>
+              </article>
+            `;
+          })
+          .join("");
+      };
+
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        document.querySelectorAll("[data-theme-option]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.themeOption === theme));
+        });
+        renderSemanticTokens();
+        renderPalettes();
+      };
+
+      document.querySelectorAll("[data-theme-option]").forEach((button) => {
+        button.addEventListener("click", () => setTheme(button.dataset.themeOption));
+      });
+
+      setTheme("light");
+    </script>
+  </body>
+</html>
