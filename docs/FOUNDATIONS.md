@@ -1,6 +1,6 @@
 # Foundations
 
-Singleton SD token contract for `@singleton-sd/tokens`.
+Singleton SD token contract for `@singleton-sd/tokens`. Agent/gallery identity copy lives in [DESIGN.md](../DESIGN.md).
 
 ## Layers
 

@@ -14,7 +14,7 @@ Read `../assets/config/clickup-defaults.json` when that checkout is available. U
 
 ## Token rules
 
-See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
+See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery/agent identity copy is [DESIGN.md](DESIGN.md).
 
 - Values live in `src/tokens/` (DTCG `$value` / `$type`).
 - CSS prefix is `--ssd-`. Do not reintroduce `--fg-*` aliases.
