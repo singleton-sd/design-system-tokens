@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 (2026-08-13)
+
+* fix: DS-66 Avoid UAC in Windows git hooks ([6653f8f](https://gitlab.com/singleton-sd/design-system/tokens/commit/6653f8f))
+* feat: DS-42 Rebuild tokens with --ssd-* contract ([64f26fe](https://gitlab.com/singleton-sd/design-system/tokens/commit/64f26fe))
+* chore: SSDOP-30 new keyword patoperpetua ([81d6f19](https://gitlab.com/singleton-sd/design-system/tokens/commit/81d6f19))
+* chore: SSDOP-30 Update .gitignore ([ad82080](https://gitlab.com/singleton-sd/design-system/tokens/commit/ad82080))
+* docs: SSDOP-30 Update README ([0be0aa2](https://gitlab.com/singleton-sd/design-system/tokens/commit/0be0aa2))
+
 ## <small>1.2.5 (2025-07-02)</small>
 
 * docs: :bookmark: SSDOP-30 change CDN url ([d063073](https://gitlab.com/singleton-sd/design-system/tokens/commit/d063073))
