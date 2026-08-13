@@ -418,9 +418,9 @@
             </div>
             <div class="theme-preview-body">
               <div class="chip-row" aria-label="Semantic theme tokens">
-                <span class="chip">fg-default</span>
-                <span class="chip">bg-default</span>
-                <span class="chip">accent-default</span>
+                <span class="chip">text-default</span>
+                <span class="chip">background-default</span>
+                <span class="chip">background-brand</span>
               </div>
               <p>
                 This card is styled with the same CSS custom properties that product interfaces consume.
@@ -514,15 +514,15 @@ body {
 
     <script>
       const semanticTokens = [
-        "fg-default",
-        "fg-muted",
-        "fg-subtle",
-        "bg-default",
-        "bg-muted",
-        "bg-subtle",
-        "accent-default",
-        "accent-bg",
-        "accent-on-accent"
+        "ssd-color-text-default",
+        "ssd-color-text-muted",
+        "ssd-color-text-subtle",
+        "ssd-color-background-default",
+        "ssd-color-background-muted",
+        "ssd-color-background-subtle",
+        "ssd-color-background-brand",
+        "ssd-color-text-on-brand",
+        "ssd-color-border-default"
       ];
       const palettes = [
         ["Yellow dark", "yellow-dark"],
@@ -589,7 +589,7 @@ body {
           .map(([title, name]) => {
             const swatches = steps
               .map((step) => {
-                const token = `colors-${name}-${step}`;
+                const token = `ssd-color-${name}-${step}`;
                 const value = getTokenValue(token);
                 return `
                   <div class="swatch-row">
