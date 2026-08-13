@@ -13,7 +13,7 @@ This package contains the official design tokens used across Singleton SD projec
 Tokens are distributed in platform-agnostic JSON format and built outputs, ready to be consumed by:
 
 - Frontend frameworks (React, Tailwind, MUI, etc.)
-- Design tools (e.g. Figma Tokens Studio via raw URL)
+- Design tools (Penpot token sync via `dist/tokens.json`)
 - Any product needing consistent, scalable UI design foundations
 
 ## Public Token Gallery
@@ -27,7 +27,7 @@ The GitLab Pages site publishes a public HTML reference for the generated tokens
 The page is built from the generated files in `dist` and demonstrates:
 
 - Light and dark mode with `data-theme="light"` and `data-theme="dark"`
-- Semantic theme colors such as `--fg-default`, `--bg-default`, and `--accent-default`
+- Semantic theme colors such as `--ssd-color-text-default`, `--ssd-color-background-default`, and `--ssd-color-background-brand`
 - Main color palettes with their CSS variable names and color codes
 - Browser usage examples for the published CSS token files
 
@@ -45,7 +45,7 @@ spacing/ → Semantic spacing references (xs–xxl)
 npm install @singletonsd/tokens
 ```
 
-### URL (e.g. for Figma)
+### URL (e.g. for Penpot / tooling)
 
 [https://gitlab.com/singleton-sd/design-system/tokens/-/raw/main/dist/tokens.json](https://gitlab.com/singleton-sd/design-system/tokens/-/raw/main/dist/tokens.json)
 
@@ -109,8 +109,8 @@ Now you can use CSS custom properties:
 
 ```css
 body {
-  background-color: var(--bg-default);
-  color: var(--fg-default);
+  background-color: var(--ssd-color-background-default);
+  color: var(--ssd-color-text-default);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -152,8 +152,8 @@ Use as usual:
 
 ```css
 body {
-  background-color: var(--bg-default);
-  color: var(--fg-default);
+  background-color: var(--ssd-color-background-default);
+  color: var(--ssd-color-text-default);
 }
 ```
 

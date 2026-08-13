@@ -2,25 +2,23 @@
   "name": "@singleton-sd/tokens",
   "version": "1.2.5",
   "description": "Singleton SD's cross-platform design tokens for consistent UI spacing, typography, and theming. Distributed as an npm package and raw JSON for design tools and applications.",
-  "style": "dist/css/light/_variables.css",
+  "style": "dist/css/light.css",
   "exports": {
-    "./css/light": "./dist/css/light/_variables.css",
-    "./css/dark": "./dist/css/dark/_variables.css",
+    "./css/light": "./dist/css/light.css",
+    "./css/dark": "./dist/css/dark.css",
     "./css/root/light": "./dist/css/root/light/_variables.css",
     "./css/root/dark": "./dist/css/root/dark/_variables.css",
+    "./scss": "./dist/scss/_tokens.scss",
     "./scss/light": "./dist/scss/light/_variables.scss",
     "./scss/dark": "./dist/scss/dark/_variables.scss",
-    "./tailwind": "./dist/tailwind/tailwind.config.js"
+    "./tailwind": "./dist/tailwind/theme.js",
+    "./js": "./dist/js/tokens.mjs",
+    "./tokens.json": "./dist/tokens.json"
   },
   "scripts": {
     "build-all": "yarn build",
-    "build": "yarn build-dark && yarn build-light && yarn build-tailwind",
-    "build-dark": "style-dictionary build -c style-dictionary.config.dark.mjs --verbose",
-    "build-light": "style-dictionary build -c style-dictionary.config.light.mjs --verbose",
-    "build-tailwind": "style-dictionary build -c style-dictionary.config.tailwind.mjs --verbose",
-    "flatten-typography": "node scripts/flattenTypography.mjs",
-    "split-tokens": "node scripts/split-tokens.mjs && yarn flatten-typography",
-    "dev": "yarn split-tokens && yarn build",
+    "build": "node scripts/build.mjs",
+    "dev": "yarn build",
     "release": "env-cmd -x release-it -VV --dry-run",
     "release:ci": "release-it --ci"
   },
@@ -50,11 +48,12 @@
     "singleton-sd",
     "patricioperpetua",
     "patoperpetua",
-    "figma",
-    "figma-tokens",
-    "design-tokens"
+    "penpot",
+    "design-tokens",
+    "dtcg"
   ],
   "engines": {
     "node": "22.x"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
