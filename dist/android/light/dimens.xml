@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Do not edit directly, this file was auto-generated.
+-->
+<resources>
+  <dimen name="font_size_100">12px</dimen>
+  <dimen name="font_size_200">14px</dimen>
+  <dimen name="font_size_300">16px</dimen>
+  <dimen name="font_size_400">26px</dimen>
+  <dimen name="font_size_500">36px</dimen>
+  <dimen name="font_size_600">42px</dimen>
+  <dimen name="font_size_700">52px</dimen>
+  <dimen name="space_100">4px</dimen>
+  <dimen name="space_200">8px</dimen>
+  <dimen name="space_300">16px</dimen>
+  <dimen name="space_400">24px</dimen>
+  <dimen name="space_500">32px</dimen>
+  <dimen name="space_600">48px</dimen>
+  <dimen name="space_800">64px</dimen>
+  <dimen name="radius_sm">4px</dimen>
+  <dimen name="radius_md">8px</dimen>
+  <dimen name="radius_lg">12px</dimen>
+  <dimen name="radius_xl">16px</dimen>
+  <dimen name="radius_full">9999px</dimen>
+  <dimen name="border_width_default">1px</dimen>
+  <dimen name="border_width_strong">2px</dimen>
+  <dimen name="logo_layout_padding_horizontal">16px</dimen>
+  <dimen name="logo_layout_padding_vertical">16px</dimen>
+  <dimen name="logo_layout_gap">4px</dimen>
+</resources>

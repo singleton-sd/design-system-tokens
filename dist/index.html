@@ -16,13 +16,13 @@
         --page-radius-sm: 12px;
         --page-radius-md: 18px;
         --page-radius-lg: 28px;
-        --page-border: color-mix(in srgb, var(--fg-default), transparent 78%);
-        --page-surface: color-mix(in srgb, var(--bg-default), var(--bg-subtle) 14%);
-        --page-surface-strong: color-mix(in srgb, var(--bg-default), var(--accent-bg) 18%);
-        --page-text: color-mix(in srgb, var(--fg-default), var(--colors-gray-900) 34%);
-        --page-text-muted: color-mix(in srgb, var(--fg-muted), var(--colors-gray-700) 38%);
+        --page-border: color-mix(in srgb, var(--ssd-color-text-default), transparent 78%);
+        --page-surface: color-mix(in srgb, var(--ssd-color-background-default), var(--ssd-color-background-subtle) 14%);
+        --page-surface-strong: color-mix(in srgb, var(--ssd-color-background-default), var(--ssd-color-background-muted) 18%);
+        --page-text: color-mix(in srgb, var(--ssd-color-text-default), var(--ssd-color-gray-900) 34%);
+        --page-text-muted: color-mix(in srgb, var(--ssd-color-text-muted), var(--ssd-color-gray-700) 38%);
         --page-shadow: 0 28px 80px
-          color-mix(in srgb, var(--shadows-default, var(--colors-black)), transparent 84%);
+          color-mix(in srgb, var(--ssd-shadow-md, var(--ssd-color-black)), transparent 84%);
       }
 
       * {
@@ -36,11 +36,11 @@
       body {
         margin: 0;
         background:
-          radial-gradient(circle at top left, color-mix(in srgb, var(--accent-bg), transparent 18%), transparent 38rem),
-          linear-gradient(135deg, var(--bg-default), color-mix(in srgb, var(--bg-default), var(--bg-subtle) 18%));
+          radial-gradient(circle at top left, color-mix(in srgb, var(--ssd-color-background-muted), transparent 18%), transparent 38rem),
+          linear-gradient(135deg, var(--ssd-color-background-default), color-mix(in srgb, var(--ssd-color-background-default), var(--ssd-color-background-subtle) 18%));
         color: var(--page-text);
         font-family:
-          var(--font-families-body), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          var(--ssd-font-family-body), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
         line-height: 1.5;
         min-height: 100vh;
@@ -70,9 +70,9 @@
       }
 
       .eyebrow {
-        color: var(--fg-muted);
+        color: var(--ssd-color-text-muted);
         font-size: 0.78rem;
-        font-weight: var(--font-weights-bold);
+        font-weight: var(--ssd-font-weight-bold);
         letter-spacing: 0.16em;
         margin: 0 0 16px;
         text-transform: uppercase;
@@ -81,9 +81,9 @@
       h1,
       h2,
       h3 {
-        color: var(--fg-default);
+        color: var(--ssd-color-text-default);
         font-family:
-          var(--font-families-heading), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          var(--ssd-font-family-heading), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
         letter-spacing: -0.04em;
         line-height: 1;
@@ -124,12 +124,12 @@
 
       .button {
         align-items: center;
-        background: var(--accent-default);
+        background: var(--ssd-color-background-brand);
         border: 1px solid var(--page-border);
         border-radius: 999px;
-        color: var(--accent-on-accent);
+        color: var(--ssd-color-text-on-brand);
         display: inline-flex;
-        font-weight: var(--font-weights-bold);
+        font-weight: var(--ssd-font-weight-bold);
         gap: 10px;
         min-height: 44px;
         padding: 0 18px;
@@ -138,7 +138,7 @@
 
       .button.secondary {
         background: var(--page-surface);
-        color: var(--fg-default);
+        color: var(--ssd-color-text-default);
       }
 
       .panel {
@@ -168,27 +168,27 @@
         color: var(--page-text);
         cursor: pointer;
         font: inherit;
-        font-weight: var(--font-weights-bold);
+        font-weight: var(--ssd-font-weight-bold);
         padding: 12px 16px;
       }
 
       .theme-toggle button[aria-pressed="true"] {
-        background: var(--accent-default);
-        border-color: var(--accent-default);
-        color: var(--accent-on-accent);
+        background: var(--ssd-color-background-brand);
+        border-color: var(--ssd-color-background-brand);
+        color: var(--ssd-color-text-on-brand);
       }
 
       .theme-preview {
-        background: var(--bg-default);
+        background: var(--ssd-color-background-default);
         border: 1px solid var(--page-border);
         border-radius: var(--page-radius-md);
-        color: var(--fg-default);
+        color: var(--ssd-color-text-default);
         overflow: hidden;
       }
 
       .theme-preview-header {
-        background: var(--accent-bg);
-        color: var(--fg-default);
+        background: var(--ssd-color-background-muted);
+        color: var(--ssd-color-text-default);
         padding: 18px;
       }
 
@@ -205,12 +205,12 @@
       }
 
       .chip {
-        background: color-mix(in srgb, var(--accent-bg), transparent 32%);
+        background: color-mix(in srgb, var(--ssd-color-background-muted), transparent 32%);
         border: 1px solid var(--page-border);
         border-radius: 999px;
-        color: var(--fg-muted);
+        color: var(--ssd-color-text-muted);
         font-size: 0.85rem;
-        font-weight: var(--font-weights-bold);
+        font-weight: var(--ssd-font-weight-bold);
         padding: 6px 10px;
       }
 
@@ -263,9 +263,9 @@
       }
 
       .token-name {
-        color: var(--fg-default);
+        color: var(--ssd-color-text-default);
         display: block;
-        font-weight: var(--font-weights-bold);
+        font-weight: var(--ssd-font-weight-bold);
       }
 
       .token-value {
@@ -310,10 +310,10 @@
       }
 
       .code-block {
-        background: color-mix(in srgb, var(--colors-black), var(--bg-default) 18%);
+        background: color-mix(in srgb, var(--ssd-color-black), var(--ssd-color-background-default) 18%);
         border: 1px solid var(--page-border);
         border-radius: var(--page-radius-md);
-        color: var(--colors-gray-100);
+        color: var(--ssd-color-gray-100);
         overflow: auto;
         padding: 20px;
       }
@@ -327,19 +327,19 @@
       }
 
       .code-comment {
-        color: var(--colors-gray-500);
+        color: var(--ssd-color-gray-500);
       }
 
       .code-token {
-        color: var(--colors-yellow-dark-400);
+        color: var(--ssd-color-yellow-dark-400);
       }
 
       .code-string {
-        color: var(--colors-green-300);
+        color: var(--ssd-color-green-300);
       }
 
       .code-property {
-        color: var(--colors-blue-300);
+        color: var(--ssd-color-blue-300);
       }
 
       .footer {
@@ -489,13 +489,13 @@
 <span class="code-token">/&gt;</span></code></pre>
           <pre class="code-block"><code><span class="code-comment">/* CSS */</span>
 body {
-  background: <span class="code-token">var(--bg-default)</span>;
-  color: <span class="code-token">var(--fg-default)</span>;
+  background: <span class="code-token">var(--ssd-color-background-default)</span>;
+  color: <span class="code-token">var(--ssd-color-text-default)</span>;
 }
 
 .button {
-  background: <span class="code-token">var(--accent-default)</span>;
-  color: <span class="code-token">var(--accent-on-accent)</span>;
+  background: <span class="code-token">var(--ssd-color-background-brand)</span>;
+  color: <span class="code-token">var(--ssd-color-text-on-brand)</span>;
 }</code></pre>
         </div>
       </section>

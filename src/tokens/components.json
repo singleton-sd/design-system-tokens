@@ -1,0 +1,11 @@
+{
+  "logo": {
+    "layout": {
+      "padding": {
+        "horizontal": { "$value": "{space.300}", "$type": "spacing" },
+        "vertical": { "$value": "{space.300}", "$type": "spacing" }
+      },
+      "gap": { "$value": "{space.100}", "$type": "spacing" }
+    }
+  }
+}

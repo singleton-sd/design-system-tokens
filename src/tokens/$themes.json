@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Light",
+    "group": "theme",
+    "selectedTokenSets": {
+      "core": "enabled",
+      "semantic/light": "enabled",
+      "components": "enabled"
+    }
+  },
+  {
+    "name": "Dark",
+    "group": "theme",
+    "selectedTokenSets": {
+      "core": "enabled",
+      "semantic/dark": "enabled",
+      "components": "enabled"
+    }
+  }
+]
