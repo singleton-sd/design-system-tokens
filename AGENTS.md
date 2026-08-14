@@ -14,13 +14,21 @@ Read `../assets/config/clickup-defaults.json` when that checkout is available. U
 
 ## Token rules
 
-See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
+See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery/agent identity copy is [DESIGN.md](DESIGN.md).
 
 - Values live in `src/tokens/` (DTCG `$value` / `$type`).
 - CSS prefix is `--ssd-`. Do not reintroduce `--fg-*` aliases.
 - `yarn build` emits CSS, SCSS, Tailwind theme, JS, `dist/tokens.json`, iOS Swift, Android XML, Flutter Dart.
 - Penpot is the style-guide home; this package is the value source of truth.
 - Do not embed logo binaries here. Use `@singleton-sd/assets`.
+
+## Related docs
+
+- Token contract: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md)
+- Gallery/agent identity: [DESIGN.md](DESIGN.md)
+- Public gallery: https://tokens.design.singletonsd.com/
+- Logo binaries (`@singleton-sd/assets`): [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) · [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md) · https://assets.singletonsd.com
+- Local sibling checkout: `../assets/`
 
 ## Git
 

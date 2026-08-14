@@ -14,7 +14,9 @@ The CSS prefix is `--ssd-`. There are no `--fg-*` aliases.
 
 [Public gallery](https://tokens.design.singletonsd.com/) ·
 [GitLab Pages](https://singleton-sd.gitlab.io/design-system/tokens/) ·
-[Foundations](docs/FOUNDATIONS.md)
+[Foundations](docs/FOUNDATIONS.md) ·
+[DESIGN.md](DESIGN.md) ·
+[AGENTS.md](AGENTS.md)
 
 ## Public gallery
 
@@ -217,7 +219,8 @@ yarn build
 ```
 
 Edit `src/tokens/`, then rebuild. New semantic roles belong in both light and
-dark files. See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
+dark files. See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery and agent
+copy: [DESIGN.md](DESIGN.md). Agent working agreements: [AGENTS.md](AGENTS.md).
 
 ## Versioning
 
@@ -228,7 +231,8 @@ This package follows [Semantic Versioning](https://semver.org/). Releases use
 
 Work in a dedicated worktree off `origin/main`. Branch as
 `feature/<DS-n>-<kebab-title>` (ClickUp Design System list). Open a merge
-request against `main`. Do not commit on the shared `main` checkout.
+request against `main`. Do not commit on the shared `main` checkout. Follow
+[AGENTS.md](AGENTS.md).
 
 ## License
 
