@@ -6,6 +6,12 @@ Do not invent product names, features, colors, scales, copy, or claims beyond wh
 
 Values live in `src/tokens/` (DTCG `$value` / `$type`). This file is the agent/gallery contract. The operating manual is [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md).
 
+Related:
+
+- Token contract: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md)
+- Public gallery: https://tokens.design.singletonsd.com/
+- Logo binaries: `@singleton-sd/assets` — https://assets.singletonsd.com · [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) · [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md)
+
 ---
 
 ## Product
@@ -127,6 +133,17 @@ Token set order:
 4. components
 
 CSS prefix is `--ssd-`. Do not reintroduce `--fg-*`, `--bg-*`, or `--accent-*` aliases.
+
+Penpot → tokens → assets sync:
+
+```text
+tokens (values) → yarn build → dist/css, dist/tokens.json, native
+                 ↘ Penpot token sets/themes (MCP, connected Brand System file)
+assets (SVG/PNG) → Penpot logo components
+Penpot usage boards → assets/BRAND.md + export packs
+```
+
+Figma is reference-only. Do not treat Tokens Studio as the pipeline.
 
 ---
 
@@ -515,10 +532,22 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
 | `--ssd-color-border-focus` | yellow-light 500 | `#c89200` |
 | `--ssd-color-border-brand` | yellow-light 500 | `#c89200` |
+| `--ssd-color-icon-default` | text.default | `#c89200` |
+| `--ssd-color-icon-muted` | text.muted | `#ffb300` |
+| `--ssd-color-icon-inverse` | text.inverse | `#ffffff` |
+| `--ssd-color-icon-brand` | text.brand | `#c89200` |
 | `--ssd-color-feedback-danger-text` | red 700 | `#c53030` |
 | `--ssd-color-feedback-danger-background` | red 100 | `#fff5f5` |
+| `--ssd-color-feedback-danger-border` | red 400 | `#fc8181` |
+| `--ssd-color-feedback-warning-text` | orange 700 | `#c05621` |
+| `--ssd-color-feedback-warning-background` | orange 100 | `#fffaf0` |
+| `--ssd-color-feedback-warning-border` | orange 400 | `#f6ad55` |
 | `--ssd-color-feedback-success-text` | green 700 | `#2f855a` |
 | `--ssd-color-feedback-success-background` | green 100 | `#f0fff4` |
+| `--ssd-color-feedback-success-border` | green 400 | `#68d391` |
+| `--ssd-color-feedback-info-text` | blue 700 | `#2b6cb0` |
+| `--ssd-color-feedback-info-background` | blue 100 | `#ebf8ff` |
+| `--ssd-color-feedback-info-border` | blue 400 | `#63b3ed` |
 
 ### Dark
 
@@ -543,12 +572,24 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
 | `--ssd-color-border-focus` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-border-brand` | yellow-dark 500 | `#ffb300` |
+| `--ssd-color-icon-default` | text.default | `#ffb300` |
+| `--ssd-color-icon-muted` | text.muted | `#ffa000` |
+| `--ssd-color-icon-inverse` | text.inverse | `#292c30` |
+| `--ssd-color-icon-brand` | text.brand | `#ffb300` |
 | `--ssd-color-feedback-danger-text` | red 300 | `#feb2b2` |
 | `--ssd-color-feedback-danger-background` | red 900 | `#742a2a` |
+| `--ssd-color-feedback-danger-border` | red 600 | `#e53e3e` |
+| `--ssd-color-feedback-warning-text` | orange 300 | `#fbd38d` |
+| `--ssd-color-feedback-warning-background` | orange 900 | `#7b341e` |
+| `--ssd-color-feedback-warning-border` | orange 600 | `#dd6b20` |
 | `--ssd-color-feedback-success-text` | green 300 | `#9ae6b4` |
 | `--ssd-color-feedback-success-background` | green 900 | `#22543d` |
+| `--ssd-color-feedback-success-border` | green 600 | `#38a169` |
+| `--ssd-color-feedback-info-text` | blue 300 | `#90cdf4` |
+| `--ssd-color-feedback-info-background` | blue 900 | `#2a4365` |
+| `--ssd-color-feedback-info-border` | blue 600 | `#3182ce` |
 
-Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shadows.default`.
+Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shadows.default`. Icon roles alias the matching text roles.
 
 ---
 

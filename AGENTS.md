@@ -22,6 +22,14 @@ See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery/agent identity copy is [
 - Penpot is the style-guide home; this package is the value source of truth.
 - Do not embed logo binaries here. Use `@singleton-sd/assets`.
 
+## Related docs
+
+- Token contract: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md)
+- Gallery/agent identity: [DESIGN.md](DESIGN.md)
+- Public gallery: https://tokens.design.singletonsd.com/
+- Logo binaries (`@singleton-sd/assets`): [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) · [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md) · https://assets.singletonsd.com
+- Local sibling checkout: `../assets/`
+
 ## Git
 
 Work in a dedicated worktree off `origin/main`. Branch: `feature/<DS-n>-<kebab-title>`. Never commit on the shared `main` checkout.
