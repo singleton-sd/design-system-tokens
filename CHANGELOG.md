@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0 (2026-08-15)
+
+* feat: DS-75 Add css-vars export ([c3ee7e8](https://gitlab.com/singleton-sd/design-system/tokens/commit/c3ee7e8))
+* docs: DS-46 Cross-link assets and DESIGN.md ([0074f9d](https://gitlab.com/singleton-sd/design-system/tokens/commit/0074f9d))
+* docs: DS-46 Fold DESIGN.md onto --ssd-* contract ([48c2183](https://gitlab.com/singleton-sd/design-system/tokens/commit/48c2183))
+* docs: DS-46 Link DESIGN and AGENTS in README ([a719b78](https://gitlab.com/singleton-sd/design-system/tokens/commit/a719b78))
+* docs: DS-69 Refresh README and token gallery ([4cc6f9e](https://gitlab.com/singleton-sd/design-system/tokens/commit/4cc6f9e))
+
 ## 1.3.0 (2026-08-13)
 
 * fix: DS-66 Avoid UAC in Windows git hooks ([6653f8f](https://gitlab.com/singleton-sd/design-system/tokens/commit/6653f8f))
