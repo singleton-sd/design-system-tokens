@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.4.2 (2026-08-15)</small>
+
+* fix: DS-76 Align ./js types with ESM dump ([b47e126](https://gitlab.com/singleton-sd/design-system/tokens/commit/b47e126))
+
 ## <small>1.4.1 (2026-08-15)</small>
 
 * fix: DS-79 Emit css-vars types as .d.mts ([9663621](https://gitlab.com/singleton-sd/design-system/tokens/commit/9663621))
