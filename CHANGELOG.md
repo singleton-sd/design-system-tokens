@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.4.1 (2026-08-15)</small>
+
+* fix: DS-79 Emit css-vars types as .d.mts ([9663621](https://gitlab.com/singleton-sd/design-system/tokens/commit/9663621))
+
 ## 1.4.0 (2026-08-15)
 
 * feat: DS-75 Add css-vars export ([c3ee7e8](https://gitlab.com/singleton-sd/design-system/tokens/commit/c3ee7e8))
