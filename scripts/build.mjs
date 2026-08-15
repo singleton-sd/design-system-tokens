@@ -80,9 +80,16 @@ for (const theme of ['light', 'dark']) {
 
 writeFileSync(
   'dist/js/tokens.mjs',
-  `export * as light from './light.mjs';\nexport * as dark from './dark.mjs';\n`,
+  `export { default as light } from './light.mjs';\nexport { default as dark } from './dark.mjs';\n`,
 );
 writeFileSync(
-  'dist/js/tokens.d.ts',
-  `export * as light from './light';\nexport * as dark from './dark';\n`,
+  'dist/js/tokens.d.mts',
+  `export { default as light } from './light.mjs';\nexport { default as dark } from './dark.mjs';\n`,
 );
+for (const stale of ['dist/js/tokens.d.ts', 'dist/js/light.d.ts', 'dist/js/dark.d.ts']) {
+  try {
+    unlinkSync(stale);
+  } catch {
+    // absent on clean builds
+  }
+}

@@ -71,7 +71,7 @@ Package entry points:
 | `@singleton-sd/tokens/scss/dark` | `dist/scss/dark/_variables.scss` |
 | `@singleton-sd/tokens/css-vars` | `dist/css-vars/index.mjs` (+ `index.d.mts`) |
 | `@singleton-sd/tokens/tailwind` | `dist/tailwind/theme.js` |
-| `@singleton-sd/tokens/js` | `dist/js/tokens.mjs` |
+| `@singleton-sd/tokens/js` | `dist/js/tokens.mjs` (+ `tokens.d.mts`) |
 | `@singleton-sd/tokens/tokens.json` | `dist/tokens.json` |
 
 ## Usage
@@ -161,7 +161,12 @@ export default {
 
 ```js
 import { light, dark } from '@singleton-sd/tokens/js';
+
+light.color.text.default.$value;
+dark.color.background.default.$value;
 ```
+
+This is the resolved Style Dictionary dump (nested paths, token objects). For `var(--ssd-*)` bindings use `./css-vars`.
 
 ### Penpot / raw JSON
 

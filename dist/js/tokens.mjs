@@ -1,2 +1,2 @@
-export * as light from './light.mjs';
-export * as dark from './dark.mjs';
+export { default as light } from './light.mjs';
+export { default as dark } from './dark.mjs';

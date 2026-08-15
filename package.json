@@ -17,7 +17,11 @@
       "default": "./dist/css-vars/index.mjs"
     },
     "./tailwind": "./dist/tailwind/theme.js",
-    "./js": "./dist/js/tokens.mjs",
+    "./js": {
+      "types": "./dist/js/tokens.d.mts",
+      "import": "./dist/js/tokens.mjs",
+      "default": "./dist/js/tokens.mjs"
+    },
     "./tokens.json": "./dist/tokens.json"
   },
   "scripts": {
