@@ -28,7 +28,7 @@ Do not add page-specific aliases (`hero`, `og`, `linkedin`) here. Products map t
 ## Sync loop
 
 ```text
-tokens (values) → yarn build → dist/css, dist/tokens.json, native
+tokens (values) → yarn build → dist/css, dist/css-vars, dist/tokens.json, native
                  ↘ Penpot token sets/themes (MCP, connected Brand System file)
 assets (SVG/PNG) → Penpot logo components
 Penpot usage boards → assets/BRAND.md + export packs
@@ -43,7 +43,7 @@ Figma is reference-only. Do not treat Tokens Studio as the pipeline.
 
 ## Release
 
-`yarn release` / CI `release:ci` as before. `dist` is the published artifact (CSS, SCSS, Tailwind theme, JS, `tokens.json`, iOS, Android, Flutter).
+`yarn release` / CI `release:ci` as before. `dist` is the published artifact (CSS, SCSS, css-vars map, Tailwind theme, JS, `tokens.json`, iOS, Android, Flutter).
 
 ## Old → new CSS migration
 

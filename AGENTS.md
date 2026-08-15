@@ -18,7 +18,7 @@ See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery/agent identity copy is [
 
 - Values live in `src/tokens/` (DTCG `$value` / `$type`).
 - CSS prefix is `--ssd-`. Do not reintroduce `--fg-*` aliases.
-- `yarn build` emits CSS, SCSS, Tailwind theme, JS, `dist/tokens.json`, iOS Swift, Android XML, Flutter Dart.
+- `yarn build` emits CSS, SCSS, css-vars map, Tailwind theme, JS, `dist/tokens.json`, iOS Swift, Android XML, Flutter Dart.
 - Penpot is the style-guide home; this package is the value source of truth.
 - Do not embed logo binaries here. Use `@singleton-sd/assets`.
 

@@ -137,7 +137,7 @@ CSS prefix is `--ssd-`. Do not reintroduce `--fg-*`, `--bg-*`, or `--accent-*` a
 Penpot → tokens → assets sync:
 
 ```text
-tokens (values) → yarn build → dist/css, dist/tokens.json, native
+tokens (values) → yarn build → dist/css, dist/css-vars, dist/tokens.json, native
                  ↘ Penpot token sets/themes (MCP, connected Brand System file)
 assets (SVG/PNG) → Penpot logo components
 Penpot usage boards → assets/BRAND.md + export packs
@@ -174,6 +174,7 @@ Registry note: configure npm for the `@singleton-sd` scope via GitLab’s npm re
 - `@singleton-sd/tokens/scss`
 - `@singleton-sd/tokens/scss/light`
 - `@singleton-sd/tokens/scss/dark`
+- `@singleton-sd/tokens/css-vars`
 - `@singleton-sd/tokens/tailwind`
 - `@singleton-sd/tokens/js`
 - `@singleton-sd/tokens/tokens.json`
