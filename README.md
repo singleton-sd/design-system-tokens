@@ -69,7 +69,7 @@ Package entry points:
 | `@singleton-sd/tokens/scss` | `dist/scss/_tokens.scss` |
 | `@singleton-sd/tokens/scss/light` | `dist/scss/light/_variables.scss` |
 | `@singleton-sd/tokens/scss/dark` | `dist/scss/dark/_variables.scss` |
-| `@singleton-sd/tokens/css-vars` | `dist/css-vars/index.mjs` |
+| `@singleton-sd/tokens/css-vars` | `dist/css-vars/index.mjs` (+ `index.d.mts`) |
 | `@singleton-sd/tokens/tailwind` | `dist/tailwind/theme.js` |
 | `@singleton-sd/tokens/js` | `dist/js/tokens.mjs` |
 | `@singleton-sd/tokens/tokens.json` | `dist/tokens.json` |
