@@ -12,7 +12,8 @@
     "./scss/light": "./dist/scss/light/_variables.scss",
     "./scss/dark": "./dist/scss/dark/_variables.scss",
     "./css-vars": {
-      "types": "./dist/css-vars/index.d.ts",
+      "types": "./dist/css-vars/index.d.mts",
+      "import": "./dist/css-vars/index.mjs",
       "default": "./dist/css-vars/index.mjs"
     },
     "./tailwind": "./dist/tailwind/theme.js",

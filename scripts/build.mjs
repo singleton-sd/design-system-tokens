@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import StyleDictionary from 'style-dictionary';
 import {
   buildCssVarsMap,
@@ -61,7 +61,13 @@ writeFileSync(
 
 const cssVars = buildCssVarsMap();
 writeFileSync('dist/css-vars/index.mjs', renderCssVarsModule(cssVars));
-writeFileSync('dist/css-vars/index.d.ts', renderCssVarsDts(cssVars));
+// NodeNext pairs .mjs with .d.mts; a sibling .d.ts is treated as CJS and breaks default imports.
+writeFileSync('dist/css-vars/index.d.mts', renderCssVarsDts(cssVars));
+try {
+  unlinkSync('dist/css-vars/index.d.ts');
+} catch {
+  // absent on clean builds
+}
 writeFileSync(
   'dist/tailwind/theme.js',
   renderTailwindThemeModule(toTailwindTheme(cssVars)),
