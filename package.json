@@ -11,6 +11,10 @@
     "./scss": "./dist/scss/_tokens.scss",
     "./scss/light": "./dist/scss/light/_variables.scss",
     "./scss/dark": "./dist/scss/dark/_variables.scss",
+    "./css-vars": {
+      "types": "./dist/css-vars/index.d.ts",
+      "default": "./dist/css-vars/index.mjs"
+    },
     "./tailwind": "./dist/tailwind/theme.js",
     "./js": "./dist/js/tokens.mjs",
     "./tokens.json": "./dist/tokens.json"

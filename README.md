@@ -69,6 +69,7 @@ Package entry points:
 | `@singleton-sd/tokens/scss` | `dist/scss/_tokens.scss` |
 | `@singleton-sd/tokens/scss/light` | `dist/scss/light/_variables.scss` |
 | `@singleton-sd/tokens/scss/dark` | `dist/scss/dark/_variables.scss` |
+| `@singleton-sd/tokens/css-vars` | `dist/css-vars/index.mjs` |
 | `@singleton-sd/tokens/tailwind` | `dist/tailwind/theme.js` |
 | `@singleton-sd/tokens/js` | `dist/js/tokens.mjs` |
 | `@singleton-sd/tokens/tokens.json` | `dist/tokens.json` |
@@ -121,10 +122,25 @@ body {
 
 Use the generated `$ssd-*` names from `dist/scss/{light,dark}/_variables.scss`.
 
+### CSS vars (framework-agnostic)
+
+`dist/css-vars/index.mjs` maps DTCG token paths to `var(--ssd-*)` strings only (no resolved colors, no Tailwind `DEFAULT` keys). Import the matching CSS theme as well.
+
+```js
+import cssVars from '@singleton-sd/tokens/css-vars';
+
+const page = {
+  color: cssVars.color.text.default,
+  background: cssVars.color.background.default,
+  fontFamily: cssVars.font.family.body,
+};
+```
+
+Feedback roles keep full semantic nesting (`color.feedback.danger.text` / `.background` / `.border`).
+
 ### Tailwind
 
-`dist/tailwind/theme.js` is an ESM theme that maps to `--ssd-*` CSS variables.
-Import the matching CSS file as well.
+`dist/tailwind/theme.js` is derived from the css-vars map (lossy reshape for Tailwind: `default` → `DEFAULT`, feedback text-only). Import the matching CSS file as well.
 
 ```js
 import singletonTokens from '@singleton-sd/tokens/tailwind';
