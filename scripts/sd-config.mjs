@@ -1,8 +1,61 @@
+import StyleDictionary from 'style-dictionary';
+
 const tokenType = (token) => token.$type ?? token.type;
 
 export const isColor = (token) => tokenType(token) === 'color';
 export const isDimension = (token) =>
   ['spacing', 'borderRadius', 'borderWidth', 'fontSizes', 'dimension'].includes(tokenType(token));
+
+const JS_DTS_HEADER = `/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+export interface DesignToken {
+  $value?: unknown;
+  $type?: string;
+  name?: string;
+  path?: string[];
+  attributes?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+`;
+
+function isTokenLeaf(node) {
+  return (
+    node !== null &&
+    typeof node === 'object' &&
+    !Array.isArray(node) &&
+    Object.hasOwn(node, '$value')
+  );
+}
+
+function renderTokenTreeType(node, indent) {
+  const pad = '  '.repeat(indent);
+  const inner = '  '.repeat(indent + 1);
+  if (isTokenLeaf(node)) {
+    return 'DesignToken';
+  }
+  const entries = Object.entries(/** @type {Record<string, unknown>} */ (node));
+  if (entries.length === 0) {
+    return 'Record<string, never>';
+  }
+  const lines = entries.map(([key, child]) => {
+    const safeKey = /^[A-Za-z_$][\w$]*$/.test(key) ? key : JSON.stringify(key);
+    return `${inner}${safeKey}: ${renderTokenTreeType(child, indent + 1)};`;
+  });
+  return `{\n${lines.join('\n')}\n${pad}}`;
+}
+
+StyleDictionary.registerFormat({
+  name: 'typescript/esm-default',
+  format: ({ dictionary }) => {
+    const tree = renderTokenTreeType(dictionary.tokens, 0);
+    return `${JS_DTS_HEADER}
+declare const tokens: ${tree};
+export default tokens;
+`;
+  },
+});
 
 /**
  * @param {'light' | 'dark'} theme
@@ -76,8 +129,8 @@ export function createConfig(theme) {
             format: 'javascript/esm',
           },
           {
-            destination: `${theme}.d.ts`,
-            format: 'typescript/es6-declarations',
+            destination: `${theme}.d.mts`,
+            format: 'typescript/esm-default',
           },
         ],
       },
