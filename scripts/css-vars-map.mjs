@@ -1,6 +1,6 @@
 /**
  * Framework-agnostic CSS var bindings (DTCG path → var(--ssd-*)).
- * Tailwind theme is derived via a lossy reshape that stays 1.3.0-compatible.
+ * Tailwind theme is derived from this map (`default` → `DEFAULT`).
  */
 
 /** @type {readonly string[]} */
@@ -84,8 +84,9 @@ export function buildCssVarsMap(paths = CSS_VAR_PATHS) {
 }
 
 /**
- * Lossy reshape to the published Tailwind v4 theme shape (1.3.0-compatible).
- * Feedback background/border are omitted; color `default` becomes `DEFAULT`.
+ * Reshape to the published Tailwind v4 theme.
+ * Color `default` becomes `DEFAULT`. Feedback keeps text as `DEFAULT` so
+ * `*-feedback-danger` stays valid, and adds text/background/border roles.
  *
  * @param {Record<string, unknown>} cssVars
  */
@@ -103,7 +104,9 @@ export function toTailwindTheme(cssVars) {
           background: withDefaultKey(/** @type {Record<string, string>} */ (color.background ?? {})),
           border: withDefaultKey(/** @type {Record<string, string>} */ (color.border ?? {})),
           icon: withDefaultKey(/** @type {Record<string, string>} */ (color.icon ?? {})),
-          feedback: feedbackTextOnly(/** @type {Record<string, Record<string, string>>} */ (color.feedback ?? {})),
+          feedback: feedbackRoles(
+            /** @type {Record<string, Record<string, string>>} */ (color.feedback ?? {}),
+          ),
         },
         fontFamily: { ...(font.family ?? {}) },
         borderRadius: { ...radius },
@@ -128,15 +131,21 @@ function withDefaultKey(group) {
 
 /**
  * @param {Record<string, Record<string, string>>} feedback
- * @returns {Record<string, string>}
+ * @returns {Record<string, Record<string, string>>}
  */
-function feedbackTextOnly(feedback) {
-  /** @type {Record<string, string>} */
+function feedbackRoles(feedback) {
+  /** @type {Record<string, Record<string, string>>} */
   const out = {};
   for (const [tone, roles] of Object.entries(feedback)) {
-    if (roles && typeof roles.text === 'string') {
-      out[tone] = roles.text;
+    if (!roles || typeof roles !== 'object') {
+      continue;
     }
+    /** @type {Record<string, string>} */
+    const next = { ...roles };
+    if (typeof roles.text === 'string') {
+      next.DEFAULT = roles.text;
+    }
+    out[tone] = next;
   }
   return out;
 }
