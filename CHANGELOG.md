@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0 (2026-08-17)
+
+* feat: DS-80 Expand Tailwind feedback roles ([a61dcbc](https://gitlab.com/singleton-sd/design-system/tokens/commit/a61dcbc))
+
 ## <small>1.4.2 (2026-08-15)</small>
 
 * fix: DS-76 Align ./js types with ESM dump ([b47e126](https://gitlab.com/singleton-sd/design-system/tokens/commit/b47e126))
