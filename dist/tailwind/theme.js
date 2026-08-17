@@ -35,10 +35,30 @@ export default {
           brand: 'var(--ssd-color-icon-brand)',
         },
         feedback: {
-          danger: 'var(--ssd-color-feedback-danger-text)',
-          warning: 'var(--ssd-color-feedback-warning-text)',
-          success: 'var(--ssd-color-feedback-success-text)',
-          info: 'var(--ssd-color-feedback-info-text)',
+          danger: {
+            text: 'var(--ssd-color-feedback-danger-text)',
+            background: 'var(--ssd-color-feedback-danger-background)',
+            border: 'var(--ssd-color-feedback-danger-border)',
+            DEFAULT: 'var(--ssd-color-feedback-danger-text)',
+          },
+          warning: {
+            text: 'var(--ssd-color-feedback-warning-text)',
+            background: 'var(--ssd-color-feedback-warning-background)',
+            border: 'var(--ssd-color-feedback-warning-border)',
+            DEFAULT: 'var(--ssd-color-feedback-warning-text)',
+          },
+          success: {
+            text: 'var(--ssd-color-feedback-success-text)',
+            background: 'var(--ssd-color-feedback-success-background)',
+            border: 'var(--ssd-color-feedback-success-border)',
+            DEFAULT: 'var(--ssd-color-feedback-success-text)',
+          },
+          info: {
+            text: 'var(--ssd-color-feedback-info-text)',
+            background: 'var(--ssd-color-feedback-info-background)',
+            border: 'var(--ssd-color-feedback-info-border)',
+            DEFAULT: 'var(--ssd-color-feedback-info-text)',
+          },
         },
       },
       fontFamily: {

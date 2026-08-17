@@ -140,7 +140,7 @@ Feedback roles keep full semantic nesting (`color.feedback.danger.text` / `.back
 
 ### Tailwind
 
-`dist/tailwind/theme.js` is derived from the css-vars map (lossy reshape for Tailwind: `default` → `DEFAULT`, feedback text-only). Import the matching CSS file as well.
+`dist/tailwind/theme.js` is derived from the css-vars map (`default` → `DEFAULT`). Feedback tones keep text as `DEFAULT` (so `text-feedback-danger` still works) and add `text` / `background` / `border`. Import the matching CSS file as well.
 
 ```js
 import singletonTokens from '@singleton-sd/tokens/tailwind';
@@ -178,11 +178,15 @@ Figma is reference-only. Do not treat Tokens Studio as the pipeline.
 
 ### CDN / GitLab Pages
 
-Pages serves `dist/` at the site root. Use a release tag in production.
+GitLab **free tier** publishes a single Pages site. There are no `/1.4.2/` (or branch-prefixed) CSS URLs — those return 404. The public gallery at [tokens.design.singletonsd.com](https://tokens.design.singletonsd.com) is the latest `main` deploy.
 
-Latest (`main`):
+Live (unversioned):
 
 ```html
+<link
+  rel="stylesheet"
+  href="https://tokens.design.singletonsd.com/css/root/light/_variables.css"
+/>
 <link
   rel="stylesheet"
   href="https://tokens.design.singletonsd.com/css/light/_variables.css"
@@ -193,7 +197,7 @@ Latest (`main`):
 />
 ```
 
-GitLab Pages fallback:
+GitLab Pages hostname fallback:
 
 ```html
 <link
@@ -202,23 +206,12 @@ GitLab Pages fallback:
 />
 ```
 
-Tagged release (replace `1.3.0` with the tag you need):
+**Pin a version** by depending on `@singleton-sd/tokens@x.y.z` and importing the package CSS exports (or copying those files). Do not hotlink `gitlab.com/.../-/raw/...` as a stylesheet (`text/plain` + `nosniff`).
 
-```html
-<link
-  rel="stylesheet"
-  href="https://tokens.design.singletonsd.com/1.3.0/css/dark/_variables.css"
-/>
-```
-
-Branch previews: GitLab lowercases the branch and replaces other characters
-with hyphens (`feature/dark-mode` → `/feature-dark-mode/`).
-
-| Use case | URL path | Description |
+| Use case | Where | Description |
 | --- | --- | --- |
-| Production | `/1.3.0/` | Locked to a released tag |
-| Staging / Dev | `/` | Latest from `main` |
-| Feature testing | `/feature-name/` | Preview from a sanitized branch |
+| Live gallery / CDN | `/css/…` | Latest from `main` |
+| Production lock | npm `./css/*` exports | Pinned package version |
 
 ### Native
 

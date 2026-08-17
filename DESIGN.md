@@ -220,27 +220,21 @@ Old `--fg-*` / `--bg-*` / `--accent-*` names are retired. See [docs/FOUNDATIONS.
 
 ### Documented CDN / Pages URLs
 
-Latest (main):
+GitLab free tier has one Pages deployment (no `/1.x.y/` or `/feature-name/` CSS trees). Live URLs track `main`:
 
 ```
 https://tokens.design.singletonsd.com/css/light.css
 https://tokens.design.singletonsd.com/css/dark.css
+https://tokens.design.singletonsd.com/css/root/light/_variables.css
 https://singleton-sd.gitlab.io/design-system/tokens/css/dark.css
 ```
 
-Tagged version example:
+Pin production CSS with `@singleton-sd/tokens@x.y.z` package exports, not a versioned Pages path.
 
-```
-https://singleton-sd.gitlab.io/design-system/tokens/1.3.0/css/dark.css
-```
-
-Branch preview example (sanitized): `feature/dark-mode` → `/feature-dark-mode/`
-
-| Use case | URL path | Description |
+| Use case | Where | Description |
 | --- | --- | --- |
-| Production | `/1.3.0/` | Locked to a released tag |
-| Staging / Dev | `/` | Latest from `main` branch |
-| Feature testing | `/feature-name/` | Preview from branch (auto-sanitized) |
+| Live gallery / CDN | `/css/…` | Latest from `main` |
+| Production lock | npm `./css/*` exports | Pinned package version |
 
 ---
 
