@@ -27,6 +27,7 @@
   "scripts": {
     "build-all": "yarn build",
     "build": "node scripts/build.mjs",
+    "validate:css": "node scripts/validate-css-output.mjs",
     "dev": "yarn build",
     "release": "env-cmd -x release-it -VV --dry-run",
     "release:ci": "release-it --ci"

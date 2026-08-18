@@ -27,6 +27,21 @@ stages:
   - release
   - package
 
+# Dedicated job: shared npm pipeline's test_static is lint/audit only.
+# Same-stage `needs` waits for the included `build` job artifacts (`dist/`).
+validate_css:
+  image: '${GLOBAL_IMAGE_NAME}:${GLOBAL_IMAGE_TAG}'
+  stage: build
+  needs:
+    - job: build
+      artifacts: true
+  script:
+    - yarn validate:css
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - when: on_success
+
 commit-generated-files:
   image: '${GLOBAL_IMAGE_NAME}:${GLOBAL_IMAGE_TAG}'
   stage: deploy
