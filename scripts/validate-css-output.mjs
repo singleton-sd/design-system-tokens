@@ -65,7 +65,7 @@ function findShadowDecls(css) {
 }
 
 let failed = false;
-let warned = false;
+let warningCount = 0;
 
 for (const relativePath of CSS_SHEETS) {
   const sheet = loadSheet(relativePath);
@@ -86,7 +86,7 @@ for (const relativePath of CSS_SHEETS) {
       console.warn(
         `WARN: ${relativePath}: ${name} contains invalid dropShadow fragment (DS-78): ${value}`,
       );
-      warned = true;
+      warningCount += 1;
     }
   }
 }
@@ -95,8 +95,10 @@ if (failed) {
   process.exit(1);
 }
 
-if (warned) {
-  console.info('CSS validation passed with warnings (shadows are warn-only until DS-78).');
+if (warningCount > 0) {
+  console.info(
+    `CSS validation passed with ${warningCount} warning(s) (shadows are warn-only until DS-78).`,
+  );
 } else {
   console.info('CSS validation passed.');
 }
