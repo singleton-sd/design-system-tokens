@@ -25,6 +25,7 @@ See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md). Gallery/agent identity copy is [
 ## Related docs
 
 - Token contract: [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md)
+- Figma is deprecated: [docs/FIGMA-DEPRECATED.md](docs/FIGMA-DEPRECATED.md)
 - Gallery/agent identity: [DESIGN.md](DESIGN.md)
 - Public gallery: https://tokens.design.singletonsd.com/
 - Logo binaries (`@singleton-sd/assets`): [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) · [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md) · https://assets.singletonsd.com

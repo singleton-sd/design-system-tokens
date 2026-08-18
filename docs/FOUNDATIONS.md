@@ -73,3 +73,10 @@ Clean break: no `--fg-*` aliases in this package. Consumers remap in follow-up P
 | `--colors-*` | `--ssd-color-*` |
 
 Brand yellow is `color.*.brand`. There is no parallel `accent` group.
+
+## Figma (deprecated)
+
+The Figma Brand Style Guide and Figma Phases 1–6 (DS-1–DS-28) are superseded.
+Canonical sources are Penpot plus this package and `@singleton-sd/assets`. See
+[FIGMA-DEPRECATED.md](FIGMA-DEPRECATED.md).
+
