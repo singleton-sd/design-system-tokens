@@ -1,0 +1,52 @@
+/*
+ * Reference only — not a published @singleton-sd/tokens export.
+ *
+ * Product overlays live in the consuming app. They MUST reference --ssd-*
+ * (never --fg-* / --bg-*). Do not add page-specific aliases (hero, og,
+ * linkedin) to the tokens package.
+ *
+ * Marketing source (read-only reference):
+ *   apps/marketing/src/styles/global.css
+ *
+ * Token contract: docs/FOUNDATIONS.md
+ * Gallery: https://tokens.design.singletonsd.com/
+ */
+
+@import '@singleton-sd/tokens/css/light';
+@import '@singleton-sd/tokens/css/dark';
+
+/*
+ * Pattern A — product-prefixed locals on the theme root (marketing).
+ *
+ * --mkt-color-background-hero: page wash. No hero token in the package;
+ *   mix brand at lower emphasis, or use inverse / brand directly.
+ * --mkt-shadow-*: local box-shadow. Published --ssd-shadow-* currently
+ *   emit invalid `dropShadow …` CSS (DS-78). Keep shadows local until
+ *   that fix lands.
+ */
+[data-theme='light'],
+[data-theme='dark'] {
+  --mkt-color-background-brand-muted: color-mix(
+    in srgb,
+    var(--ssd-color-background-brand) 16%,
+    var(--ssd-color-background-default)
+  );
+  --mkt-color-background-hero: var(--mkt-color-background-brand-muted);
+  --mkt-shadow-sm: 0 1px 2px color-mix(in srgb, var(--ssd-color-gray-900) 12%, transparent);
+  --mkt-shadow-md: 0 4px 8px color-mix(in srgb, var(--ssd-color-gray-900) 16%, transparent);
+  --mkt-shadow-lg: 0 12px 24px color-mix(in srgb, var(--ssd-color-gray-900) 20%, transparent);
+}
+
+/*
+ * Pattern B — isolate a product subtree with [data-product].
+ * Use when one shell hosts more than one product.
+ */
+[data-product='marketing'] {
+  --mkt-color-background-hero: var(--mkt-color-background-brand-muted);
+}
+
+.hero {
+  background-color: var(--mkt-color-background-hero);
+  box-shadow: var(--mkt-shadow-lg);
+  color: var(--ssd-color-text-default);
+}
