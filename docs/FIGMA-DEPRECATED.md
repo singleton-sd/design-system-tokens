@@ -16,9 +16,10 @@ style-guide boards. Do not edit the Figma file for new work.
 | Public token gallery | https://tokens.design.singletonsd.com/ |
 | Shareable brand snapshot | https://assets.singletonsd.com/brand/ |
 
-Operating manuals: [FOUNDATIONS.md](FOUNDATIONS.md) · [AGENTS.md](../AGENTS.md) ·
-assets [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) ·
-assets [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md).
+Operating manuals:
+
+- Tokens: [FOUNDATIONS.md](FOUNDATIONS.md) · [AGENTS.md](../AGENTS.md)
+- Assets: [AGENTS.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/AGENTS.md) · [BRAND.md](https://gitlab.com/singleton-sd/design-system/assets/-/blob/main/BRAND.md)
 
 ## What not to do
 

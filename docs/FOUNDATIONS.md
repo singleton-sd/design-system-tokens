@@ -34,7 +34,7 @@ assets (SVG/PNG) → Penpot logo components
 Penpot usage boards → assets/BRAND.md + export packs
 ```
 
-Figma is reference-only. Do not treat Tokens Studio as the pipeline.
+The Figma Brand Style Guide and Phases 1–6 are deprecated. Do not treat Figma or Tokens Studio as the pipeline. See [FIGMA-DEPRECATED.md](FIGMA-DEPRECATED.md).
 
 ## Related docs
 
