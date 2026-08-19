@@ -60,7 +60,7 @@ assets (SVG/PNG) → Penpot logo components
 Penpot usage boards → assets/BRAND.md + export packs
 ```
 
-Figma is reference-only. Do not treat Tokens Studio as the pipeline.
+The Figma Brand Style Guide and Phases 1–6 are deprecated. Do not treat Figma or Tokens Studio as the pipeline. See [FIGMA-DEPRECATED.md](FIGMA-DEPRECATED.md).
 
 ## Related docs
 
@@ -100,3 +100,10 @@ Clean break: no `--fg-*` aliases in this package. Consumers remap in follow-up P
 | `--colors-*` | `--ssd-color-*` |
 
 Brand yellow is `color.*.brand`. There is no parallel `accent` group.
+
+## Figma (deprecated)
+
+The Figma Brand Style Guide and Figma Phases 1–6 (DS-1–DS-28) are superseded.
+Canonical sources are Penpot plus this package and `@singleton-sd/assets`. See
+[FIGMA-DEPRECATED.md](FIGMA-DEPRECATED.md).
+
