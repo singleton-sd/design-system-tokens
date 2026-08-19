@@ -32,15 +32,15 @@ Core brand is `--ssd-*`. Each product may add a **local overlay** for names this
 
 Put overlays in app CSS as:
 
-- Product-prefixed locals on the theme root (`[data-theme='light']` / `[data-theme='dark']`), or
-- A `[data-product='…']` block that scopes the same locals to a product subtree.
+- Product-prefixed locals on the theme root (`[data-theme='light']` / `[data-theme='dark']`), applied to the `<html>` element or your app-shell root, or
+- A `[data-product='…']` block on the same root element (or a subtree wrapper) that scopes the same locals to a single product.
 
 ### Overlay rules
 
 - Overlay values **must** reference `--ssd-*` (or compositions of them, for example `color-mix`).
 - Never introduce `--fg-*`, `--bg-*`, or other pre-migration aliases in an overlay. Remap those in the product ([DS-61](https://app.clickup.com/t/86d4143pg) marketing, [DS-62](https://app.clickup.com/t/86d4143pj) jsonresume-theme-pdf).
 - Do not add page-specific aliases (`hero`, `og`, `linkedin`) to this package. Keep them in the product overlay.
-- Overlay CSS is **not** a package export. `package.json` `files` is `dist` only. [docs/examples/marketing-overlay.css](examples/marketing-overlay.css) is a commented reference snippet, not a published artifact.
+- Overlay CSS is **not** a package export. `package.json` `files` is `dist` only. [examples/marketing-overlay.css](examples/marketing-overlay.css) is a commented reference snippet, not a published artifact.
 
 ### Marketing reference
 
@@ -49,7 +49,7 @@ Marketing (`apps/marketing/src/styles/global.css`) keeps `--mkt-*` locals on the
 - `--mkt-color-background-hero` — page wash. There is no hero token here; map to `--ssd-color-background-inverse` / `--ssd-color-background-brand`, or mix brand at lower emphasis.
 - `--mkt-shadow-sm` / `--mkt-shadow-md` / `--mkt-shadow-lg` — local `box-shadow` values. Published `--ssd-shadow-*` currently emit invalid `dropShadow …` CSS ([DS-78](https://app.clickup.com/t/86d41j56h)). Prefer local shadows until that fix lands.
 
-Copy the commented snippet in [docs/examples/marketing-overlay.css](examples/marketing-overlay.css). Live catalog: https://tokens.design.singletonsd.com/
+Copy the commented snippet in [examples/marketing-overlay.css](examples/marketing-overlay.css). Live catalog: https://tokens.design.singletonsd.com/
 
 ## Sync loop
 
@@ -65,7 +65,7 @@ Figma is reference-only. Do not treat Tokens Studio as the pipeline.
 ## Related docs
 
 - Gallery/agent identity: [DESIGN.md](../DESIGN.md)
-- Product overlay example (not published): [docs/examples/marketing-overlay.css](examples/marketing-overlay.css)
+- Product overlay example (not published): [examples/marketing-overlay.css](examples/marketing-overlay.css)
 - Assets operating manual: sibling `../assets/AGENTS.md` and usage rules in `../assets/BRAND.md` (or the GitLab links above)
 
 ## Release
