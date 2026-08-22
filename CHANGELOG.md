@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.0 (2026-08-22)
+
+* docs: DS-56 Document product overlay layer ([db15f5a](https://gitlab.com/singleton-sd/design-system/tokens/commit/db15f5a))
+* docs: DS-56 Fix overlay path names and clarify data-theme DOM placement ([e972ad1](https://gitlab.com/singleton-sd/design-system/tokens/commit/e972ad1))
+* docs: DS-60 Address review comments on Figma deprecation docs ([e0dd164](https://gitlab.com/singleton-sd/design-system/tokens/commit/e0dd164))
+* docs: DS-60 Deprecate Figma after Penpot ([1ebdd66](https://gitlab.com/singleton-sd/design-system/tokens/commit/1ebdd66))
+* chore: DS-58 Count CSS validation warnings ([22f6101](https://gitlab.com/singleton-sd/design-system/tokens/commit/22f6101))
+* chore: DS-60 Open merge request ([628b32d](https://gitlab.com/singleton-sd/design-system/tokens/commit/628b32d))
+* feat: DS-58 Add CSS output validation ([7c9e6d5](https://gitlab.com/singleton-sd/design-system/tokens/commit/7c9e6d5))
+
 ## 1.5.0 (2026-08-17)
 
 * feat: DS-80 Expand Tailwind feedback roles ([a61dcbc](https://gitlab.com/singleton-sd/design-system/tokens/commit/a61dcbc))
