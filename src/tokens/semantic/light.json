@@ -7,7 +7,7 @@
       "disabled": { "$value": "{color.gray.400}", "$type": "color" },
       "inverse": { "$value": "{color.white}", "$type": "color" },
       "brand": { "$value": "{color.yellow-light.500}", "$type": "color" },
-      "on-brand": { "$value": "{color.gray.900}", "$type": "color" },
+      "on-brand": { "$value": "{color.black}", "$type": "color" },
       "link": { "$value": "{color.yellow-light.800}", "$type": "color" },
       "link-hover": { "$value": "{color.yellow-light.900}", "$type": "color" }
     },
@@ -17,7 +17,8 @@
       "subtle": { "$value": "{color.gray.200}", "$type": "color" },
       "inverse": { "$value": "{color.black}", "$type": "color" },
       "brand": { "$value": "{color.yellow-light.500}", "$type": "color" },
-      "brand-hovered": { "$value": "{color.yellow-light.600}", "$type": "color" }
+      "brand-hovered": { "$value": "{color.yellow-light.600}", "$type": "color" },
+      "brand-pressed": { "$value": "{color.yellow-light.700}", "$type": "color" }
     },
     "border": {
       "default": { "$value": "{color.gray.300}", "$type": "color" },

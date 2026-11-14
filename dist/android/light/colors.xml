@@ -111,7 +111,7 @@
   <color name="color_text_disabled">#ffb3b7bd</color>
   <color name="color_text_inverse">#ffffffff</color>
   <color name="color_text_brand">#ffc89200</color>
-  <color name="color_text_on_brand">#ff292c30</color>
+  <color name="color_text_on_brand">#ff000000</color>
   <color name="color_text_link">#ff8e5c00</color>
   <color name="color_text_link_hover">#ff6b4500</color>
   <color name="color_background_default">#ffffffff</color>
@@ -120,6 +120,7 @@
   <color name="color_background_inverse">#ff000000</color>
   <color name="color_background_brand">#ffc89200</color>
   <color name="color_background_brand_hovered">#ffb57f00</color>
+  <color name="color_background_brand_pressed">#ffa36f00</color>
   <color name="color_border_default">#ffc9ccd1</color>
   <color name="color_border_muted">#ffe1e3e6</color>
   <color name="color_border_strong">#ff9da1a6</color>

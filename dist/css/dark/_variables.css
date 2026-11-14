@@ -144,7 +144,7 @@
   --ssd-line-height-body: 1.5;
   --ssd-color-text-default: var(--ssd-color-gray-100);
   --ssd-color-text-muted: var(--ssd-color-gray-400);
-  --ssd-color-text-subtle: var(--ssd-color-gray-500);
+  --ssd-color-text-subtle: var(--ssd-color-gray-400);
   --ssd-color-text-disabled: var(--ssd-color-gray-600);
   --ssd-color-text-inverse: var(--ssd-color-gray-900);
   --ssd-color-text-brand: var(--ssd-color-yellow-dark-500);
@@ -157,6 +157,7 @@
   --ssd-color-background-inverse: var(--ssd-color-white);
   --ssd-color-background-brand: var(--ssd-color-yellow-dark-500);
   --ssd-color-background-brand-hovered: var(--ssd-color-yellow-dark-400);
+  --ssd-color-background-brand-pressed: var(--ssd-color-yellow-dark-600);
   --ssd-color-border-default: var(--ssd-color-gray-700);
   --ssd-color-border-muted: var(--ssd-color-gray-800);
   --ssd-color-border-strong: var(--ssd-color-gray-500);

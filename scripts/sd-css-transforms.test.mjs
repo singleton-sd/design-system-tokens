@@ -56,8 +56,9 @@ describe('typographyShorthand', () => {
     assert.doesNotMatch(typographyShorthand(token, 'css'), /'var\(/);
     assert.equal(
       typographyShorthand(token, 'scss'),
-      'var(--ssd-font-weight-regular) var(--ssd-font-size-300)/var(--ssd-line-height-body) var(--ssd-font-family-body)',
+      "$ssd-font-weight-regular unquote($ssd-font-size-300 + '/' + $ssd-line-height-body) $ssd-font-family-body",
     );
+    assert.doesNotMatch(typographyShorthand(token, 'scss'), /var\(--ssd-/);
   });
 });
 

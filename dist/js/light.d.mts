@@ -154,6 +154,7 @@ declare const tokens: {
       inverse: DesignToken;
       brand: DesignToken;
       "brand-hovered": DesignToken;
+      "brand-pressed": DesignToken;
     };
     border: {
       default: DesignToken;

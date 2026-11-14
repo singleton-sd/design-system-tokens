@@ -14,6 +14,7 @@ public class SsdTokensLight {
     public static let ssdBorderWidthStrong = 2px
     public static let ssdColorBackgroundBrand = UIColor(red: 0.784, green: 0.573, blue: 0.000, alpha: 1)
     public static let ssdColorBackgroundBrandHovered = UIColor(red: 0.710, green: 0.498, blue: 0.000, alpha: 1)
+    public static let ssdColorBackgroundBrandPressed = UIColor(red: 0.639, green: 0.435, blue: 0.000, alpha: 1)
     public static let ssdColorBackgroundDefault = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1)
     public static let ssdColorBackgroundInverse = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1)
     public static let ssdColorBackgroundMuted = UIColor(red: 0.961, green: 0.965, blue: 0.969, alpha: 1)
@@ -129,7 +130,7 @@ public class SsdTokensLight {
     public static let ssdColorTextLink = UIColor(red: 0.557, green: 0.361, blue: 0.000, alpha: 1)
     public static let ssdColorTextLinkHover = UIColor(red: 0.420, green: 0.271, blue: 0.000, alpha: 1)
     public static let ssdColorTextMuted = UIColor(red: 0.376, green: 0.396, blue: 0.420, alpha: 1)
-    public static let ssdColorTextOnBrand = UIColor(red: 0.161, green: 0.173, blue: 0.188, alpha: 1)
+    public static let ssdColorTextOnBrand = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1)
     public static let ssdColorTextSubtle = UIColor(red: 0.376, green: 0.396, blue: 0.420, alpha: 1)
     public static let ssdColorWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1)
     public static let ssdColorYellowDark100 = UIColor(red: 1.000, green: 0.973, blue: 0.882, alpha: 1)

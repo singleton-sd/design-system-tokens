@@ -18,6 +18,7 @@ declare const cssVars: {
       inverse: 'var(--ssd-color-background-inverse)';
       brand: 'var(--ssd-color-background-brand)';
       "brand-hovered": 'var(--ssd-color-background-brand-hovered)';
+      "brand-pressed": 'var(--ssd-color-background-brand-pressed)';
     };
     border: {
       default: 'var(--ssd-color-border-default)';

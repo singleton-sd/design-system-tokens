@@ -2060,12 +2060,12 @@ export default {
       },
       "on-brand": {
         key: "{color.text.on-brand}",
-        $value: "#292c30",
+        $value: "#000000",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.gray.900}",
+          $value: "{color.black}",
           $type: "color",
           key: "{color.text.on-brand}",
         },
@@ -2230,6 +2230,25 @@ export default {
           item: "brand-hovered",
         },
         path: ["color", "background", "brand-hovered"],
+      },
+      "brand-pressed": {
+        key: "{color.background.brand-pressed}",
+        $value: "#a36f00",
+        $type: "color",
+        filePath: "src/tokens/semantic/light.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-light.700}",
+          $type: "color",
+          key: "{color.background.brand-pressed}",
+        },
+        name: "SsdColorBackgroundBrandPressed",
+        attributes: {
+          category: "color",
+          type: "background",
+          item: "brand-pressed",
+        },
+        path: ["color", "background", "brand-pressed"],
       },
     },
     border: {

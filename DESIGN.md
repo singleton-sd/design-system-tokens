@@ -214,6 +214,10 @@ body {
 .button:hover {
   background: var(--ssd-color-background-brand-hovered);
 }
+
+.button:active {
+  background: var(--ssd-color-background-brand-pressed);
+}
 ```
 
 Old `--fg-*` / `--bg-*` / `--accent-*` names are retired. See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md) for the migration table.
@@ -522,7 +526,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-text-disabled` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-inverse` | white | `#ffffff` |
 | `--ssd-color-text-brand` | yellow-light 500 | `#c89200` |
-| `--ssd-color-text-on-brand` | gray 900 | `#292c30` |
+| `--ssd-color-text-on-brand` | black | `#000000` |
 | `--ssd-color-text-link` | yellow-light 800 | `#8e5c00` |
 | `--ssd-color-text-link-hover` | yellow-light 900 | `#6b4500` |
 | `--ssd-color-background-default` | white | `#ffffff` |
@@ -531,6 +535,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-background-inverse` | black | `#000000` |
 | `--ssd-color-background-brand` | yellow-light 500 | `#c89200` |
 | `--ssd-color-background-brand-hovered` | yellow-light 600 | `#b57f00` |
+| `--ssd-color-background-brand-pressed` | yellow-light 700 | `#a36f00` |
 | `--ssd-color-border-default` | gray 300 | `#c9ccd1` |
 | `--ssd-color-border-muted` | gray 200 | `#e1e3e6` |
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
@@ -560,7 +565,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | --- | --- | --- |
 | `--ssd-color-text-default` | gray 100 | `#f5f6f7` |
 | `--ssd-color-text-muted` | gray 400 | `#b3b7bd` |
-| `--ssd-color-text-subtle` | gray 500 | `#9da1a6` |
+| `--ssd-color-text-subtle` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-disabled` | gray 600 | `#7f848a` |
 | `--ssd-color-text-inverse` | gray 900 | `#292c30` |
 | `--ssd-color-text-brand` | yellow-dark 500 | `#ffb300` |
@@ -573,6 +578,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-background-inverse` | white | `#ffffff` |
 | `--ssd-color-background-brand` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-background-brand-hovered` | yellow-dark 400 | `#ffd54f` |
+| `--ssd-color-background-brand-pressed` | yellow-dark 600 | `#ffa000` |
 | `--ssd-color-border-default` | gray 700 | `#60656b` |
 | `--ssd-color-border-muted` | gray 800 | `#44484d` |
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
@@ -602,7 +608,7 @@ Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shado
 
 `--ssd-typography-*` is a CSS `font` shorthand (`weight size/line-height family`). Letter-spacing is not part of `font`; pair heading styles with `--ssd-letter-spacing-heading`.
 
-Light `text.subtle` uses gray 700 (same as muted). Gray 600 is 3.77:1 on white, which fails WCAG AA for body text.
+Light `text.subtle` uses gray 700 (same as muted). Gray 600 is 3.77:1 on white, which fails WCAG AA for body text. Dark `text.subtle` uses gray 400 (same as muted): gray 500 is 3.54:1 on `background.subtle` (`#44484d`). Light `text.on-brand` is black on brand yellow.
 
 ---
 
@@ -610,7 +616,7 @@ Light `text.subtle` uses gray 700 (same as muted). Gray 600 is 3.77:1 on white, 
 
 Use only these product terms when labeling UI:
 
-design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · control · focus · icon · brand · on-brand · link · link-hover · feedback · spacing 100–800 · font size 100–700 · Open Sauce Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
+design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · control · focus · icon · brand · on-brand · brand-hovered · brand-pressed · link · link-hover · feedback · spacing 100–800 · font size 100–700 · Open Sauce Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
 
 Do not use: `--fg-*` · `--bg-*` · accent / onAccent · fg-alternative · Tokens Studio · Figma as the live pipeline.
 

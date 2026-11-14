@@ -17,6 +17,7 @@ class SsdTokensDark {
     static const borderWidthStrong = 2px;
     static const colorBackgroundBrand = Color(0xFFFFB300);
     static const colorBackgroundBrandHovered = Color(0xFFFFD54F);
+    static const colorBackgroundBrandPressed = Color(0xFFFFA000);
     static const colorBackgroundDefault = Color(0xFF000000);
     static const colorBackgroundInverse = Color(0xFFFFFFFF);
     static const colorBackgroundMuted = Color(0xFF292C30);
@@ -133,7 +134,7 @@ class SsdTokensDark {
     static const colorTextLinkHover = Color(0xFFFFE082);
     static const colorTextMuted = Color(0xFFB3B7BD);
     static const colorTextOnBrand = Color(0xFF292C30);
-    static const colorTextSubtle = Color(0xFF9DA1A6);
+    static const colorTextSubtle = Color(0xFFB3B7BD);
     static const colorWhite = Color(0xFFFFFFFF);
     static const colorYellowDark100 = Color(0xFFFFF8E1);
     static const colorYellowDark200 = Color(0xFFFFECB3);

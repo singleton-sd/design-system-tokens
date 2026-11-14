@@ -1984,12 +1984,12 @@ export default {
       },
       subtle: {
         key: "{color.text.subtle}",
-        $value: "#9da1a6",
+        $value: "#b3b7bd",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
         original: {
-          $value: "{color.gray.500}",
+          $value: "{color.gray.400}",
           $type: "color",
           key: "{color.text.subtle}",
         },
@@ -2230,6 +2230,25 @@ export default {
           item: "brand-hovered",
         },
         path: ["color", "background", "brand-hovered"],
+      },
+      "brand-pressed": {
+        key: "{color.background.brand-pressed}",
+        $value: "#ffa000",
+        $type: "color",
+        filePath: "src/tokens/semantic/dark.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-dark.600}",
+          $type: "color",
+          key: "{color.background.brand-pressed}",
+        },
+        name: "SsdColorBackgroundBrandPressed",
+        attributes: {
+          category: "color",
+          type: "background",
+          item: "brand-pressed",
+        },
+        path: ["color", "background", "brand-pressed"],
       },
     },
     border: {

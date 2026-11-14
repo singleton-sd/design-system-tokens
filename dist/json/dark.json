@@ -126,7 +126,7 @@
     "text": {
       "default": "#f5f6f7",
       "muted": "#b3b7bd",
-      "subtle": "#9da1a6",
+      "subtle": "#b3b7bd",
       "disabled": "#7f848a",
       "inverse": "#292c30",
       "brand": "#ffb300",
@@ -140,7 +140,8 @@
       "subtle": "#44484d",
       "inverse": "#ffffff",
       "brand": "#ffb300",
-      "brand-hovered": "#ffd54f"
+      "brand-hovered": "#ffd54f",
+      "brand-pressed": "#ffa000"
     },
     "border": {
       "default": "#60656b",

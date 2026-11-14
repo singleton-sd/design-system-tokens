@@ -20,6 +20,7 @@ export const CSS_VAR_PATHS = Object.freeze([
   'color.background.inverse',
   'color.background.brand',
   'color.background.brand-hovered',
+  'color.background.brand-pressed',
   'color.border.default',
   'color.border.muted',
   'color.border.strong',

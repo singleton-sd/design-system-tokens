@@ -130,7 +130,7 @@
       "disabled": "#b3b7bd",
       "inverse": "#ffffff",
       "brand": "#c89200",
-      "on-brand": "#292c30",
+      "on-brand": "#000000",
       "link": "#8e5c00",
       "link-hover": "#6b4500"
     },
@@ -140,7 +140,8 @@
       "subtle": "#e1e3e6",
       "inverse": "#000000",
       "brand": "#c89200",
-      "brand-hovered": "#b57f00"
+      "brand-hovered": "#b57f00",
+      "brand-pressed": "#a36f00"
     },
     "border": {
       "default": "#c9ccd1",

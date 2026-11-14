@@ -47,7 +47,7 @@ Put overlays in app CSS as:
 Marketing (`apps/marketing/src/styles/global.css`) keeps `--mkt-*` locals on the theme root:
 
 - `--mkt-color-background-hero` — page wash. There is no hero token here; map to `--ssd-color-background-inverse` / `--ssd-color-background-brand`, or mix brand at lower emphasis.
-- `--mkt-shadow-sm` / `--mkt-shadow-md` / `--mkt-shadow-lg` — local `box-shadow` values. Published `--ssd-shadow-*` now emit valid `box-shadow` ([DS-78](https://app.clickup.com/t/86d41j56h)); overlays may keep a local mix or use `var(--ssd-shadow-*)`.
+- Shadows — use published `var(--ssd-shadow-sm|md|lg)`. Those now emit valid `box-shadow` ([DS-78](https://app.clickup.com/t/86d41j56h)). Local `--mkt-shadow-*` copies are not required.
 
 Copy the commented snippet in [docs/examples/marketing-overlay.css](examples/marketing-overlay.css). Live catalog: https://tokens.design.singletonsd.com/
 
@@ -73,15 +73,17 @@ Semantic text, focus, and control colours target **4.5:1** for body text and **3
 | Light gray-600 on white | `#7f848a` on `#ffffff` | 3.77:1 | **Not** used for text. Fails 4.5:1; used as `border.control` |
 | Light `text.link` yellow-light-800 on white | `#8e5c00` on `#ffffff` | 5.70:1 | Links |
 | Light `text.link-hover` yellow-light-900 on white | `#6b4500` on `#ffffff` | 8.48:1 | Link hover |
-| `text.on-brand` gray-900 on brand | `#292c30` on `#c89200` | 5.05:1 | Primary button label |
+| Light `text.on-brand` black on brand | `#000000` on `#c89200` | 7.57:1 | Primary button label |
+| Light `text.on-brand` black on brand-hovered | `#000000` on `#b57f00` | 6.00:1 | Hovered button label |
+| Light `text.on-brand` black on brand-pressed | `#000000` on `#a36f00` | 4.83:1 | Pressed button label |
 | Dark `text.default` gray-100 on black | `#f5f6f7` on `#000000` | 19.41:1 | Body text |
-| Dark `text.muted` gray-400 on black | `#b3b7bd` on `#000000` | 10.42:1 | Secondary text |
-| Dark `text.subtle` gray-500 on black | `#9da1a6` on `#000000` | 8.08:1 | Tertiary text |
+| Dark `text.muted` / `text.subtle` gray-400 on black | `#b3b7bd` on `#000000` | 10.42:1 | Secondary / tertiary text |
+| Dark `text.subtle` gray-400 on `background.subtle` | `#b3b7bd` on `#44484d` | 4.57:1 | Tertiary text on muted surfaces |
 | Dark `text.link` yellow-dark-400 on black | `#ffd54f` on `#000000` | 14.88:1 | Links (kept) |
 | Light `border.control` gray-600 on white | `#7f848a` on `#ffffff` | 3.77:1 | Control outline |
 | Light `border.focus` gray-900 on white | `#292c30` on `#ffffff` | 14.03:1 | Focus ring |
 
-`text.subtle` (light) is **gray-700**, not gray-600: 3.77:1 is enough for UI chrome but not for body-sized text.
+`text.subtle` (light) is **gray-700**, not gray-600: 3.77:1 is enough for UI chrome but not for body-sized text. Dark `text.subtle` is **gray-400** (same as muted): gray-500 is 3.54:1 on `background.subtle` (`#44484d`).
 
 `border.default` stays a decorative divider (gray-300 light / gray-700 dark). Interactive controls use `border.control`. Focus offset is `--ssd-border-width-focus-offset` (2px) in the existing `border.width` group.
 

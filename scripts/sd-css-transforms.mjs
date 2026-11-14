@@ -136,10 +136,10 @@ function originalValue(token) {
  * so outputReferences cannot splice it into `--ssd-font-size-300`.
  *
  * @param {unknown} token
- * @param {'css' | 'scss'} [_syntax]
+ * @param {'css' | 'scss'} syntax
  * @returns {string}
  */
-export function typographyShorthand(token, _syntax) {
+export function typographyShorthand(token, syntax) {
   const original = originalValue(token);
   if (!original || typeof original !== 'object' || Array.isArray(original)) {
     const val = /** @type {{ $value?: unknown, value?: unknown }} */ (token).$value ??
@@ -147,12 +147,15 @@ export function typographyShorthand(token, _syntax) {
     return typeof val === 'string' ? val : String(val);
   }
   const fields = /** @type {Record<string, unknown>} */ (original);
-  // Always CSS var() for composites. SCSS `$a/$b` is division, and `#{…}`
-  // uses braces that Style Dictionary treats as token references.
-  const weight = cssOrRaw(fields.fontWeight, 'css');
-  const size = cssOrRaw(fields.fontSize, 'css');
-  const lineHeight = cssOrRaw(fields.lineHeight, 'css');
-  const family = fontFamilyCss(fields.fontFamily, 'css');
+  const weight = cssOrRaw(fields.fontWeight, syntax);
+  const size = cssOrRaw(fields.fontSize, syntax);
+  const lineHeight = cssOrRaw(fields.lineHeight, syntax);
+  const family = fontFamilyCss(fields.fontFamily, syntax);
+  if (syntax === 'scss') {
+    // `$a/$b` is Sass division. `#{…}` looks like a Style Dictionary
+    // token ref. Concatenate through `unquote` so `/` stays CSS.
+    return `${weight} unquote(${size} + '/' + ${lineHeight}) ${family}`;
+  }
   return `${weight} ${size}/${lineHeight} ${family}`;
 }
 
