@@ -20,9 +20,9 @@
  *
  * --mkt-color-background-hero: page wash. No hero token in the package;
  *   mix brand at lower emphasis, or use inverse / brand directly.
- * --mkt-shadow-*: local box-shadow. Published --ssd-shadow-* currently
- *   emit invalid `dropShadow …` CSS (DS-78). Keep shadows local until
- *   that fix lands.
+ * --mkt-shadow-*: local box-shadow. Published --ssd-shadow-* now emit
+ *   valid box-shadow (DS-78). Overlays may keep a local mix or use
+ *   var(--ssd-shadow-*).
  */
 [data-theme='light'],
 [data-theme='dark'] {

@@ -13,6 +13,7 @@ class SsdTokensDark {
     SsdTokensDark._();
 
     static const borderWidthDefault = 1px;
+    static const borderWidthFocusOffset = 2px;
     static const borderWidthStrong = 2px;
     static const colorBackgroundBrand = Color(0xFFFFB300);
     static const colorBackgroundBrandHovered = Color(0xFFFFD54F);
@@ -31,6 +32,7 @@ class SsdTokensDark {
     static const colorBlue800 = Color(0xFF2C5282);
     static const colorBlue900 = Color(0xFF2A4365);
     static const colorBorderBrand = Color(0xFFFFB300);
+    static const colorBorderControl = Color(0xFF9DA1A6);
     static const colorBorderDefault = Color(0xFF60656B);
     static const colorBorderFocus = Color(0xFFFFB300);
     static const colorBorderMuted = Color(0xFF44484D);
@@ -66,9 +68,9 @@ class SsdTokensDark {
     static const colorGreen800 = Color(0xFF276749);
     static const colorGreen900 = Color(0xFF22543D);
     static const colorIconBrand = Color(0xFFFFB300);
-    static const colorIconDefault = Color(0xFFFFB300);
+    static const colorIconDefault = Color(0xFFF5F6F7);
     static const colorIconInverse = Color(0xFF292C30);
-    static const colorIconMuted = Color(0xFFFFA000);
+    static const colorIconMuted = Color(0xFFB3B7BD);
     static const colorIndigo100 = Color(0xFFEBF4FF);
     static const colorIndigo200 = Color(0xFFC3DAFE);
     static const colorIndigo300 = Color(0xFFA3BFFA);
@@ -124,13 +126,14 @@ class SsdTokensDark {
     static const colorTeal800 = Color(0xFF285E61);
     static const colorTeal900 = Color(0xFF234E52);
     static const colorTextBrand = Color(0xFFFFB300);
-    static const colorTextDefault = Color(0xFFFFB300);
+    static const colorTextDefault = Color(0xFFF5F6F7);
     static const colorTextDisabled = Color(0xFF7F848A);
     static const colorTextInverse = Color(0xFF292C30);
     static const colorTextLink = Color(0xFFFFD54F);
-    static const colorTextMuted = Color(0xFFFFA000);
+    static const colorTextLinkHover = Color(0xFFFFE082);
+    static const colorTextMuted = Color(0xFFB3B7BD);
     static const colorTextOnBrand = Color(0xFF292C30);
-    static const colorTextSubtle = Color(0xFFFFE082);
+    static const colorTextSubtle = Color(0xFF9DA1A6);
     static const colorWhite = Color(0xFFFFFFFF);
     static const colorYellowDark100 = Color(0xFFFFF8E1);
     static const colorYellowDark200 = Color(0xFFFFECB3);

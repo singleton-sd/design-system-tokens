@@ -1,6 +1,11 @@
 import StyleDictionary from 'style-dictionary';
+import {
+  registerSsdCssTransforms,
+  shouldOutputCssReferences,
+  tokenType,
+} from './sd-css-transforms.mjs';
 
-const tokenType = (token) => token.$type ?? token.type;
+registerSsdCssTransforms(StyleDictionary);
 
 export const isColor = (token) => tokenType(token) === 'color';
 export const isDimension = (token) =>
@@ -80,7 +85,7 @@ export function createConfig(theme) {
             destination: `${theme}.css`,
             format: 'css/variables',
             options: {
-              outputReferences: true,
+              outputReferences: shouldOutputCssReferences,
               selector: `[data-theme='${theme}']`,
             },
           },
@@ -88,7 +93,7 @@ export function createConfig(theme) {
             destination: `${theme}/_variables.css`,
             format: 'css/variables',
             options: {
-              outputReferences: true,
+              outputReferences: shouldOutputCssReferences,
               selector: `[data-theme='${theme}']`,
             },
           },
@@ -96,7 +101,7 @@ export function createConfig(theme) {
             destination: `root/${theme}/_variables.css`,
             format: 'css/variables',
             options: {
-              outputReferences: true,
+              outputReferences: shouldOutputCssReferences,
               selector: ':root',
             },
           },
@@ -110,12 +115,12 @@ export function createConfig(theme) {
           {
             destination: `_${theme}.scss`,
             format: 'scss/variables',
-            options: { outputReferences: true },
+            options: { outputReferences: shouldOutputCssReferences },
           },
           {
             destination: `${theme}/_variables.scss`,
             format: 'scss/variables',
-            options: { outputReferences: true },
+            options: { outputReferences: shouldOutputCssReferences },
           },
         ],
       },

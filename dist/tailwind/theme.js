@@ -12,6 +12,7 @@ export default {
           brand: 'var(--ssd-color-text-brand)',
           'on-brand': 'var(--ssd-color-text-on-brand)',
           link: 'var(--ssd-color-text-link)',
+          'link-hover': 'var(--ssd-color-text-link-hover)',
         },
         background: {
           DEFAULT: 'var(--ssd-color-background-default)',
@@ -25,6 +26,7 @@ export default {
           DEFAULT: 'var(--ssd-color-border-default)',
           muted: 'var(--ssd-color-border-muted)',
           strong: 'var(--ssd-color-border-strong)',
+          control: 'var(--ssd-color-border-control)',
           focus: 'var(--ssd-color-border-focus)',
           brand: 'var(--ssd-color-border-brand)',
         },

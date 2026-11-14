@@ -2,8 +2,8 @@
  * Validate built CSS token sheets (run after `yarn build`).
  *
  * FAIL if retired `--fg-*` aliases appear.
- * WARN if `--ssd-shadow-*` values contain leaked `dropShadow` fragments
- * (known DS-78; keep warn-only until those CSS values are fixed, then fail).
+ * FAIL if `--ssd-shadow-*` contains leaked `dropShadow` fragments (DS-78).
+ * FAIL if composite typography CSS is malformed (nested var in font-size, quoted var()).
  */
 
 import { existsSync, readFileSync } from 'node:fs';
@@ -19,10 +19,22 @@ const CSS_SHEETS = [
   'dist/css/root/dark/_variables.css',
 ];
 
+const REQUIRED_DECLS = [
+  '--ssd-color-text-default',
+  '--ssd-color-text-link-hover',
+  '--ssd-color-border-control',
+  '--ssd-border-width-focus-offset',
+  '--ssd-typography-body',
+  '--ssd-shadow-sm',
+];
+
 const FG_ALIAS_RE = /--fg-[A-Za-z0-9-]+/g;
 const CUSTOM_PROP_RE = /(--[A-Za-z0-9-]+)\s*:\s*([^;]*);/g;
 const SHADOW_NAME_RE = /^--ssd-shadow-/;
+const TYPOGRAPHY_NAME_RE = /^--ssd-typography-/;
 const DROP_SHADOW_FRAGMENT_RE = /dropShadow/;
+const QUOTED_VAR_RE = /['"]var\(--/;
+const NESTED_FONT_SIZE_VAR_RE = /--ssd-font-size-\d+var\(/;
 
 /**
  * @param {string} relativePath
@@ -48,24 +60,19 @@ function findFgAliases(css) {
  * @param {string} css
  * @returns {{ name: string, value: string }[]}
  */
-function findShadowDecls(css) {
+function findDecls(css) {
   /** @type {{ name: string, value: string }[]} */
   const decls = [];
   CUSTOM_PROP_RE.lastIndex = 0;
   let match = CUSTOM_PROP_RE.exec(css);
   while (match !== null) {
-    const name = match[1];
-    const value = match[2].trim();
-    if (SHADOW_NAME_RE.test(name)) {
-      decls.push({ name, value });
-    }
+    decls.push({ name: match[1], value: match[2].trim() });
     match = CUSTOM_PROP_RE.exec(css);
   }
   return decls;
 }
 
 let failed = false;
-let warningCount = 0;
 
 for (const relativePath of CSS_SHEETS) {
   const sheet = loadSheet(relativePath);
@@ -81,12 +88,29 @@ for (const relativePath of CSS_SHEETS) {
     failed = true;
   }
 
-  for (const { name, value } of findShadowDecls(css)) {
-    if (DROP_SHADOW_FRAGMENT_RE.test(value)) {
-      console.warn(
-        `WARN: ${relativePath}: ${name} contains invalid dropShadow fragment (DS-78): ${value}`,
+  const decls = findDecls(css);
+  const names = new Set(decls.map((decl) => decl.name));
+
+  for (const required of REQUIRED_DECLS) {
+    if (!names.has(required)) {
+      console.error(`FAIL: ${relativePath}: missing ${required}`);
+      failed = true;
+    }
+  }
+
+  for (const { name, value } of decls) {
+    if (SHADOW_NAME_RE.test(name) && DROP_SHADOW_FRAGMENT_RE.test(value)) {
+      console.error(
+        `FAIL: ${relativePath}: ${name} contains invalid dropShadow fragment (DS-78): ${value}`,
       );
-      warningCount += 1;
+      failed = true;
+    }
+
+    if (TYPOGRAPHY_NAME_RE.test(name)) {
+      if (QUOTED_VAR_RE.test(value) || NESTED_FONT_SIZE_VAR_RE.test(value)) {
+        console.error(`FAIL: ${relativePath}: ${name} is malformed typography CSS: ${value}`);
+        failed = true;
+      }
     }
   }
 }
@@ -95,10 +119,4 @@ if (failed) {
   process.exit(1);
 }
 
-if (warningCount > 0) {
-  console.info(
-    `CSS validation passed with ${warningCount} warning(s) (shadows are warn-only until DS-78).`,
-  );
-} else {
-  console.info('CSS validation passed.');
-}
+console.info('CSS validation passed.');
