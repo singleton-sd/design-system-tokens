@@ -244,7 +244,7 @@ Pin production CSS with `@singleton-sd/tokens@x.y.z` package exports, not a vers
 
 - Heading: **Plus Jakarta Sans** 700 (`--ssd-font-family-heading`)
 - Body: **Plus Jakarta Sans** 400 (`--ssd-font-family-body`)
-- Lockups and wordmarks: **Plus Jakarta Sans** 500, outlined to paths in the logo files
+- Logo lockups: wordmark (`</ SINGLETON >`, `</S>` mark) **Plus Jakarta Sans** 700, descriptor lines (`SOFTWARE DEVELOPMENT`, `SOFTWARE PTY LTD`) 400, outlined to paths in the logo files (see `@singleton-sd/assets` BRAND.md)
 - Token value: `'Plus Jakarta Sans', system-ui, sans-serif`
 - Licence: SIL Open Font License 1.1 ([Google Fonts](https://fonts.google.com/specimen/Plus+Jakarta+Sans)). Load it from Google Fonts (`https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`) or self-host the static TTF/WOFF2 files.
 - Replaces Open Sauce Sans (November 2026).
