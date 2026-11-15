@@ -46,6 +46,32 @@ function renderTokenTreeType(node, indent) {
   return `{\n${lines.join('\n')}\n${pad}}`;
 }
 
+/**
+ * Native font-family value: the first family of the CSS stack as a string
+ * literal. Native platforms take one family name, not a CSS fallback list.
+ *
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function primaryFontFamily(value) {
+  const first = String(value).split(',')[0].trim();
+  return first.replace(/^(['"])(.*)\1$/, '$2');
+}
+
+StyleDictionary.registerTransform({
+  name: 'fontFamily/native/swift',
+  type: 'value',
+  filter: (token) => tokenType(token) === 'fontFamilies',
+  transform: (token) => JSON.stringify(primaryFontFamily(token.$value ?? token.value)),
+});
+
+StyleDictionary.registerTransform({
+  name: 'fontFamily/native/dart',
+  type: 'value',
+  filter: (token) => tokenType(token) === 'fontFamilies',
+  transform: (token) => `'${primaryFontFamily(token.$value ?? token.value).replace(/'/g, "\\'")}'`,
+});
+
 StyleDictionary.registerFormat({
   name: 'typescript/esm-default',
   format: ({ dictionary }) => {
@@ -146,7 +172,10 @@ export function createConfig(theme) {
       },
       ios: {
         prefix: 'Ssd',
-        transformGroup: 'ios-swift',
+        transforms: [
+          ...StyleDictionary.hooks.transformGroups['ios-swift'],
+          'fontFamily/native/swift',
+        ],
         buildPath: `dist/ios/${theme}/`,
         files: [
           {
@@ -177,7 +206,7 @@ export function createConfig(theme) {
         ],
       },
       flutter: {
-        transformGroup: 'flutter',
+        transforms: [...StyleDictionary.hooks.transformGroups.flutter, 'fontFamily/native/dart'],
         buildPath: `dist/flutter/${theme}/`,
         files: [
           {
