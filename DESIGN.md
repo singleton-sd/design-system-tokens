@@ -214,6 +214,10 @@ body {
 .button:hover {
   background: var(--ssd-color-background-brand-hovered);
 }
+
+.button:active {
+  background: var(--ssd-color-background-brand-pressed);
+}
 ```
 
 Old `--fg-*` / `--bg-*` / `--accent-*` names are retired. See [docs/FOUNDATIONS.md](docs/FOUNDATIONS.md) for the migration table.
@@ -247,7 +251,6 @@ Pin production CSS with `@singleton-sd/tokens@x.y.z` package exports, not a vers
 - Logo lockups: wordmark (`</ SINGLETON >`, `</S>` mark) **Plus Jakarta Sans** 700, descriptor lines (`SOFTWARE DEVELOPMENT`, `SOFTWARE PTY LTD`) 400, outlined to paths in the logo files (see `@singleton-sd/assets` BRAND.md)
 - Token value: `'Plus Jakarta Sans', system-ui, sans-serif`
 - Licence: SIL Open Font License 1.1 ([Google Fonts](https://fonts.google.com/specimen/Plus+Jakarta+Sans)). Load it from Google Fonts (`https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`) or self-host the static TTF/WOFF2 files.
-- Replaces Open Sauce Sans (November 2026).
 - Mono: `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace` (`--ssd-font-family-mono`)
 
 ### Font sizes
@@ -316,6 +319,14 @@ Display / h1 sizes are on the typography composites (72px / 64px), not extra pri
 | lg | `--ssd-radius-lg` | 12px |
 | xl | `--ssd-radius-xl` | 16px |
 | full | `--ssd-radius-full` | 9999px |
+
+### Border width
+
+| Token | CSS variable | Value |
+| --- | --- | --- |
+| default | `--ssd-border-width-default` | 1px |
+| strong | `--ssd-border-width-strong` | 2px |
+| focus-offset | `--ssd-border-width-focus-offset` | 2px |
 
 ### Motion
 
@@ -512,27 +523,30 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 
 | CSS variable | Resolves to | Hex |
 | --- | --- | --- |
-| `--ssd-color-text-default` | yellow-light 500 | `#c89200` |
-| `--ssd-color-text-muted` | yellow-dark 500 | `#ffb300` |
-| `--ssd-color-text-subtle` | yellow-dark 300 | `#ffe082` |
+| `--ssd-color-text-default` | gray 900 | `#292c30` |
+| `--ssd-color-text-muted` | gray 700 | `#60656b` |
+| `--ssd-color-text-subtle` | gray 700 | `#60656b` |
 | `--ssd-color-text-disabled` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-inverse` | white | `#ffffff` |
 | `--ssd-color-text-brand` | yellow-light 500 | `#c89200` |
-| `--ssd-color-text-on-brand` | gray 900 | `#292c30` |
-| `--ssd-color-text-link` | yellow-light 600 | `#b57f00` |
+| `--ssd-color-text-on-brand` | black | `#000000` |
+| `--ssd-color-text-link` | yellow-light 800 | `#8e5c00` |
+| `--ssd-color-text-link-hover` | yellow-light 900 | `#6b4500` |
 | `--ssd-color-background-default` | white | `#ffffff` |
 | `--ssd-color-background-muted` | gray 100 | `#f5f6f7` |
 | `--ssd-color-background-subtle` | gray 200 | `#e1e3e6` |
 | `--ssd-color-background-inverse` | black | `#000000` |
 | `--ssd-color-background-brand` | yellow-light 500 | `#c89200` |
 | `--ssd-color-background-brand-hovered` | yellow-light 600 | `#b57f00` |
+| `--ssd-color-background-brand-pressed` | yellow-light 700 | `#a36f00` |
 | `--ssd-color-border-default` | gray 300 | `#c9ccd1` |
 | `--ssd-color-border-muted` | gray 200 | `#e1e3e6` |
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
-| `--ssd-color-border-focus` | yellow-light 500 | `#c89200` |
+| `--ssd-color-border-control` | gray 600 | `#7f848a` |
+| `--ssd-color-border-focus` | gray 900 | `#292c30` |
 | `--ssd-color-border-brand` | yellow-light 500 | `#c89200` |
-| `--ssd-color-icon-default` | text.default | `#c89200` |
-| `--ssd-color-icon-muted` | text.muted | `#ffb300` |
+| `--ssd-color-icon-default` | text.default | `#292c30` |
+| `--ssd-color-icon-muted` | text.muted | `#60656b` |
 | `--ssd-color-icon-inverse` | text.inverse | `#ffffff` |
 | `--ssd-color-icon-brand` | text.brand | `#c89200` |
 | `--ssd-color-feedback-danger-text` | red 700 | `#c53030` |
@@ -552,27 +566,30 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 
 | CSS variable | Resolves to | Hex |
 | --- | --- | --- |
-| `--ssd-color-text-default` | yellow-dark 500 | `#ffb300` |
-| `--ssd-color-text-muted` | yellow-dark 600 | `#ffa000` |
-| `--ssd-color-text-subtle` | yellow-dark 300 | `#ffe082` |
+| `--ssd-color-text-default` | gray 100 | `#f5f6f7` |
+| `--ssd-color-text-muted` | gray 400 | `#b3b7bd` |
+| `--ssd-color-text-subtle` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-disabled` | gray 600 | `#7f848a` |
 | `--ssd-color-text-inverse` | gray 900 | `#292c30` |
 | `--ssd-color-text-brand` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-text-on-brand` | gray 900 | `#292c30` |
 | `--ssd-color-text-link` | yellow-dark 400 | `#ffd54f` |
+| `--ssd-color-text-link-hover` | yellow-dark 300 | `#ffe082` |
 | `--ssd-color-background-default` | black | `#000000` |
 | `--ssd-color-background-muted` | gray 900 | `#292c30` |
 | `--ssd-color-background-subtle` | gray 800 | `#44484d` |
 | `--ssd-color-background-inverse` | white | `#ffffff` |
 | `--ssd-color-background-brand` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-background-brand-hovered` | yellow-dark 400 | `#ffd54f` |
+| `--ssd-color-background-brand-pressed` | yellow-dark 600 | `#ffa000` |
 | `--ssd-color-border-default` | gray 700 | `#60656b` |
 | `--ssd-color-border-muted` | gray 800 | `#44484d` |
 | `--ssd-color-border-strong` | gray 500 | `#9da1a6` |
+| `--ssd-color-border-control` | gray 500 | `#9da1a6` |
 | `--ssd-color-border-focus` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-border-brand` | yellow-dark 500 | `#ffb300` |
-| `--ssd-color-icon-default` | text.default | `#ffb300` |
-| `--ssd-color-icon-muted` | text.muted | `#ffa000` |
+| `--ssd-color-icon-default` | text.default | `#f5f6f7` |
+| `--ssd-color-icon-muted` | text.muted | `#b3b7bd` |
 | `--ssd-color-icon-inverse` | text.inverse | `#292c30` |
 | `--ssd-color-icon-brand` | text.brand | `#ffb300` |
 | `--ssd-color-feedback-danger-text` | red 300 | `#feb2b2` |
@@ -588,7 +605,13 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-feedback-info-background` | blue 900 | `#2a4365` |
 | `--ssd-color-feedback-info-border` | blue 600 | `#3182ce` |
 
-Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shadows.default`. Icon roles alias the matching text roles.
+Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shadows.default`. CSS emits valid `box-shadow` values (gray-900 or black mixed at 12% / 16% / 20% alpha). Icon roles alias the matching text roles.
+
+`--ssd-color-border-default` is for decorative dividers. Interactive controls use `--ssd-color-border-control`. Light focus rings use `--ssd-color-border-focus` (gray 900) with `--ssd-border-width-focus-offset` (2px). Dark focus stays yellow-dark 500 (`#ffb300`).
+
+`--ssd-typography-*` is a CSS `font` shorthand (`weight size/line-height family`). Letter-spacing is not part of `font`; pair heading styles with `--ssd-letter-spacing-heading`.
+
+Light `text.subtle` uses gray 700 (same as muted). Gray 600 is 3.77:1 on white, which fails WCAG AA for body text. Dark `text.subtle` uses gray 400 (same as muted): gray 500 is 3.54:1 on `background.subtle` (`#44484d`). Light `text.on-brand` is black on brand yellow.
 
 ---
 
@@ -596,7 +619,7 @@ Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shado
 
 Use only these product terms when labeling UI:
 
-design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · icon · brand · on-brand · feedback · spacing 100–800 · font size 100–700 · Plus Jakarta Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
+design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · control · focus · icon · brand · on-brand · brand-hovered · brand-pressed · link · link-hover · feedback · spacing 100–800 · font size 100–700 · Plus Jakarta Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
 
 Do not use: `--fg-*` · `--bg-*` · accent / onAccent · fg-alternative · Tokens Studio · Figma as the live pipeline.
 

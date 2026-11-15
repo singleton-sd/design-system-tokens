@@ -25,6 +25,7 @@
   <dimen name="radius_full">9999px</dimen>
   <dimen name="border_width_default">1px</dimen>
   <dimen name="border_width_strong">2px</dimen>
+  <dimen name="border_width_focus_offset">2px</dimen>
   <dimen name="logo_layout_padding_horizontal">16px</dimen>
   <dimen name="logo_layout_padding_vertical">16px</dimen>
   <dimen name="logo_layout_gap">4px</dimen>
