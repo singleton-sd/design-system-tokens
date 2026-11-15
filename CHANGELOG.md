@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2026-11-15)
+
+* docs(tokens): SSD-943 Correct lockup font weights ([e9d3260](https://gitlab.com/singleton-sd/design-system/tokens/commit/e9d3260))
+* fix(tokens): SSD-457 SCSS type, subtle, on-brand ([553cb05](https://gitlab.com/singleton-sd/design-system/tokens/commit/553cb05))
+* fix(tokens): SSD-943 Emit one font family natively ([4296171](https://gitlab.com/singleton-sd/design-system/tokens/commit/4296171))
+* feat(tokens): SSD-457 Accessible text and CSS output ([86e1d30](https://gitlab.com/singleton-sd/design-system/tokens/commit/86e1d30))
+* feat(tokens): SSD-943 Switch brand font to Plus Jakarta Sans ([5779f27](https://gitlab.com/singleton-sd/design-system/tokens/commit/5779f27))
+
 ## 1.6.0 (2026-08-22)
 
 * docs: DS-56 Document product overlay layer ([db15f5a](https://gitlab.com/singleton-sd/design-system/tokens/commit/db15f5a))
