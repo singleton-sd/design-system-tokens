@@ -2039,6 +2039,25 @@ export default {
         },
         path: ["color", "text", "inverse"],
       },
+      "inverse-subtle": {
+        key: "{color.text.inverse-subtle}",
+        $value: "#ffe082",
+        $type: "color",
+        filePath: "src/tokens/semantic/light.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-dark.300}",
+          $type: "color",
+          key: "{color.text.inverse-subtle}",
+        },
+        name: "SsdColorTextInverseSubtle",
+        attributes: {
+          category: "color",
+          type: "text",
+          item: "inverse-subtle",
+        },
+        path: ["color", "text", "inverse-subtle"],
+      },
       brand: {
         key: "{color.text.brand}",
         $value: "#c89200",

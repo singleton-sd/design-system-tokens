@@ -142,6 +142,7 @@ declare const tokens: {
       subtle: DesignToken;
       disabled: DesignToken;
       inverse: DesignToken;
+      "inverse-subtle": DesignToken;
       brand: DesignToken;
       "on-brand": DesignToken;
       link: DesignToken;

@@ -127,6 +127,7 @@ public class SsdTokensLight {
     public static let ssdColorTextDefault = UIColor(red: 0.161, green: 0.173, blue: 0.188, alpha: 1)
     public static let ssdColorTextDisabled = UIColor(red: 0.702, green: 0.718, blue: 0.741, alpha: 1)
     public static let ssdColorTextInverse = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1)
+    public static let ssdColorTextInverseSubtle = UIColor(red: 1.000, green: 0.878, blue: 0.510, alpha: 1)
     public static let ssdColorTextLink = UIColor(red: 0.557, green: 0.361, blue: 0.000, alpha: 1)
     public static let ssdColorTextLinkHover = UIColor(red: 0.420, green: 0.271, blue: 0.000, alpha: 1)
     public static let ssdColorTextMuted = UIColor(red: 0.376, green: 0.396, blue: 0.420, alpha: 1)

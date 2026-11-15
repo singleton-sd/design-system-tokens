@@ -129,6 +129,7 @@
       "subtle": "#60656b",
       "disabled": "#b3b7bd",
       "inverse": "#ffffff",
+      "inverse-subtle": "#ffe082",
       "brand": "#c89200",
       "on-brand": "#000000",
       "link": "#8e5c00",

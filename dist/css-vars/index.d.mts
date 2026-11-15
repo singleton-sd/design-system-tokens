@@ -6,6 +6,7 @@ declare const cssVars: {
       subtle: 'var(--ssd-color-text-subtle)';
       disabled: 'var(--ssd-color-text-disabled)';
       inverse: 'var(--ssd-color-text-inverse)';
+      "inverse-subtle": 'var(--ssd-color-text-inverse-subtle)';
       brand: 'var(--ssd-color-text-brand)';
       "on-brand": 'var(--ssd-color-text-on-brand)';
       link: 'var(--ssd-color-text-link)';
