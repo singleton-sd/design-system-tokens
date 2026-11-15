@@ -104,8 +104,8 @@
   --ssd-color-pink-700: #b83280;
   --ssd-color-pink-800: #97266d;
   --ssd-color-pink-900: #702459;
-  --ssd-font-family-heading: Open Sauce Sans;
-  --ssd-font-family-body: Open Sauce Sans;
+  --ssd-font-family-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --ssd-font-family-body: 'Plus Jakarta Sans', system-ui, sans-serif;
   --ssd-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ssd-font-weight-regular: 400;
   --ssd-font-weight-medium: 500;

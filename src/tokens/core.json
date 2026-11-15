@@ -133,11 +133,11 @@
   "font": {
     "family": {
       "heading": {
-        "$value": "Open Sauce Sans",
+        "$value": "'Plus Jakarta Sans', system-ui, sans-serif",
         "$type": "fontFamilies"
       },
       "body": {
-        "$value": "Open Sauce Sans",
+        "$value": "'Plus Jakarta Sans', system-ui, sans-serif",
         "$type": "fontFamilies"
       },
       "mono": {

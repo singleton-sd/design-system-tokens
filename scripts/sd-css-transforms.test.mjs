@@ -26,7 +26,7 @@ describe('cssRef', () => {
 
 describe('quoteFontFamilyList', () => {
   it('quotes names with spaces but keeps comma lists', () => {
-    assert.equal(quoteFontFamilyList('Open Sauce Sans'), "'Open Sauce Sans'");
+    assert.equal(quoteFontFamilyList('Plus Jakarta Sans'), "'Plus Jakarta Sans'");
     assert.equal(
       quoteFontFamilyList('ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'),
       'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',

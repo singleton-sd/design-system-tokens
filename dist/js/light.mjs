@@ -2700,12 +2700,12 @@ export default {
     family: {
       heading: {
         key: "{font.family.heading}",
-        $value: "Open Sauce Sans",
+        $value: "'Plus Jakarta Sans', system-ui, sans-serif",
         $type: "fontFamilies",
         filePath: "src/tokens/core.json",
         isSource: true,
         original: {
-          $value: "Open Sauce Sans",
+          $value: "'Plus Jakarta Sans', system-ui, sans-serif",
           $type: "fontFamilies",
           key: "{font.family.heading}",
         },
@@ -2719,12 +2719,12 @@ export default {
       },
       body: {
         key: "{font.family.body}",
-        $value: "Open Sauce Sans",
+        $value: "'Plus Jakarta Sans', system-ui, sans-serif",
         $type: "fontFamilies",
         filePath: "src/tokens/core.json",
         isSource: true,
         original: {
-          $value: "Open Sauce Sans",
+          $value: "'Plus Jakarta Sans', system-ui, sans-serif",
           $type: "fontFamilies",
           key: "{font.family.body}",
         },
@@ -3529,7 +3529,7 @@ export default {
       key: "{typography.display}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "700",
         fontSize: "72px",
         lineHeight: "1",
@@ -3559,7 +3559,7 @@ export default {
       key: "{typography.h1}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "700",
         fontSize: "64px",
         lineHeight: "1",
@@ -3589,7 +3589,7 @@ export default {
       key: "{typography.h2}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "700",
         fontSize: "52px",
         lineHeight: "1",
@@ -3619,7 +3619,7 @@ export default {
       key: "{typography.h3}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "600",
         fontSize: "42px",
         lineHeight: "1",
@@ -3649,7 +3649,7 @@ export default {
       key: "{typography.body}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "400",
         fontSize: "16px",
         lineHeight: "1.5",
@@ -3679,7 +3679,7 @@ export default {
       key: "{typography.body-sm}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "400",
         fontSize: "14px",
         lineHeight: "1.5",
@@ -3709,7 +3709,7 @@ export default {
       key: "{typography.caption}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "500",
         fontSize: "12px",
         lineHeight: "1.5",
@@ -3739,7 +3739,7 @@ export default {
       key: "{typography.legal}",
       $type: "typography",
       $value: {
-        fontFamily: "Open Sauce Sans",
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         fontWeight: "400",
         fontSize: "12px",
         lineHeight: "1.5",

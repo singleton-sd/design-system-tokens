@@ -154,9 +154,9 @@ class SsdTokensLight {
     static const colorYellowLight700 = Color(0xFFA36F00);
     static const colorYellowLight800 = Color(0xFF8E5C00);
     static const colorYellowLight900 = Color(0xFF6B4500);
-    static const fontFamilyBody = Open Sauce Sans;
-    static const fontFamilyHeading = Open Sauce Sans;
-    static const fontFamilyMono = ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    static const fontFamilyBody = 'Plus Jakarta Sans';
+    static const fontFamilyHeading = 'Plus Jakarta Sans';
+    static const fontFamilyMono = 'ui-monospace';
     static const fontSize100 = 12px;
     static const fontSize200 = 14px;
     static const fontSize300 = 16px;
