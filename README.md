@@ -111,7 +111,7 @@ document.documentElement.setAttribute('data-theme', 'dark');
 
 ### Brand font
 
-Heading and body tokens resolve to `'Plus Jakarta Sans', system-ui, sans-serif` (700 headings, 400 body; logo wordmarks 700 and descriptors 400, outlined in the logo files). The tokens only name the font; load it yourself:
+Heading and body tokens resolve to `'Plus Jakarta Sans', system-ui, sans-serif` (700 headings, 400 body; logo wordmarks 700 and descriptors 500, outlined in the logo files). The tokens only name the font; load it yourself:
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
