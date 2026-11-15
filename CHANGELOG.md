@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0 (2026-11-15)
+
+* feat(tokens): SSD-951 Add text.inverse-subtle ([fa45a47](https://gitlab.com/singleton-sd/design-system/tokens/commit/fa45a47)), closes [#ffe082](https://gitlab.com/singleton-sd/design-system/tokens/issues/ffe082) [#60656](https://gitlab.com/singleton-sd/design-system/tokens/issues/60656)
+
 ## 1.7.0 (2026-11-15)
 
 * docs(tokens): SSD-943 Correct lockup font weights ([e9d3260](https://gitlab.com/singleton-sd/design-system/tokens/commit/e9d3260))
