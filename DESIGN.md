@@ -242,8 +242,12 @@ Pin production CSS with `@singleton-sd/tokens@x.y.z` package exports, not a vers
 
 ### Typeface
 
-- Heading: **Open Sauce Sans** (`--ssd-font-family-heading`)
-- Body: **Open Sauce Sans** (`--ssd-font-family-body`)
+- Heading: **Plus Jakarta Sans** 700 (`--ssd-font-family-heading`)
+- Body: **Plus Jakarta Sans** 400 (`--ssd-font-family-body`)
+- Lockups and wordmarks: **Plus Jakarta Sans** 500, outlined to paths in the logo files
+- Token value: `'Plus Jakarta Sans', system-ui, sans-serif`
+- Licence: SIL Open Font License 1.1 ([Google Fonts](https://fonts.google.com/specimen/Plus+Jakarta+Sans)). Load it from Google Fonts (`https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`) or self-host the static TTF/WOFF2 files.
+- Replaces Open Sauce Sans (November 2026).
 - Mono: `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace` (`--ssd-font-family-mono`)
 
 ### Font sizes
@@ -592,7 +596,7 @@ Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shado
 
 Use only these product terms when labeling UI:
 
-design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · icon · brand · on-brand · feedback · spacing 100–800 · font size 100–700 · Open Sauce Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
+design tokens · light · dark · `data-theme` · `--ssd-` · text · background · border · icon · brand · on-brand · feedback · spacing 100–800 · font size 100–700 · Plus Jakarta Sans · Style Dictionary · Penpot · Tailwind · SCSS · CSS custom properties · GitLab Pages · CDN · Semantic Versioning · Singleton SD · Singleton Software Development · `@singleton-sd/tokens` · `@singleton-sd/assets`
 
 Do not use: `--fg-*` · `--bg-*` · accent / onAccent · fg-alternative · Tokens Studio · Figma as the live pipeline.
 
@@ -602,7 +606,7 @@ Do not use: `--fg-*` · `--bg-*` · accent / onAccent · fg-alternative · Token
 
 1. **Self-contained fidelity** — Treat this document as the design source of truth for agents. Do not invent missing tokens, names, or features.
 2. **Nothing placeholder** — If a value is not listed here, do not fabricate it for UI.
-3. **Inherit the identity** — Use Open Sauce Sans, the spacing scale, semantic `--ssd-color-text` / `--ssd-color-background` / `--ssd-color-background-brand` roles, and the listed hex values.
+3. **Inherit the identity** — Use Plus Jakarta Sans, the spacing scale, semantic `--ssd-color-text` / `--ssd-color-background` / `--ssd-color-background-brand` roles, and the listed hex values.
 4. **Lead with what matters** — Semantic light/dark tokens and consumption come before secondary measures or decorative chrome.
 5. **Keep the catalog shape** — Structure pages around palette → semantic themes → usage, not unrelated section templates.
 6. **Brand weight** — Keep Singleton SD / Singleton SD Design Tokens as the primary naming signal; do not rebrand to a generic “design system” product name.

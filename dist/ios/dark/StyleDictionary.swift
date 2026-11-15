@@ -147,8 +147,8 @@ public class SsdTokensDark {
     public static let ssdColorYellowLight700 = UIColor(red: 0.639, green: 0.435, blue: 0.000, alpha: 1)
     public static let ssdColorYellowLight800 = UIColor(red: 0.557, green: 0.361, blue: 0.000, alpha: 1)
     public static let ssdColorYellowLight900 = UIColor(red: 0.420, green: 0.271, blue: 0.000, alpha: 1)
-    public static let ssdFontFamilyBody = Open Sauce Sans
-    public static let ssdFontFamilyHeading = Open Sauce Sans
+    public static let ssdFontFamilyBody = 'Plus Jakarta Sans', system-ui, sans-serif
+    public static let ssdFontFamilyHeading = 'Plus Jakarta Sans', system-ui, sans-serif
     public static let ssdFontFamilyMono = ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
     public static let ssdFontSize100 = 12px
     public static let ssdFontSize200 = 14px

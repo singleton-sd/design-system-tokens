@@ -109,6 +109,21 @@ document.documentElement.setAttribute('data-theme', 'dark');
 @import '@singleton-sd/tokens/css/root/light';
 ```
 
+### Brand font
+
+Heading and body tokens resolve to `'Plus Jakarta Sans', system-ui, sans-serif` (700 headings, 400 body, 500 lockups). The tokens only name the font; load it yourself:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+/>
+```
+
+Plus Jakarta Sans is licensed under the SIL Open Font License 1.1, so you can also self-host the static files from [google/fonts](https://github.com/google/fonts/tree/main/ofl/plusjakartasans).
+
 ### SCSS
 
 ```scss
