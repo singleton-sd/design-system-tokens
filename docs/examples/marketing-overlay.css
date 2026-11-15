@@ -20,9 +20,9 @@
  *
  * --mkt-color-background-hero: page wash. No hero token in the package;
  *   mix brand at lower emphasis, or use inverse / brand directly.
- * --mkt-shadow-*: local box-shadow. Published --ssd-shadow-* currently
- *   emit invalid `dropShadow …` CSS (DS-78). Keep shadows local until
- *   that fix lands.
+ * Shadows: use published --ssd-shadow-* (valid box-shadow after DS-78).
+ * Product-prefixed aliases may point at those vars; do not re-declare
+ * local drop-shadow mixes for that reason.
  */
 [data-theme='light'],
 [data-theme='dark'] {
@@ -32,9 +32,9 @@
     var(--ssd-color-background-default)
   );
   --mkt-color-background-hero: var(--mkt-color-background-brand-muted);
-  --mkt-shadow-sm: 0 1px 2px color-mix(in srgb, var(--ssd-color-gray-900) 12%, transparent);
-  --mkt-shadow-md: 0 4px 8px color-mix(in srgb, var(--ssd-color-gray-900) 16%, transparent);
-  --mkt-shadow-lg: 0 12px 24px color-mix(in srgb, var(--ssd-color-gray-900) 20%, transparent);
+  --mkt-shadow-sm: var(--ssd-shadow-sm);
+  --mkt-shadow-md: var(--ssd-shadow-md);
+  --mkt-shadow-lg: var(--ssd-shadow-lg);
 }
 
 /*

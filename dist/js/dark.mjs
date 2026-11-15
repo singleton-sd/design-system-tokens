@@ -1946,12 +1946,12 @@ export default {
     text: {
       default: {
         key: "{color.text.default}",
-        $value: "#ffb300",
+        $value: "#f5f6f7",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-dark.500}",
+          $value: "{color.gray.100}",
           $type: "color",
           key: "{color.text.default}",
         },
@@ -1965,12 +1965,12 @@ export default {
       },
       muted: {
         key: "{color.text.muted}",
-        $value: "#ffa000",
+        $value: "#b3b7bd",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-dark.600}",
+          $value: "{color.gray.400}",
           $type: "color",
           key: "{color.text.muted}",
         },
@@ -1984,12 +1984,12 @@ export default {
       },
       subtle: {
         key: "{color.text.subtle}",
-        $value: "#ffe082",
+        $value: "#b3b7bd",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-dark.300}",
+          $value: "{color.gray.400}",
           $type: "color",
           key: "{color.text.subtle}",
         },
@@ -2095,6 +2095,25 @@ export default {
           item: "link",
         },
         path: ["color", "text", "link"],
+      },
+      "link-hover": {
+        key: "{color.text.link-hover}",
+        $value: "#ffe082",
+        $type: "color",
+        filePath: "src/tokens/semantic/dark.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-dark.300}",
+          $type: "color",
+          key: "{color.text.link-hover}",
+        },
+        name: "SsdColorTextLinkHover",
+        attributes: {
+          category: "color",
+          type: "text",
+          item: "link-hover",
+        },
+        path: ["color", "text", "link-hover"],
       },
     },
     background: {
@@ -2212,6 +2231,25 @@ export default {
         },
         path: ["color", "background", "brand-hovered"],
       },
+      "brand-pressed": {
+        key: "{color.background.brand-pressed}",
+        $value: "#ffa000",
+        $type: "color",
+        filePath: "src/tokens/semantic/dark.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-dark.600}",
+          $type: "color",
+          key: "{color.background.brand-pressed}",
+        },
+        name: "SsdColorBackgroundBrandPressed",
+        attributes: {
+          category: "color",
+          type: "background",
+          item: "brand-pressed",
+        },
+        path: ["color", "background", "brand-pressed"],
+      },
     },
     border: {
       default: {
@@ -2271,6 +2309,25 @@ export default {
         },
         path: ["color", "border", "strong"],
       },
+      control: {
+        key: "{color.border.control}",
+        $value: "#9da1a6",
+        $type: "color",
+        filePath: "src/tokens/semantic/dark.json",
+        isSource: true,
+        original: {
+          $value: "{color.gray.500}",
+          $type: "color",
+          key: "{color.border.control}",
+        },
+        name: "SsdColorBorderControl",
+        attributes: {
+          category: "color",
+          type: "border",
+          item: "control",
+        },
+        path: ["color", "border", "control"],
+      },
       focus: {
         key: "{color.border.focus}",
         $value: "#ffb300",
@@ -2313,7 +2370,7 @@ export default {
     icon: {
       default: {
         key: "{color.icon.default}",
-        $value: "#ffb300",
+        $value: "#f5f6f7",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
@@ -2332,7 +2389,7 @@ export default {
       },
       muted: {
         key: "{color.icon.muted}",
-        $value: "#ffa000",
+        $value: "#b3b7bd",
         $type: "color",
         filePath: "src/tokens/semantic/dark.json",
         isSource: true,
@@ -3172,6 +3229,25 @@ export default {
           item: "strong",
         },
         path: ["border", "width", "strong"],
+      },
+      "focus-offset": {
+        key: "{border.width.focus-offset}",
+        $value: "2px",
+        $type: "borderWidth",
+        filePath: "src/tokens/core.json",
+        isSource: true,
+        original: {
+          $value: "2px",
+          $type: "borderWidth",
+          key: "{border.width.focus-offset}",
+        },
+        name: "SsdBorderWidthFocusOffset",
+        attributes: {
+          category: "border",
+          type: "width",
+          item: "focus-offset",
+        },
+        path: ["border", "width", "focus-offset"],
       },
     },
   },

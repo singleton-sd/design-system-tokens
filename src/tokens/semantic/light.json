@@ -1,14 +1,15 @@
 {
   "color": {
     "text": {
-      "default": { "$value": "{color.yellow-light.500}", "$type": "color" },
-      "muted": { "$value": "{color.yellow-dark.500}", "$type": "color" },
-      "subtle": { "$value": "{color.yellow-dark.300}", "$type": "color" },
+      "default": { "$value": "{color.gray.900}", "$type": "color" },
+      "muted": { "$value": "{color.gray.700}", "$type": "color" },
+      "subtle": { "$value": "{color.gray.700}", "$type": "color" },
       "disabled": { "$value": "{color.gray.400}", "$type": "color" },
       "inverse": { "$value": "{color.white}", "$type": "color" },
       "brand": { "$value": "{color.yellow-light.500}", "$type": "color" },
-      "on-brand": { "$value": "{color.gray.900}", "$type": "color" },
-      "link": { "$value": "{color.yellow-light.600}", "$type": "color" }
+      "on-brand": { "$value": "{color.black}", "$type": "color" },
+      "link": { "$value": "{color.yellow-light.800}", "$type": "color" },
+      "link-hover": { "$value": "{color.yellow-light.900}", "$type": "color" }
     },
     "background": {
       "default": { "$value": "{color.white}", "$type": "color" },
@@ -16,13 +17,15 @@
       "subtle": { "$value": "{color.gray.200}", "$type": "color" },
       "inverse": { "$value": "{color.black}", "$type": "color" },
       "brand": { "$value": "{color.yellow-light.500}", "$type": "color" },
-      "brand-hovered": { "$value": "{color.yellow-light.600}", "$type": "color" }
+      "brand-hovered": { "$value": "{color.yellow-light.600}", "$type": "color" },
+      "brand-pressed": { "$value": "{color.yellow-light.700}", "$type": "color" }
     },
     "border": {
       "default": { "$value": "{color.gray.300}", "$type": "color" },
       "muted": { "$value": "{color.gray.200}", "$type": "color" },
       "strong": { "$value": "{color.gray.500}", "$type": "color" },
-      "focus": { "$value": "{color.yellow-light.500}", "$type": "color" },
+      "control": { "$value": "{color.gray.600}", "$type": "color" },
+      "focus": { "$value": "{color.gray.900}", "$type": "color" },
       "brand": { "$value": "{color.yellow-light.500}", "$type": "color" }
     },
     "icon": {

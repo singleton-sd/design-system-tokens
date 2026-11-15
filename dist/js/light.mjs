@@ -1946,12 +1946,12 @@ export default {
     text: {
       default: {
         key: "{color.text.default}",
-        $value: "#c89200",
+        $value: "#292c30",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-light.500}",
+          $value: "{color.gray.900}",
           $type: "color",
           key: "{color.text.default}",
         },
@@ -1965,12 +1965,12 @@ export default {
       },
       muted: {
         key: "{color.text.muted}",
-        $value: "#ffb300",
+        $value: "#60656b",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-dark.500}",
+          $value: "{color.gray.700}",
           $type: "color",
           key: "{color.text.muted}",
         },
@@ -1984,12 +1984,12 @@ export default {
       },
       subtle: {
         key: "{color.text.subtle}",
-        $value: "#ffe082",
+        $value: "#60656b",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-dark.300}",
+          $value: "{color.gray.700}",
           $type: "color",
           key: "{color.text.subtle}",
         },
@@ -2060,12 +2060,12 @@ export default {
       },
       "on-brand": {
         key: "{color.text.on-brand}",
-        $value: "#292c30",
+        $value: "#000000",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.gray.900}",
+          $value: "{color.black}",
           $type: "color",
           key: "{color.text.on-brand}",
         },
@@ -2079,12 +2079,12 @@ export default {
       },
       link: {
         key: "{color.text.link}",
-        $value: "#b57f00",
+        $value: "#8e5c00",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-light.600}",
+          $value: "{color.yellow-light.800}",
           $type: "color",
           key: "{color.text.link}",
         },
@@ -2095,6 +2095,25 @@ export default {
           item: "link",
         },
         path: ["color", "text", "link"],
+      },
+      "link-hover": {
+        key: "{color.text.link-hover}",
+        $value: "#6b4500",
+        $type: "color",
+        filePath: "src/tokens/semantic/light.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-light.900}",
+          $type: "color",
+          key: "{color.text.link-hover}",
+        },
+        name: "SsdColorTextLinkHover",
+        attributes: {
+          category: "color",
+          type: "text",
+          item: "link-hover",
+        },
+        path: ["color", "text", "link-hover"],
       },
     },
     background: {
@@ -2212,6 +2231,25 @@ export default {
         },
         path: ["color", "background", "brand-hovered"],
       },
+      "brand-pressed": {
+        key: "{color.background.brand-pressed}",
+        $value: "#a36f00",
+        $type: "color",
+        filePath: "src/tokens/semantic/light.json",
+        isSource: true,
+        original: {
+          $value: "{color.yellow-light.700}",
+          $type: "color",
+          key: "{color.background.brand-pressed}",
+        },
+        name: "SsdColorBackgroundBrandPressed",
+        attributes: {
+          category: "color",
+          type: "background",
+          item: "brand-pressed",
+        },
+        path: ["color", "background", "brand-pressed"],
+      },
     },
     border: {
       default: {
@@ -2271,14 +2309,33 @@ export default {
         },
         path: ["color", "border", "strong"],
       },
-      focus: {
-        key: "{color.border.focus}",
-        $value: "#c89200",
+      control: {
+        key: "{color.border.control}",
+        $value: "#7f848a",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
         original: {
-          $value: "{color.yellow-light.500}",
+          $value: "{color.gray.600}",
+          $type: "color",
+          key: "{color.border.control}",
+        },
+        name: "SsdColorBorderControl",
+        attributes: {
+          category: "color",
+          type: "border",
+          item: "control",
+        },
+        path: ["color", "border", "control"],
+      },
+      focus: {
+        key: "{color.border.focus}",
+        $value: "#292c30",
+        $type: "color",
+        filePath: "src/tokens/semantic/light.json",
+        isSource: true,
+        original: {
+          $value: "{color.gray.900}",
           $type: "color",
           key: "{color.border.focus}",
         },
@@ -2313,7 +2370,7 @@ export default {
     icon: {
       default: {
         key: "{color.icon.default}",
-        $value: "#c89200",
+        $value: "#292c30",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
@@ -2332,7 +2389,7 @@ export default {
       },
       muted: {
         key: "{color.icon.muted}",
-        $value: "#ffb300",
+        $value: "#60656b",
         $type: "color",
         filePath: "src/tokens/semantic/light.json",
         isSource: true,
@@ -3172,6 +3229,25 @@ export default {
           item: "strong",
         },
         path: ["border", "width", "strong"],
+      },
+      "focus-offset": {
+        key: "{border.width.focus-offset}",
+        $value: "2px",
+        $type: "borderWidth",
+        filePath: "src/tokens/core.json",
+        isSource: true,
+        original: {
+          $value: "2px",
+          $type: "borderWidth",
+          key: "{border.width.focus-offset}",
+        },
+        name: "SsdBorderWidthFocusOffset",
+        attributes: {
+          category: "border",
+          type: "width",
+          item: "focus-offset",
+        },
+        path: ["border", "width", "focus-offset"],
       },
     },
   },

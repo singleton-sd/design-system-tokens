@@ -145,6 +145,7 @@ declare const tokens: {
       brand: DesignToken;
       "on-brand": DesignToken;
       link: DesignToken;
+      "link-hover": DesignToken;
     };
     background: {
       default: DesignToken;
@@ -153,11 +154,13 @@ declare const tokens: {
       inverse: DesignToken;
       brand: DesignToken;
       "brand-hovered": DesignToken;
+      "brand-pressed": DesignToken;
     };
     border: {
       default: DesignToken;
       muted: DesignToken;
       strong: DesignToken;
+      control: DesignToken;
       focus: DesignToken;
       brand: DesignToken;
     };
@@ -232,6 +235,7 @@ declare const tokens: {
     width: {
       default: DesignToken;
       strong: DesignToken;
+      "focus-offset": DesignToken;
     };
   };
   opacity: {
