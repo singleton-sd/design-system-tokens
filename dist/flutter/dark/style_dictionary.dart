@@ -130,6 +130,7 @@ class SsdTokensDark {
     static const colorTextDefault = Color(0xFFF5F6F7);
     static const colorTextDisabled = Color(0xFF7F848A);
     static const colorTextInverse = Color(0xFF292C30);
+    static const colorTextInverseSubtle = Color(0xFF60656B);
     static const colorTextLink = Color(0xFFFFD54F);
     static const colorTextLinkHover = Color(0xFFFFE082);
     static const colorTextMuted = Color(0xFFB3B7BD);

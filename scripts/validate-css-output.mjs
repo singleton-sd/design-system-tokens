@@ -31,6 +31,7 @@ const REQUIRED_CSS_DECLS = [
   '--ssd-color-text-default',
   '--ssd-color-text-on-brand',
   '--ssd-color-text-link-hover',
+  '--ssd-color-text-inverse-subtle',
   '--ssd-color-border-control',
   '--ssd-color-background-brand-pressed',
   '--ssd-border-width-focus-offset',

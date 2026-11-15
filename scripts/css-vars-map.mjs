@@ -10,6 +10,7 @@ export const CSS_VAR_PATHS = Object.freeze([
   'color.text.subtle',
   'color.text.disabled',
   'color.text.inverse',
+  'color.text.inverse-subtle',
   'color.text.brand',
   'color.text.on-brand',
   'color.text.link',

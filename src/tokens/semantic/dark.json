@@ -6,6 +6,7 @@
       "subtle": { "$value": "{color.gray.400}", "$type": "color" },
       "disabled": { "$value": "{color.gray.600}", "$type": "color" },
       "inverse": { "$value": "{color.gray.900}", "$type": "color" },
+      "inverse-subtle": { "$value": "{color.gray.700}", "$type": "color" },
       "brand": { "$value": "{color.yellow-dark.500}", "$type": "color" },
       "on-brand": { "$value": "{color.gray.900}", "$type": "color" },
       "link": { "$value": "{color.yellow-dark.400}", "$type": "color" },

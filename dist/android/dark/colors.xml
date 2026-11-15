@@ -110,6 +110,7 @@
   <color name="color_text_subtle">#ffb3b7bd</color>
   <color name="color_text_disabled">#ff7f848a</color>
   <color name="color_text_inverse">#ff292c30</color>
+  <color name="color_text_inverse_subtle">#ff60656b</color>
   <color name="color_text_brand">#ffffb300</color>
   <color name="color_text_on_brand">#ff292c30</color>
   <color name="color_text_link">#ffffd54f</color>

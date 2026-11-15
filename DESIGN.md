@@ -528,6 +528,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-text-subtle` | gray 700 | `#60656b` |
 | `--ssd-color-text-disabled` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-inverse` | white | `#ffffff` |
+| `--ssd-color-text-inverse-subtle` | yellow-dark 300 | `#ffe082` |
 | `--ssd-color-text-brand` | yellow-light 500 | `#c89200` |
 | `--ssd-color-text-on-brand` | black | `#000000` |
 | `--ssd-color-text-link` | yellow-light 800 | `#8e5c00` |
@@ -571,6 +572,7 @@ Same CSS custom property names in both themes; values differ. Activate with `dat
 | `--ssd-color-text-subtle` | gray 400 | `#b3b7bd` |
 | `--ssd-color-text-disabled` | gray 600 | `#7f848a` |
 | `--ssd-color-text-inverse` | gray 900 | `#292c30` |
+| `--ssd-color-text-inverse-subtle` | gray 700 | `#60656b` |
 | `--ssd-color-text-brand` | yellow-dark 500 | `#ffb300` |
 | `--ssd-color-text-on-brand` | gray 900 | `#292c30` |
 | `--ssd-color-text-link` | yellow-dark 400 | `#ffd54f` |
@@ -612,6 +614,8 @@ Shadows are composite tokens (`--ssd-shadow-sm|md|lg`), not a color named `shado
 `--ssd-typography-*` is a CSS `font` shorthand (`weight size/line-height family`). Letter-spacing is not part of `font`; pair heading styles with `--ssd-letter-spacing-heading`.
 
 Light `text.subtle` uses gray 700 (same as muted). Gray 600 is 3.77:1 on white, which fails WCAG AA for body text. Dark `text.subtle` uses gray 400 (same as muted): gray 500 is 3.54:1 on `background.subtle` (`#44484d`). Light `text.on-brand` is black on brand yellow.
+
+Muted text on `background.inverse` (footers, banners) uses `text.inverse-subtle`, not `text.subtle`. Light is yellow-dark 300 (`#ffe082`) on black, 16.24:1, so inverse blocks lead with yellow on black. Dark is gray 700 (`#60656b`) on white, 5.88:1. `text.subtle` on `background.inverse` is only 3.57:1 in light (gray 700 on black) and fails WCAG AA for body text.
 
 ---
 

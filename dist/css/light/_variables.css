@@ -147,6 +147,7 @@
   --ssd-color-text-subtle: var(--ssd-color-gray-700);
   --ssd-color-text-disabled: var(--ssd-color-gray-400);
   --ssd-color-text-inverse: var(--ssd-color-white);
+  --ssd-color-text-inverse-subtle: var(--ssd-color-yellow-dark-300);
   --ssd-color-text-brand: var(--ssd-color-yellow-light-500);
   --ssd-color-text-on-brand: var(--ssd-color-black);
   --ssd-color-text-link: var(--ssd-color-yellow-light-800);
