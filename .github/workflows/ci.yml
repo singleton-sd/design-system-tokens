@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: actionlint / build / test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+
+      - name: actionlint
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            | tar xz -C /tmp actionlint
+          /tmp/actionlint -color
+
+      - name: Detect GitLab package tree
+        id: pkg
+        run: |
+          set -euo pipefail
+          if [ -f package.json ] && [ -f yarn.lock ]; then
+            echo 'present=true' >> "${GITHUB_OUTPUT}"
+          else
+            echo 'present=false' >> "${GITHUB_OUTPUT}"
+            echo 'package.json/yarn.lock not at HEAD yet (expected until the first GitLab sync). Skipping yarn install/build/test.'
+          fi
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: steps.pkg.outputs.present == 'true'
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Enable Yarn 1.22.22
+        if: steps.pkg.outputs.present == 'true'
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+          yarn --version
+
+      - name: Install
+        if: steps.pkg.outputs.present == 'true'
+        env:
+          HUSKY: "0"
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        if: steps.pkg.outputs.present == 'true'
+        run: yarn build-all
+
+      - name: Test
+        if: steps.pkg.outputs.present == 'true'
+        run: yarn test
+
+      - name: Validate CSS
+        if: steps.pkg.outputs.present == 'true'
+        run: yarn validate:css

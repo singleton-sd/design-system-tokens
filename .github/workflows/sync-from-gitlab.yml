@@ -1,0 +1,232 @@
+# Mirror GitLab singleton-sd/design-system/tokens into this GitHub repo.
+# GitHub main = GitLab main plus a persistent .github/ layer (merge, never rebase/force).
+# GitLab tags do not contain these workflows, so tag-push will not start publish.yml.
+# After pushing new tags this workflow calls publish.yml (workflow_call) per tag.
+name: Sync from GitLab
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: sync-from-gitlab
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  sync:
+    name: Merge GitLab into GitHub
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      new-tags: ${{ steps.mirror.outputs.new-tags }}
+    steps:
+      - name: Require singleton-release App credentials
+        env:
+          RELEASE_APP_ID: ${{ vars.RELEASE_APP_ID }}
+          RELEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${RELEASE_APP_ID}" ] || [ -z "${RELEASE_APP_PRIVATE_KEY}" ]; then
+            echo '::error::Set vars.RELEASE_APP_ID and secrets.RELEASE_APP_PRIVATE_KEY. Never fall back to GITHUB_TOKEN for git pushes.'
+            exit 1
+          fi
+
+      - name: Create singleton-release App token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: singleton-sd
+          repositories: tokens
+          permission-contents: write
+
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+
+      - name: Configure git identity and App HTTPS auth
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          set -euo pipefail
+          slug="${APP_SLUG:-singleton-release}"
+          git config user.name "${slug}[bot]"
+          git config user.email "${slug}[bot]@users.noreply.github.com"
+          encoded="$(printf '%s' "x-access-token:${GH_TOKEN}" | base64 | tr -d '\n')"
+          echo "::add-mask::${encoded}"
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${encoded}"
+
+      - name: Mirror GitLab branches and tags
+        id: mirror
+        env:
+          GIT_TERMINAL_PROMPT: "0"
+        run: |
+          set -euo pipefail
+          echo 'new-tags=[]' >> "${GITHUB_OUTPUT}"
+
+          peel_commit() {
+            local peeled
+            peeled="$(printf '%s\n' "$1" | awk '/\^\{\}$/ { print $1; exit }')"
+            if [ -n "${peeled}" ]; then
+              printf '%s\n' "${peeled}"
+              return
+            fi
+            printf '%s\n' "$1" | awk '{ print $1; exit }'
+          }
+
+          json_string_array() {
+            if [ "$#" -eq 0 ]; then
+              printf '%s\n' '[]'
+              return
+            fi
+            printf '%s\n' "$@" | jq -R . | jq -s -c .
+          }
+
+          if git remote get-url gitlab >/dev/null 2>&1; then
+            git remote set-url gitlab https://gitlab.com/singleton-sd/design-system/tokens.git
+          else
+            git remote add gitlab https://gitlab.com/singleton-sd/design-system/tokens.git
+          fi
+
+          git fetch gitlab --tags --prune
+
+          if ! git rev-parse --verify refs/remotes/gitlab/main >/dev/null 2>&1; then
+            echo '::error::gitlab/main was not fetched from the public GitLab remote.'
+            exit 1
+          fi
+
+          if git merge-base --is-ancestor refs/remotes/gitlab/main HEAD; then
+            echo 'GitHub main already contains GitLab main; skipping merge.'
+          else
+            merge_args=(--no-ff -X theirs --no-edit -m 'chore(mirror): merge GitLab main into GitHub main')
+            if ! git merge-base HEAD refs/remotes/gitlab/main >/dev/null 2>&1; then
+              echo 'Unrelated histories; merging with --allow-unrelated-histories.'
+              merge_args+=(--allow-unrelated-histories)
+            fi
+            set +e
+            git merge "${merge_args[@]}" refs/remotes/gitlab/main
+            merge_status=$?
+            set -e
+            if [ "${merge_status}" -ne 0 ]; then
+              echo 'Merge conflicts: taking GitLab versions for GitLab-owned paths (keeping .github/).'
+              while IFS= read -r file; do
+                [ -z "${file}" ] && continue
+                case "${file}" in
+                  .github | .github/*)
+                    git checkout --ours -- "${file}"
+                    ;;
+                  *)
+                    git checkout --theirs -- "${file}"
+                    ;;
+                esac
+                git add -- "${file}"
+              done < <(git diff --name-only --diff-filter=U)
+              git commit --no-edit --no-verify
+            fi
+          fi
+
+          if ! git push origin HEAD:main; then
+            echo '::error::Push of main was rejected. Fail without --force.'
+            exit 1
+          fi
+
+          branch_failed=0
+          while IFS= read -r gitlab_ref; do
+            [ -z "${gitlab_ref}" ] && continue
+            branch="${gitlab_ref#refs/remotes/gitlab/}"
+            case "${branch}" in
+              HEAD | main) continue ;;
+            esac
+            gitlab_sha="$(git rev-parse "${gitlab_ref}")"
+            origin_sha="$(git ls-remote origin "refs/heads/${branch}" | awk '{ print $1; exit }')"
+            if [ -n "${origin_sha}" ] && [ "${origin_sha}" = "${gitlab_sha}" ]; then
+              echo "Branch ${branch} already up to date at ${gitlab_sha}."
+              continue
+            fi
+            echo "Fast-forwarding GitHub ${branch} to ${gitlab_sha}."
+            if ! git push origin "${gitlab_ref}:refs/heads/${branch}"; then
+              echo "::error::Fast-forward push of ${branch} was rejected. Not forcing."
+              branch_failed=1
+            fi
+          done < <(git for-each-ref --format='%(refname)' refs/remotes/gitlab)
+
+          if [ "${branch_failed}" -ne 0 ]; then
+            exit 1
+          fi
+
+          new_tags=()
+          tag_failed=0
+          while IFS= read -r line; do
+            [ -z "${line}" ] && continue
+            case "${line}" in
+              *$'\trefs/tags/'*'^{}') continue ;;
+            esac
+            tag="${line#*$'\trefs/tags/'}"
+            [ -z "${tag}" ] && continue
+            gitlab_lines="$(git ls-remote --tags gitlab "refs/tags/${tag}" || true)"
+            gitlab_sha="$(peel_commit "${gitlab_lines}")"
+            origin_lines="$(git ls-remote --tags origin "refs/tags/${tag}" || true)"
+            if [ -n "${origin_lines}" ]; then
+              origin_sha="$(peel_commit "${origin_lines}")"
+              if [ "${origin_sha}" = "${gitlab_sha}" ]; then
+                echo "Tag ${tag} already on GitHub at ${gitlab_sha}."
+                continue
+              fi
+              echo "::error::Tag ${tag} exists on GitHub at ${origin_sha} but GitLab has ${gitlab_sha}. Refusing to overwrite."
+              tag_failed=1
+              continue
+            fi
+            echo "Pushing new tag ${tag} (${gitlab_sha})."
+            if ! git push origin "refs/tags/${tag}:refs/tags/${tag}"; then
+              echo "::error::Push of tag ${tag} was rejected. Not forcing."
+              tag_failed=1
+              continue
+            fi
+            new_tags+=("${tag}")
+          done < <(git ls-remote --tags gitlab)
+
+          if [ "${tag_failed}" -ne 0 ]; then
+            exit 1
+          fi
+
+          if [ "${#new_tags[@]}" -eq 0 ]; then
+            echo 'No new GitLab tags to publish.'
+            echo 'new-tags=[]' >> "${GITHUB_OUTPUT}"
+          else
+            json="$(json_string_array "${new_tags[@]}")"
+            echo "New tags: ${json}"
+            echo "new-tags=${json}" >> "${GITHUB_OUTPUT}"
+          fi
+
+          echo 'Mirror step finished (exit 0 even when nothing is new).'
+
+      - name: Forget App git credentials
+        if: always()
+        run: git config --local --unset-all http.https://github.com/.extraheader || true
+
+  publish-new-tags:
+    name: Publish ${{ matrix.tag }}
+    needs: sync
+    if: needs.sync.outputs.new-tags != '[]' && needs.sync.outputs.new-tags != ''
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        tag: ${{ fromJSON(needs.sync.outputs.new-tags) }}
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag: ${{ matrix.tag }}

@@ -1,0 +1,177 @@
+# Publish @singleton-sd/tokens to GitHub Packages from a tag commit.
+# GitLab tags do not contain this file, so on.push.tags will not fire for mirrored
+# tags. Sync starts this workflow via workflow_call from the default branch.
+# workflow_dispatch is the backfill/retry path (tag=1.8.0 or tag=all).
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to publish (e.g. 1.8.0), or all unpublished local version tags
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        description: Tag to publish (e.g. 1.8.0), or all unpublished local version tags
+        required: true
+        type: string
+  push:
+    tags:
+      - "*"
+
+permissions: {}
+
+jobs:
+  publish:
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REQUESTED_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - name: Checkout default branch with tags
+        if: env.REQUESTED_TAG == 'all'
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+
+      - name: Checkout tag commit
+        if: env.REQUESTED_TAG != 'all'
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          ref: ${{ env.REQUESTED_TAG }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: "@singleton-sd"
+
+      - name: Enable Yarn 1.22.22
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+          yarn --version
+
+      - name: Publish tag(s)
+        run: |
+          set -euo pipefail
+          set +x
+
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo '::error::NODE_AUTH_TOKEN is empty; GitHub Packages publish uses secrets.GITHUB_TOKEN (Packages rejects App tokens).'
+            exit 1
+          fi
+
+          requested="${REQUESTED_TAG}"
+          if [ -z "${requested}" ]; then
+            echo '::error::Missing tag input (expected a version such as 1.8.0, or all).'
+            exit 1
+          fi
+          case "${requested}" in
+            main | HEAD | master)
+              echo "::error::Refusing to publish from ${requested}. Publish tag commits only, never main HEAD."
+              exit 1
+              ;;
+          esac
+
+          version_on_registry() {
+            local version="$1"
+            if npm view "@singleton-sd/tokens@${version}" version --registry https://npm.pkg.github.com \
+              >/dev/null 2>/tmp/npm-view.err; then
+              return 0
+            fi
+            if grep -qiE 'E404|404 Not Found|is not in this registry|does not exist' /tmp/npm-view.err; then
+              return 1
+            fi
+            echo "::error::Failed to query GitHub Packages for @singleton-sd/tokens@${version}."
+            exit 1
+          }
+
+          list_tags() {
+            if [ "${requested}" = "all" ]; then
+              git for-each-ref --format='%(refname:short)' refs/tags | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || true
+              return
+            fi
+            if ! printf '%s\n' "${requested}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error::Tag must be a version like 1.8.0, or all. Got: ${requested}"
+              exit 1
+            fi
+            printf '%s\n' "${requested}"
+          }
+
+          has_yarn_script() {
+            local name="$1"
+            SCRIPT_NAME="${name}" node -e 'const s = require("./package.json").scripts || {}; process.exit(s[process.env.SCRIPT_NAME] ? 0 : 1)'
+          }
+
+          publish_one() {
+            local tag="$1"
+            echo "=== ${tag} ==="
+
+            if version_on_registry "${tag}"; then
+              echo "Skip: @singleton-sd/tokens@${tag} already exists on GitHub Packages."
+              return 0
+            fi
+
+            git checkout -f --detach "${tag}"
+            git config advice.detachedHead false
+            rm -rf node_modules
+
+            if [ ! -f package.json ] || [ ! -f yarn.lock ]; then
+              echo "::error::Tag ${tag} is missing package.json or yarn.lock."
+              exit 1
+            fi
+
+            pkg_name="$(node -p 'require("./package.json").name')"
+            pkg_version="$(node -p 'require("./package.json").version')"
+            if [ "${pkg_name}" != '@singleton-sd/tokens' ]; then
+              echo "::error::Unexpected package name ${pkg_name} at tag ${tag}."
+              exit 1
+            fi
+            if [ "${pkg_version}" != "${tag}" ]; then
+              echo "::error::package.json version ${pkg_version} does not match tag ${tag}."
+              exit 1
+            fi
+
+            HUSKY=0 yarn install --frozen-lockfile
+            yarn build-all
+
+            if has_yarn_script test; then
+              yarn test
+            else
+              echo "Skipping yarn test: script not defined on tag ${tag}."
+            fi
+            if has_yarn_script validate:css; then
+              yarn validate:css
+            else
+              echo "Skipping yarn validate:css: script not defined on tag ${tag}."
+            fi
+
+            npm pkg set repository.url=https://github.com/singleton-sd/tokens.git
+            npm publish --registry https://npm.pkg.github.com
+            echo "Published @singleton-sd/tokens@${tag}."
+          }
+
+          published_any=0
+          while IFS= read -r tag; do
+            [ -z "${tag}" ] && continue
+            publish_one "${tag}"
+            published_any=1
+          done < <(list_tags)
+
+          if [ "${requested}" = "all" ] && [ "${published_any}" -eq 0 ]; then
+            echo 'No local version tags found. Run sync-from-gitlab first, then retry tag=all.'
+          fi
