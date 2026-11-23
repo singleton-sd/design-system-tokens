@@ -1,7 +1,7 @@
 # Publish @singleton-sd/tokens to GitHub Packages from a tag commit.
-# GitLab tags do not contain this file, so on.push.tags will not fire for mirrored
-# tags. Sync starts this workflow via workflow_call from the default branch.
-# workflow_dispatch is the backfill/retry path (tag=1.8.0 or tag=all).
+# GitLab tags do not contain this file. Publish is started from the default
+# branch: sync calls this via workflow_call; workflow_dispatch is the
+# backfill/retry path (tag=1.8.0 or tag=all). No on.push.tags trigger.
 name: Publish
 
 on:
@@ -17,15 +17,12 @@ on:
         description: Tag to publish (e.g. 1.8.0), or all unpublished local version tags
         required: true
         type: string
-  push:
-    tags:
-      - "*"
 
 # Per-tag group so a retry of 1.8.0 waits on an in-flight 1.8.0 without cancelling
 # other versions. A single shared group would drop pending sync workflow_call runs
 # (GitHub cancels the previously pending job in a group when a newer one queues).
 concurrency:
-  group: publish-${{ inputs.tag || github.ref_name }}
+  group: publish-${{ inputs.tag }}
   cancel-in-progress: false
 
 permissions: {}
@@ -39,8 +36,7 @@ jobs:
       contents: read
       packages: write
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      REQUESTED_TAG: ${{ inputs.tag || github.ref_name }}
+      REQUESTED_TAG: ${{ inputs.tag }}
     steps:
       - name: Checkout default branch with tags
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -53,8 +49,6 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
-          registry-url: https://npm.pkg.github.com
-          scope: "@singleton-sd"
 
       - name: Enable Yarn 1.22.22
         run: |
@@ -64,16 +58,30 @@ jobs:
           yarn --version
 
       - name: Publish tag(s)
+        env:
+          PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           set +x
-          # shellcheck source=../scripts/mirror-lib.sh
-          source "${GITHUB_WORKSPACE}/.github/scripts/mirror-lib.sh"
-
-          if [ -z "${NODE_AUTH_TOKEN}" ]; then
-            echo '::error::NODE_AUTH_TOKEN is empty; GitHub Packages publish uses secrets.GITHUB_TOKEN (Packages rejects App tokens).'
+          tok="${PKG_TOKEN:-}"
+          unset PKG_TOKEN
+          unset NODE_AUTH_TOKEN || true
+          unset NPM_TOKEN || true
+          unset GITHUB_TOKEN || true
+          if [ -z "${tok}" ]; then
+            echo '::error::PKG_TOKEN is empty; GitHub Packages publish uses secrets.GITHUB_TOKEN (Packages rejects App tokens).'
             exit 1
           fi
+
+          npmrc="${RUNNER_TEMP}/github-packages.npmrc"
+          cat > "${npmrc}" <<'EOF'
+          @singleton-sd:registry=https://npm.pkg.github.com
+          //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+          always-auth=true
+          EOF
+
+          # shellcheck source=../scripts/mirror-lib.sh
+          source "${GITHUB_WORKSPACE}/.github/scripts/mirror-lib.sh"
 
           requested="${REQUESTED_TAG}"
           if [ -z "${requested}" ]; then
@@ -87,9 +95,13 @@ jobs:
               ;;
           esac
 
+          npm_pkg() {
+            NODE_AUTH_TOKEN="${tok}" npm --userconfig "${npmrc}" "$@"
+          }
+
           version_on_registry() {
             local version="$1"
-            if npm view "@singleton-sd/tokens@${version}" version --registry https://npm.pkg.github.com \
+            if npm_pkg view "@singleton-sd/tokens@${version}" version --registry https://npm.pkg.github.com \
               >/dev/null 2>/tmp/npm-view.err; then
               return 0
             fi
@@ -101,7 +113,7 @@ jobs:
           }
 
           registry_latest() {
-            if npm view @singleton-sd/tokens dist-tags.latest --registry https://npm.pkg.github.com \
+            if npm_pkg view @singleton-sd/tokens dist-tags.latest --registry https://npm.pkg.github.com \
               >/tmp/npm-latest.out 2>/tmp/npm-latest.err; then
               tr -d '[:space:]' < /tmp/npm-latest.out
               return 0
@@ -179,10 +191,10 @@ jobs:
             current_latest="$(registry_latest)"
             dist_tag="$(npm_publish_dist_tag "${tag}" "${current_latest}")"
             if [ "${dist_tag}" = "latest" ]; then
-              npm publish --registry https://npm.pkg.github.com
+              npm_pkg publish --registry https://npm.pkg.github.com
             else
               echo "Publishing ${tag} with --tag ${dist_tag} so latest stays ${current_latest}."
-              npm publish --tag "${dist_tag}" --registry https://npm.pkg.github.com
+              npm_pkg publish --tag "${dist_tag}" --registry https://npm.pkg.github.com
             fi
             echo "Published @singleton-sd/tokens@${tag}."
           }

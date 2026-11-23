@@ -34,14 +34,14 @@ Git HTTPS for App pushes uses Basic `x-access-token` (never Bearer), matching [`
 
 ## Publish (`publish.yml`)
 
-GitLab tags (`1.1.0` … `1.8.0`, **no `v` prefix**) point at GitLab commits that **do not contain** `.github/workflows`. `on: push: tags` therefore **does not run** for mirrored tags, because GitHub loads the workflow file from the tagged commit. Do not rely on tag-push alone.
+GitLab tags (`1.1.0` … `1.8.0`, **no `v` prefix**) point at GitLab commits that **do not contain** `.github/workflows`. There is no `on: push: tags` trigger.
 
 Start publish from the default branch:
 
 - `workflow_call` — the sync workflow invokes this for **each newly pushed tag**, with `permissions: { contents: read, packages: write }` granted by the caller.
 - `workflow_dispatch` — backfill and retry. Input `tag` is one version (`1.8.0`) or `all` (every local version tag not yet on the registry).
 
-The job checks out the **tag commit**, rebuilds with `yarn build-all` (same as GitLab CI; `dist/` is committed **and** rebuilt), runs `yarn test` / `yarn validate:css` when those scripts exist, and publishes with `GITHUB_TOKEN`. GitHub Packages **rejects** App tokens.
+The job checks out the **tag commit**, rebuilds with `yarn build-all` (same as GitLab CI; `dist/` is committed **and** rebuilt), runs `yarn test` / `yarn validate:css` when those scripts exist, and publishes with `GITHUB_TOKEN`. GitHub Packages **rejects** App tokens. `setup-node` does not set `registry-url` or `scope`, so Yarn install/build/test never authenticate to GitHub Packages. The Packages token is passed only as step-level `PKG_TOKEN`, copied into a non-exported shell variable, unset, and supplied inline as `NODE_AUTH_TOKEN` on `npm view` / `npm publish` only.
 
 `package.json` `repository` still points at GitLab. At publish time only (throwaway checkout, not committed) the job sets `repository.url` to this GitHub repo so the package is linked to `singleton-sd/tokens`. `publishConfig` is not committed.
 

@@ -213,6 +213,24 @@ test_fail_exits_nonzero() {
   ok "fail() exits nonzero so subshell assertions fail the harness"
 }
 
+test_publish_yml_keeps_token_off_install() {
+  local f="${ROOT}/.github/workflows/publish.yml"
+  if grep -E '^[[:space:]]+NODE_AUTH_TOKEN:' "${f}"; then
+    fail "publish.yml must not set NODE_AUTH_TOKEN as a GitHub Actions env"
+  fi
+  if grep -E '^[[:space:]]+push:' "${f}"; then
+    fail "publish.yml must not use on.push.tags"
+  fi
+  if grep -E 'registry-url:' "${f}"; then
+    fail "publish.yml setup-node must not set registry-url (install would require auth)"
+  fi
+  # shellcheck disable=SC2016 # match the GitHub Actions expression literally
+  if ! grep -q 'PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}' "${f}"; then
+    fail "publish.yml should pass GITHUB_TOKEN only as step-level PKG_TOKEN"
+  fi
+  ok "publish.yml does not put GITHUB_TOKEN in job env or setup-node registry-url"
+}
+
 test_require_tag_ref_rejects_numeric_branch
 test_require_tag_ref_accepts_version_tag
 test_backfill_does_not_move_latest
@@ -221,5 +239,6 @@ test_merge_keeps_ours_on_conflicting_github
 test_merge_keeps_ours_on_clean_github_add
 test_merge_second_sync_modify_discarded_github_file
 test_fail_exits_nonzero
+test_publish_yml_keeps_token_off_install
 
 echo "All helper tests passed."
