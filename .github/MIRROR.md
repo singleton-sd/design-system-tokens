@@ -45,7 +45,7 @@ The job checks out the **tag commit**, rebuilds with `yarn build-all` (same as G
 
 `package.json` `repository` still points at GitLab. At publish time only (throwaway checkout, not committed) the job sets `repository.url` to this GitHub repo so the package is linked to `singleton-sd/tokens`. `publishConfig` is not committed.
 
-Publishing is idempotent: if `@singleton-sd/tokens@<version>` already exists on `https://npm.pkg.github.com`, that version is skipped and the job exits 0. Never overwrite a published version. Never publish from `main` HEAD (`main` can be docs commits ahead of the latest tag). The tarball always comes from `refs/tags/<version>` (a branch of the same name is not enough). Backfilling an older version uses `npm publish --tag <version>` so an existing higher `latest` (for example 1.8.0) is not moved to 1.1.0.
+Publishing is idempotent: if `@singleton-sd/tokens@<version>` already exists on `https://npm.pkg.github.com`, that version is skipped and the job exits 0. Never overwrite a published version. Never publish from `main` HEAD (`main` can be docs commits ahead of the latest tag). The tarball always comes from `refs/tags/<version>` (a branch of the same name is not enough). Backfilling an older version uses `npm publish --tag backfill-<version>` (npm rejects SemVer dist-tag names) so an existing higher `latest` (for example 1.8.0) is not moved to 1.1.0.
 
 Backfill tags: `1.1.0`, `1.2.0`, `1.2.1`, `1.2.2`, `1.2.3`, `1.2.4`, `1.2.5`, `1.3.0`, `1.4.0`, `1.4.1`, `1.4.2`, `1.5.0`, `1.6.0`, `1.7.0`, `1.8.0`.
 

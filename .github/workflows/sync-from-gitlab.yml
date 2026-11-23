@@ -160,6 +160,7 @@ jobs:
             echo 'No new GitLab tags to publish.'
             echo 'new-tags=[]' >> "${GITHUB_OUTPUT}"
           else
+            mapfile -t new_tags < <(printf '%s\n' "${new_tags[@]}" | sort -V)
             json="$(json_string_array "${new_tags[@]}")"
             echo "New tags: ${json}"
             echo "new-tags=${json}" >> "${GITHUB_OUTPUT}"

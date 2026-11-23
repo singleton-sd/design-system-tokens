@@ -21,6 +21,13 @@ on:
     tags:
       - "*"
 
+# Per-tag group so a retry of 1.8.0 waits on an in-flight 1.8.0 without cancelling
+# other versions. A single shared group would drop pending sync workflow_call runs
+# (GitHub cancels the previously pending job in a group when a newer one queues).
+concurrency:
+  group: publish-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
 permissions: {}
 
 jobs:
@@ -108,7 +115,7 @@ jobs:
 
           list_tags() {
             if [ "${requested}" = "all" ]; then
-              git for-each-ref --format='%(refname:short)' refs/tags | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || true
+              git for-each-ref --format='%(refname:short)' refs/tags | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V || true
               return
             fi
             if ! printf '%s\n' "${requested}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then

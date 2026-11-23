@@ -17,9 +17,9 @@ require_tag_ref() {
 }
 
 # Dist-tag to pass to npm publish for <version> given the registry's current latest.
-# Prints "latest" when this version should own latest; otherwise prints the version
-# so the caller can `npm publish --tag <version>` without moving latest.
-# Backfill case: latest=1.8.0, version=1.1.0 -> 1.1.0
+# Prints "latest" when this version should own latest; otherwise prints
+# backfill-<version> (npm rejects SemVer dist-tag names such as 1.1.0).
+# Backfill case: latest=1.8.0, version=1.1.0 -> backfill-1.1.0
 npm_publish_dist_tag() {
   local version="$1"
   local current_latest="${2:-}"
@@ -37,7 +37,7 @@ npm_publish_dist_tag() {
     printf '%s\n' 'latest'
     return 0
   fi
-  printf '%s\n' "${version}"
+  printf '%s\n' "backfill-${version}"
 }
 
 peel_commit() {
@@ -92,18 +92,21 @@ merge_preserving_dot_github() {
     return 1
   fi
 
+  # Restore .github/ before per-file conflict handling. A later GitLab edit of a
+  # file discarded on a previous sync is a modify/delete conflict with no stage 2
+  # (ours); `git checkout --ours` would fail and skip this restore.
+  preserve_dot_github_from_head
+
   if [ "${merge_status}" -ne 0 ]; then
     echo 'Merge conflicts: taking GitLab versions for GitLab-owned paths (keeping .github/).'
     while IFS= read -r file; do
       [ -z "${file}" ] && continue
       case "${file}" in
         .github | .github/*)
-          git checkout --ours -- "${file}"
-          ;;
-        *)
-          git checkout --theirs -- "${file}"
+          continue
           ;;
       esac
+      git checkout --theirs -- "${file}"
       git add -- "${file}"
     done < <(git diff --name-only --diff-filter=U)
   fi
@@ -114,6 +117,5 @@ merge_preserving_dot_github() {
     return 1
   fi
 
-  preserve_dot_github_from_head
   git commit --no-verify -m 'chore(mirror): merge GitLab main into GitHub main'
 }
