@@ -36,20 +36,11 @@ jobs:
       REQUESTED_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - name: Checkout default branch with tags
-        if: env.REQUESTED_TAG == 'all'
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
           fetch-tags: true
-          persist-credentials: false
-
-      - name: Checkout tag commit
-        if: env.REQUESTED_TAG != 'all'
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
-        with:
-          ref: ${{ env.REQUESTED_TAG }}
-          fetch-depth: 0
           persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -69,6 +60,8 @@ jobs:
         run: |
           set -euo pipefail
           set +x
+          # shellcheck source=../scripts/mirror-lib.sh
+          source "${GITHUB_WORKSPACE}/.github/scripts/mirror-lib.sh"
 
           if [ -z "${NODE_AUTH_TOKEN}" ]; then
             echo '::error::NODE_AUTH_TOKEN is empty; GitHub Packages publish uses secrets.GITHUB_TOKEN (Packages rejects App tokens).'
@@ -100,6 +93,19 @@ jobs:
             exit 1
           }
 
+          registry_latest() {
+            if npm view @singleton-sd/tokens dist-tags.latest --registry https://npm.pkg.github.com \
+              >/tmp/npm-latest.out 2>/tmp/npm-latest.err; then
+              tr -d '[:space:]' < /tmp/npm-latest.out
+              return 0
+            fi
+            if grep -qiE 'E404|404 Not Found|is not in this registry|does not exist' /tmp/npm-latest.err; then
+              return 0
+            fi
+            echo '::error::Failed to query GitHub Packages dist-tags.latest.'
+            exit 1
+          }
+
           list_tags() {
             if [ "${requested}" = "all" ]; then
               git for-each-ref --format='%(refname:short)' refs/tags | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || true
@@ -121,12 +127,14 @@ jobs:
             local tag="$1"
             echo "=== ${tag} ==="
 
+            tag_ref="$(require_tag_ref "${tag}")"
+
             if version_on_registry "${tag}"; then
               echo "Skip: @singleton-sd/tokens@${tag} already exists on GitHub Packages."
               return 0
             fi
 
-            git checkout -f --detach "${tag}"
+            git checkout -f --detach "${tag_ref}"
             git config advice.detachedHead false
             rm -rf node_modules
 
@@ -161,7 +169,14 @@ jobs:
             fi
 
             npm pkg set repository.url=https://github.com/singleton-sd/tokens.git
-            npm publish --registry https://npm.pkg.github.com
+            current_latest="$(registry_latest)"
+            dist_tag="$(npm_publish_dist_tag "${tag}" "${current_latest}")"
+            if [ "${dist_tag}" = "latest" ]; then
+              npm publish --registry https://npm.pkg.github.com
+            else
+              echo "Publishing ${tag} with --tag ${dist_tag} so latest stays ${current_latest}."
+              npm publish --tag "${dist_tag}" --registry https://npm.pkg.github.com
+            fi
             echo "Published @singleton-sd/tokens@${tag}."
           }
 

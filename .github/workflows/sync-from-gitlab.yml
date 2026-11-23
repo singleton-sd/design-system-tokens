@@ -73,25 +73,9 @@ jobs:
           GIT_TERMINAL_PROMPT: "0"
         run: |
           set -euo pipefail
+          # shellcheck source=../scripts/mirror-lib.sh
+          source "${GITHUB_WORKSPACE}/.github/scripts/mirror-lib.sh"
           echo 'new-tags=[]' >> "${GITHUB_OUTPUT}"
-
-          peel_commit() {
-            local peeled
-            peeled="$(printf '%s\n' "$1" | awk '/\^\{\}$/ { print $1; exit }')"
-            if [ -n "${peeled}" ]; then
-              printf '%s\n' "${peeled}"
-              return
-            fi
-            printf '%s\n' "$1" | awk '{ print $1; exit }'
-          }
-
-          json_string_array() {
-            if [ "$#" -eq 0 ]; then
-              printf '%s\n' '[]'
-              return
-            fi
-            printf '%s\n' "$@" | jq -R . | jq -s -c .
-          }
 
           if git remote get-url gitlab >/dev/null 2>&1; then
             git remote set-url gitlab https://gitlab.com/singleton-sd/design-system/tokens.git
@@ -106,35 +90,7 @@ jobs:
             exit 1
           fi
 
-          if git merge-base --is-ancestor refs/remotes/gitlab/main HEAD; then
-            echo 'GitHub main already contains GitLab main; skipping merge.'
-          else
-            merge_args=(--no-ff -X theirs --no-edit -m 'chore(mirror): merge GitLab main into GitHub main')
-            if ! git merge-base HEAD refs/remotes/gitlab/main >/dev/null 2>&1; then
-              echo 'Unrelated histories; merging with --allow-unrelated-histories.'
-              merge_args+=(--allow-unrelated-histories)
-            fi
-            set +e
-            git merge "${merge_args[@]}" refs/remotes/gitlab/main
-            merge_status=$?
-            set -e
-            if [ "${merge_status}" -ne 0 ]; then
-              echo 'Merge conflicts: taking GitLab versions for GitLab-owned paths (keeping .github/).'
-              while IFS= read -r file; do
-                [ -z "${file}" ] && continue
-                case "${file}" in
-                  .github | .github/*)
-                    git checkout --ours -- "${file}"
-                    ;;
-                  *)
-                    git checkout --theirs -- "${file}"
-                    ;;
-                esac
-                git add -- "${file}"
-              done < <(git diff --name-only --diff-filter=U)
-              git commit --no-edit --no-verify
-            fi
-          fi
+          merge_preserving_dot_github refs/remotes/gitlab/main
 
           if ! git push origin HEAD:main; then
             echo '::error::Push of main was rejected. Fail without --force.'

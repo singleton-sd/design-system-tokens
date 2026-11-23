@@ -30,6 +30,9 @@ jobs:
             | tar xz -C /tmp actionlint
           /tmp/actionlint -color
 
+      - name: Helper tests
+        run: bash .github/tests/run.sh
+
       - name: Detect GitLab package tree
         id: pkg
         run: |

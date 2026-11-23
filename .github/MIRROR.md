@@ -25,7 +25,7 @@ Triggers: hourly cron (`0 * * * *`) and `workflow_dispatch`.
 
 1. Fail if `vars.RELEASE_APP_ID` or `secrets.RELEASE_APP_PRIVATE_KEY` is missing. Git pushes use the **singleton-release GitHub App** token only — never `GITHUB_TOKEN`.
 2. Fetch the public GitLab remote (`https://gitlab.com/singleton-sd/design-system/tokens.git`). No GitLab token.
-3. **`main`:** `git merge` GitLab `main` into GitHub `main` (no rebase, no `reset --hard`, no force-push). First run uses `--allow-unrelated-histories` when the histories do not share an ancestor. Merges use `--no-ff` so `.github/` is not dropped by a fast-forward onto a GitLab commit that lacks it. Push `main` only as that merge (or a no-op if already up to date). If the push is rejected, the job fails.
+3. **`main`:** `git merge --no-commit` GitLab `main` into GitHub `main` (no rebase, no `reset --hard`, no force-push). First run uses `--allow-unrelated-histories` when the histories do not share an ancestor. After the merge, the job restores the complete pre-merge `.github/` tree from GitHub `HEAD`, then commits. That keeps GitHub-only workflows even if GitLab later adds or conflicts on `.github/`. GitLab-owned paths still take GitLab’s version. Push `main` only as that merge (or a no-op if already up to date). If the push is rejected, the job fails.
 4. **Other branches** (`design`, `feature/…`): same name on GitHub, **fast-forward only**. `.github/` is not merged into those branches.
 5. **Tags:** mirrored as-is (they point at GitLab commits). If a tag already exists at the same SHA, skip it. If it exists at a different SHA, **fail** — never move or overwrite a tag.
 6. Exit 0 when nothing is new.
@@ -45,7 +45,7 @@ The job checks out the **tag commit**, rebuilds with `yarn build-all` (same as G
 
 `package.json` `repository` still points at GitLab. At publish time only (throwaway checkout, not committed) the job sets `repository.url` to this GitHub repo so the package is linked to `singleton-sd/tokens`. `publishConfig` is not committed.
 
-Publishing is idempotent: if `@singleton-sd/tokens@<version>` already exists on `https://npm.pkg.github.com`, that version is skipped and the job exits 0. Never overwrite a published version. Never publish from `main` HEAD (`main` can be docs commits ahead of the latest tag).
+Publishing is idempotent: if `@singleton-sd/tokens@<version>` already exists on `https://npm.pkg.github.com`, that version is skipped and the job exits 0. Never overwrite a published version. Never publish from `main` HEAD (`main` can be docs commits ahead of the latest tag). The tarball always comes from `refs/tags/<version>` (a branch of the same name is not enough). Backfilling an older version uses `npm publish --tag <version>` so an existing higher `latest` (for example 1.8.0) is not moved to 1.1.0.
 
 Backfill tags: `1.1.0`, `1.2.0`, `1.2.1`, `1.2.2`, `1.2.3`, `1.2.4`, `1.2.5`, `1.3.0`, `1.4.0`, `1.4.1`, `1.4.2`, `1.5.0`, `1.6.0`, `1.7.0`, `1.8.0`.
 
