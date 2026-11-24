@@ -70,3 +70,130 @@ commit-generated-files:
       else
         echo "No changes to commit."
       fi
+
+
+# Publish already-tagged versions to GitHub Packages. Does not replace the
+# shared pipeline's GitLab npm registry publish (release_job).
+# GITHUB_PACKAGES_TOKEN is a protected group CI variable: this job only runs
+# on protected refs (protected tags, or a web pipeline on protected main).
+# No tags are protected yet; protect a pattern such as `*` (or `1.*`) so
+# tag pipelines receive the variable. Until then, backfill from main.
+publish:github-packages:
+  image: '${GLOBAL_IMAGE_NAME}:${GLOBAL_IMAGE_TAG}'
+  stage: package
+  needs: []
+  variables:
+    GIT_DEPTH: '0'
+    CI_DEBUG_TRACE: 'false'
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_REF_PROTECTED == "true" && $CI_COMMIT_TAG =~ /^[0-9]+\.[0-9]+\.[0-9]+$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_PROTECTED == "true" && $PUBLISH_TAGS'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_PROTECTED == "true" && $PUBLISH_REF'
+  before_script:
+    - apk add --no-cache git
+    - |
+        if command -v corepack >/dev/null 2>&1; then
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+        else
+          npm install -g yarn@1.22.22
+        fi
+  script:
+    - |
+        set -eu
+        # Never `set -x`: GITHUB_PACKAGES_TOKEN must not appear in logs.
+        list_version_tags() {
+          git fetch --tags --force origin >/dev/null 2>&1 || true
+          git tag -l | node -e '
+            const fs = require("fs");
+            const tags = fs.readFileSync(0, "utf8").split(/\n/).filter((t) => /^[0-9]+\.[0-9]+\.[0-9]+$/.test(t));
+            tags.sort((a, b) => {
+              const pa = a.split(".").map(Number);
+              const pb = b.split(".").map(Number);
+              for (let i = 0; i < 3; i += 1) {
+                if (pa[i] !== pb[i]) return pa[i] - pb[i];
+              }
+              return 0;
+            });
+            process.stdout.write(tags.join("\n") + (tags.length ? "\n" : ""));
+          '
+        }
+
+        resolve_tags() {
+          if [ -n "${CI_COMMIT_TAG:-}" ]; then
+            printf '%s\n' "${CI_COMMIT_TAG}"
+            return
+          fi
+          if [ -n "${PUBLISH_TAGS:-}" ]; then
+            if [ "${PUBLISH_TAGS}" = "all" ]; then
+              list_version_tags
+              return
+            fi
+            printf '%s\n' "${PUBLISH_TAGS}" | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed '/^$/d'
+            return
+          fi
+          if [ -n "${PUBLISH_REF:-}" ]; then
+            if [ "${PUBLISH_REF}" = "all" ]; then
+              list_version_tags
+              return
+            fi
+            printf '%s\n' "${PUBLISH_REF}"
+            return
+          fi
+          echo "No tag to publish: set CI_COMMIT_TAG, PUBLISH_TAGS, or PUBLISH_REF."
+          exit 1
+        }
+
+        publish_one() {
+          tag="$1"
+          echo "Publishing tag ${tag} to GitHub Packages"
+          git checkout -f --detach "${tag}"
+          yarn install --frozen-lockfile
+          ver="$(node -p "require('./package.json').version")"
+          if [ "${ver}" != "${tag}" ]; then
+            echo "package.json version ${ver} does not match tag ${tag}"
+            exit 1
+          fi
+          if [ -z "${GITHUB_PACKAGES_TOKEN:-}" ]; then
+            echo "GITHUB_PACKAGES_TOKEN is empty. Run this job on a protected branch or protected tag so the protected group variable is available."
+            exit 1
+          fi
+
+          NPMRC="$(mktemp /tmp/npmrc.XXXXXX)"
+          cleanup_npmrc() { rm -f "${NPMRC}"; }
+          trap cleanup_npmrc EXIT
+          umask 077
+          printf '%s\n' "//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}" >"${NPMRC}"
+          printf '%s\n' "@singleton-sd:registry=https://npm.pkg.github.com" >>"${NPMRC}"
+          export NPM_CONFIG_USERCONFIG="${NPMRC}"
+
+          if npm view "@singleton-sd/tokens@${ver}" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+            echo "Already published @singleton-sd/tokens@${ver} to GitHub Packages; skipping"
+          else
+            npm pkg set repository.url="git+https://github.com/singleton-sd/design-system-tokens.git"
+            npm publish --registry=https://npm.pkg.github.com
+            echo "Published @singleton-sd/tokens@${ver} to GitHub Packages"
+          fi
+
+          rm -f "${NPMRC}"
+          unset NPM_CONFIG_USERCONFIG
+          trap - EXIT
+        }
+
+        tags="$(resolve_tags)"
+        if [ -z "${tags}" ]; then
+          echo "No version tags resolved."
+          exit 1
+        fi
+        set -o pipefail
+        printf '%s\n' "${tags}" > /tmp/github-packages-tags.txt
+        while IFS= read -r tag; do
+          [ -z "${tag}" ] && continue
+          if ! printf '%s' "${tag}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "Refusing to publish non-semver tag: ${tag}"
+            exit 1
+          fi
+          publish_one "${tag}"
+        done < /tmp/github-packages-tags.txt

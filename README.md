@@ -44,10 +44,22 @@ share names and swap values.
 
 ## Install
 
-Point the `@singleton-sd` scope at GitLab’s npm registry in `.npmrc`:
+GitLab is the source of truth. Open merge requests there only.
+<https://github.com/singleton-sd/design-system-tokens> is a read-only
+push mirror. The package is also published to GitHub Packages.
+
+Point the `@singleton-sd` scope at the registry you use in `.npmrc`.
+
+GitLab’s npm registry:
 
 ```ini
 @singleton-sd:registry=https://gitlab.com/api/v4/packages/npm/
+```
+
+GitHub Packages (this org’s GitHub apps):
+
+```ini
+@singleton-sd:registry=https://npm.pkg.github.com
 ```
 
 ```sh
